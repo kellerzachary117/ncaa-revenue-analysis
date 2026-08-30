@@ -130,7 +130,7 @@ const doc = new Document({
 
       new Paragraph({ children: [new TextRun({ text: "", break: 1 })], spacing: { after: 40 } }),
       h1("Key Findings"),
-      boldBullet("Football revenue predicts lower graduation rates. ", "Controlling for nothing else, more football revenue significantly predicts a LOWER Graduation Success Rate (coefficient -2.67, p = 0.004), the opposite direction from \"more resources helps academics,\" and a different story from the original 30-school project's finding that it's scholarship-investment share, not raw revenue, that drives outcomes."),
+      boldBullet("Scholarship reinvestment explains football's revenue effect. ", "On its own, more football revenue significantly predicts a LOWER Graduation Success Rate (p = 0.004). But once scholarship/aid investment share is added to the model, that revenue effect stops being significant (p = 0.328), while aid share itself becomes a significant positive predictor (p = 0.029). It isn't that football money hurts academics; it's that big-revenue programs that don't reinvest proportionally in aid have worse outcomes, replicating the original 30-school project's core finding at this larger scale, and pinpointing it specifically to football."),
       boldBullet("Revenue predicts wins, but it depends heavily on the sport. ", "Basketball (p < 0.001) and volleyball (p = 0.005) both show real, significant revenue-to-wins relationships. Football's is only marginal (p = 0.075); soccer shows none (small sample)."),
       boldBullet("NIL valuation predicts wins, not grades, and it's concentrated. ", "Among schools that actually have a player in On3's national NIL 100, a higher NIL valuation significantly predicts a higher win percentage (p = 0.005), but has no relationship with graduation rate (p = 0.584). Revenue itself strongly predicts whether a school has any NIL-100 presence at all (p < 0.001): NIL visibility concentrates at the schools that are already the wealthiest, it doesn't spread opportunity more evenly."),
       boldBullet("Real corrections made along the way, not smoothed over. ", "Three Big East schools assumed \"no football\" (Butler, Georgetown, Villanova) actually sponsor real FCS programs, confirmed against the source data and corrected before analysis. A circulating NIL \"team rankings\" dataset turned out to be from November 2023, not current, and was discarded rather than used."),
@@ -142,6 +142,7 @@ const doc = new Document({
       numbered("Pulled real 2025-26 season win-loss records from NCAA's official stats site and conference standings sources."),
       numbered("Pulled real NCAA Graduation Success Rate data (2018 entering cohort) for the full 83-school population using the GSR database's conference+sport combined search, rather than one-by-one lookups."),
       numbered("Sourced NIL valuation from On3's live NIL 100 rankings (football and basketball only), explicitly restricted in the analysis to schools with real NIL-100 presence rather than treating absence as zero spend."),
+      numbered("Pulled institution-level scholarship/aid investment share from a separate EADA data category after confirming, against the raw federal data dictionary, that aid is never reported broken out by individual sport the way revenue and expenses are."),
       numbered("Merged all sources into one school-sport panel and ran the regression models in Python (pandas, statsmodels, robust standard errors)."),
 
       h2("Languages & Tools"),
@@ -150,7 +151,7 @@ const doc = new Document({
       bullet("Data sources: US Dept. of Education EADA survey; NCAA Graduation Success Rate database; NCAA official statistics; On3 NIL Valuations"),
 
       h2("Presenting This"),
-      body("Lead with the sport-specific split, not the pooled average: \"more money = more wins\" is real in basketball and volleyball but weak in football, and football revenue actually predicts worse academic outcomes. Be upfront that the NIL variable is a real but partial proxy (national top-100 presence), not verified spend; nobody publishes that.", { italics: true, color: GRAY }),
+      body("Lead with the scholarship-share finding, it's the strongest story: revenue alone looks like it hurts football academics, but that's really scholarship reinvestment doing the work, the same mechanism the original 30-school project found, now pinpointed to one sport. Keep the sport-specific win% split as the second beat. Be upfront that the NIL variable is a real but partial proxy (national top-100 presence), not verified spend; nobody publishes that.", { italics: true, color: GRAY }),
     ],
   }],
 });

@@ -8,7 +8,7 @@ Dep. Variable:                win_pct   R-squared:                       0.115
 Model:                            OLS   Adj. R-squared:                  0.097
 Method:                 Least Squares   F-statistic:                     8.138
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):           4.11e-07
-Time:                        09:30:02   Log-Likelihood:                 76.692
+Time:                        09:46:26   Log-Likelihood:                 76.692
 No. Observations:                 246   AIC:                            -141.4
 Df Residuals:                     240   BIC:                            -120.4
 Df Model:                           5                                         
@@ -41,7 +41,7 @@ Dep. Variable:                    gsr   R-squared:                       0.292
 Model:                            OLS   Adj. R-squared:                  0.277
 Method:                 Least Squares   F-statistic:                     29.35
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):           3.09e-23
-Time:                        09:30:02   Log-Likelihood:                -951.63
+Time:                        09:46:27   Log-Likelihood:                -951.63
 No. Observations:                 247   AIC:                             1915.
 Df Residuals:                     241   BIC:                             1936.
 Df Model:                           5                                         
@@ -74,7 +74,7 @@ Dep. Variable:                win_pct   R-squared:                       0.027
 Model:                            OLS   Adj. R-squared:                  0.013
 Method:                 Least Squares   F-statistic:                     3.256
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):             0.0754
-Time:                        09:30:02   Log-Likelihood:                 9.2329
+Time:                        09:46:27   Log-Likelihood:                 9.2329
 No. Observations:                  73   AIC:                            -14.47
 Df Residuals:                      71   BIC:                            -9.885
 Df Model:                           1                                         
@@ -103,7 +103,7 @@ Dep. Variable:                win_pct   R-squared:                       0.140
 Model:                            OLS   Adj. R-squared:                  0.129
 Method:                 Least Squares   F-statistic:                     13.47
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):           0.000432
-Time:                        09:30:02   Log-Likelihood:                 44.755
+Time:                        09:46:27   Log-Likelihood:                 44.755
 No. Observations:                  83   AIC:                            -85.51
 Df Residuals:                      81   BIC:                            -80.67
 Df Model:                           1                                         
@@ -132,7 +132,7 @@ Dep. Variable:                win_pct   R-squared:                       0.089
 Model:                            OLS   Adj. R-squared:                  0.078
 Method:                 Least Squares   F-statistic:                     7.733
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):            0.00680
-Time:                        09:30:02   Log-Likelihood:                 25.842
+Time:                        09:46:27   Log-Likelihood:                 25.842
 No. Observations:                  80   AIC:                            -47.68
 Df Residuals:                      78   BIC:                            -42.92
 Df Model:                           1                                         
@@ -161,7 +161,7 @@ Dep. Variable:                win_pct   R-squared:                       0.020
 Model:                            OLS   Adj. R-squared:                 -0.102
 Method:                 Least Squares   F-statistic:                    0.3816
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):              0.554
-Time:                        09:30:02   Log-Likelihood:                 5.7267
+Time:                        09:46:27   Log-Likelihood:                 5.7267
 No. Observations:                  10   AIC:                            -7.453
 Df Residuals:                       8   BIC:                            -6.848
 Df Model:                           1                                         
@@ -190,7 +190,7 @@ Dep. Variable:                    gsr   R-squared:                       0.067
 Model:                            OLS   Adj. R-squared:                  0.054
 Method:                 Least Squares   F-statistic:                     8.100
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):            0.00578
-Time:                        09:30:02   Log-Likelihood:                -255.36
+Time:                        09:46:27   Log-Likelihood:                -255.36
 No. Observations:                  73   AIC:                             514.7
 Df Residuals:                      71   BIC:                             519.3
 Df Model:                           1                                         
@@ -219,7 +219,7 @@ Dep. Variable:                    gsr   R-squared:                       0.020
 Model:                            OLS   Adj. R-squared:                  0.008
 Method:                 Least Squares   F-statistic:                     2.114
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):              0.150
-Time:                        09:30:02   Log-Likelihood:                -353.69
+Time:                        09:46:27   Log-Likelihood:                -353.69
 No. Observations:                  83   AIC:                             711.4
 Df Residuals:                      81   BIC:                             716.2
 Df Model:                           1                                         
@@ -248,7 +248,7 @@ Dep. Variable:                    gsr   R-squared:                       0.006
 Model:                            OLS   Adj. R-squared:                 -0.006
 Method:                 Least Squares   F-statistic:                    0.5917
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):              0.444
-Time:                        09:30:02   Log-Likelihood:                -245.02
+Time:                        09:46:27   Log-Likelihood:                -245.02
 No. Observations:                  81   AIC:                             494.0
 Df Residuals:                      79   BIC:                             498.8
 Df Model:                           1                                         
@@ -277,7 +277,7 @@ Dep. Variable:                    gsr   R-squared:                       0.000
 Model:                            OLS   Adj. R-squared:                 -0.125
 Method:                 Least Squares   F-statistic:                 0.0003740
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):              0.985
-Time:                        09:30:02   Log-Likelihood:                -33.912
+Time:                        09:46:27   Log-Likelihood:                -33.912
 No. Observations:                  10   AIC:                             71.82
 Df Residuals:                       8   BIC:                             72.43
 Df Model:                           1                                         
@@ -306,7 +306,7 @@ Dep. Variable:                    gsr   R-squared:                       0.017
 Model:                            OLS   Adj. R-squared:                 -0.012
 Method:                 Least Squares   F-statistic:                    0.6380
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):              0.532
-Time:                        09:30:02   Log-Likelihood:                -278.11
+Time:                        09:46:27   Log-Likelihood:                -278.11
 No. Observations:                  70   AIC:                             562.2
 Df Residuals:                      67   BIC:                             569.0
 Df Model:                           2                                         
@@ -336,7 +336,7 @@ Dep. Variable:                win_pct   R-squared:                       0.083
 Model:                            OLS   Adj. R-squared:                  0.055
 Method:                 Least Squares   F-statistic:                     4.167
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):             0.0197
-Time:                        09:30:02   Log-Likelihood:                 22.286
+Time:                        09:46:27   Log-Likelihood:                 22.286
 No. Observations:                  70   AIC:                            -38.57
 Df Residuals:                      67   BIC:                            -31.83
 Df Model:                           2                                         
@@ -366,7 +366,7 @@ Dep. Variable:           has_nil_data   R-squared:                       0.174
 Model:                            OLS   Adj. R-squared:                  0.163
 Method:                 Least Squares   F-statistic:                     23.80
 Date:                Sun, 30 Aug 2026   Prob (F-statistic):           1.00e-09
-Time:                        09:30:02   Log-Likelihood:                -97.502
+Time:                        09:46:27   Log-Likelihood:                -97.502
 No. Observations:                 156   AIC:                             201.0
 Df Residuals:                     153   BIC:                             210.2
 Df Model:                           2                                         
@@ -382,6 +382,160 @@ Omnibus:                      282.937   Durbin-Watson:                   2.091
 Prob(Omnibus):                  0.000   Jarque-Bera (JB):               13.296
 Skew:                           0.113   Prob(JB):                      0.00130
 Kurtosis:                       1.588   Cond. No.                         480.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 7: GSR ~ ln(Revenue) + Aid Share + Sport FE + P5 (pooled, n=247)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    gsr   R-squared:                       0.311
+Model:                            OLS   Adj. R-squared:                  0.294
+Method:                 Least Squares   F-statistic:                     25.93
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):           1.06e-23
+Time:                        09:46:27   Log-Likelihood:                -948.22
+No. Observations:                 247   AIC:                             1910.
+Df Residuals:                     240   BIC:                             1935.
+Df Model:                           6                                         
+Covariance Type:                  HC1                                         
+==========================================================================================
+                             coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------------------
+Intercept                 91.0056     12.076      7.536      0.000      67.337     114.675
+C(sport)[T.football]       8.0883      2.172      3.724      0.000       3.832      12.345
+C(sport)[T.soccer]        10.7793      3.177      3.393      0.001       4.552      17.006
+C(sport)[T.volleyball]    14.4086      2.760      5.220      0.000       8.998      19.819
+ln_revenue                -1.1089      0.671     -1.652      0.099      -2.424       0.207
+aid_share_of_revenue      44.1218     16.943      2.604      0.009      10.913      77.330
+p5                         2.4814      2.591      0.958      0.338      -2.597       7.560
+==============================================================================
+Omnibus:                       51.647   Durbin-Watson:                   1.662
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              106.475
+Skew:                          -1.030   Prob(JB):                     7.57e-24
+Kurtosis:                       5.470   Cond. No.                         435.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 7.football: GSR ~ ln(Revenue) + Aid Share, football only (n=73)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    gsr   R-squared:                       0.131
+Model:                            OLS   Adj. R-squared:                  0.106
+Method:                 Least Squares   F-statistic:                     7.031
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):            0.00165
+Time:                        09:46:27   Log-Likelihood:                -252.78
+No. Observations:                  73   AIC:                             511.6
+Df Residuals:                      70   BIC:                             518.4
+Df Model:                           2                                         
+Covariance Type:                  HC1                                         
+========================================================================================
+                           coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+Intercept              100.3206     21.844      4.593      0.000      57.507     143.134
+ln_revenue              -1.0986      1.123     -0.978      0.328      -3.300       1.103
+aid_share_of_revenue    52.8276     24.252      2.178      0.029       5.294     100.361
+==============================================================================
+Omnibus:                        7.298   Durbin-Watson:                   1.693
+Prob(Omnibus):                  0.026   Jarque-Bera (JB):                6.595
+Skew:                          -0.659   Prob(JB):                       0.0370
+Kurtosis:                       3.658   Cond. No.                         604.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 7.basketball: GSR ~ ln(Revenue) + Aid Share, basketball only (n=83)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    gsr   R-squared:                       0.044
+Model:                            OLS   Adj. R-squared:                  0.021
+Method:                 Least Squares   F-statistic:                     3.151
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):             0.0482
+Time:                        09:46:27   Log-Likelihood:                -352.63
+No. Observations:                  83   AIC:                             711.3
+Df Residuals:                      80   BIC:                             718.5
+Df Model:                           2                                         
+Covariance Type:                  HC1                                         
+========================================================================================
+                           coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+Intercept              153.5072     83.295      1.843      0.065      -9.748     316.763
+ln_revenue              -4.7245      4.807     -0.983      0.326     -14.146       4.697
+aid_share_of_revenue    48.3946     32.112      1.507      0.132     -14.543     111.332
+==============================================================================
+Omnibus:                        7.615   Durbin-Watson:                   2.415
+Prob(Omnibus):                  0.022   Jarque-Bera (JB):                7.761
+Skew:                          -0.749   Prob(JB):                       0.0206
+Kurtosis:                       2.994   Cond. No.                         787.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 7.volleyball: GSR ~ ln(Revenue) + Aid Share, volleyball only (n=81)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    gsr   R-squared:                       0.007
+Model:                            OLS   Adj. R-squared:                 -0.019
+Method:                 Least Squares   F-statistic:                    0.3046
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):              0.738
+Time:                        09:46:27   Log-Likelihood:                -245.01
+No. Observations:                  81   AIC:                             496.0
+Df Residuals:                      78   BIC:                             503.2
+Df Model:                           2                                         
+Covariance Type:                  HC1                                         
+========================================================================================
+                           coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+Intercept               90.9951      8.242     11.041      0.000      74.842     107.149
+ln_revenue               0.4190      0.571      0.733      0.463      -0.701       1.538
+aid_share_of_revenue     1.4524      8.543      0.170      0.865     -15.292      18.197
+==============================================================================
+Omnibus:                       25.351   Durbin-Watson:                   1.756
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               35.128
+Skew:                          -1.494   Prob(JB):                     2.36e-08
+Kurtosis:                       4.216   Cond. No.                         250.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 7.soccer: GSR ~ ln(Revenue) + Aid Share, soccer only (n=10)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    gsr   R-squared:                       0.132
+Model:                            OLS   Adj. R-squared:                 -0.115
+Method:                 Least Squares   F-statistic:                    0.6515
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):              0.550
+Time:                        09:46:27   Log-Likelihood:                -33.201
+No. Observations:                  10   AIC:                             72.40
+Df Residuals:                       7   BIC:                             73.31
+Df Model:                           2                                         
+Covariance Type:                  HC1                                         
+========================================================================================
+                           coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+Intercept               81.9081     84.833      0.966      0.334     -84.362     248.178
+ln_revenue               0.2367      5.366      0.044      0.965     -10.280      10.753
+aid_share_of_revenue    43.2366     40.768      1.061      0.289     -36.668     123.141
+==============================================================================
+Omnibus:                        1.446   Durbin-Watson:                   2.781
+Prob(Omnibus):                  0.485   Jarque-Bera (JB):                0.830
+Skew:                          -0.663   Prob(JB):                        0.660
+Kurtosis:                       2.517   Cond. No.                         749.
 ==============================================================================
 
 Notes:

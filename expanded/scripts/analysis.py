@@ -74,5 +74,21 @@ fb_bb = df[df["sport"].isin(["football", "basketball"])].dropna(subset=["ln_reve
 m6 = smf.ols("has_nil_data ~ ln_revenue + C(sport)", data=fb_bb).fit(cov_type="HC1")
 report(f"Model 6: P(in NIL-100) ~ ln(Revenue) + sport FE (n={len(fb_bb)})", m6)
 
+# --- Model 7: does scholarship/aid share (institution-level -- EADA does not
+# report student aid broken out by individual sport, confirmed against the raw
+# federal data dictionary, unlike revenue/expense/participants which are
+# reported per sport) replicate the original 30-school project's finding once
+# tested against each sport's own GSR? ---
+sub7 = df.dropna(subset=["gsr", "ln_revenue", "aid_share_of_revenue"])
+m7 = smf.ols("gsr ~ ln_revenue + aid_share_of_revenue + C(sport) + p5", data=sub7).fit(cov_type="HC1")
+report(f"Model 7: GSR ~ ln(Revenue) + Aid Share + Sport FE + P5 (pooled, n={len(sub7)})", m7)
+
+for sport in ["football", "basketball", "volleyball", "soccer"]:
+    s = df[df["sport"] == sport].dropna(subset=["gsr", "ln_revenue", "aid_share_of_revenue"])
+    if len(s) < 8:
+        continue
+    m = smf.ols("gsr ~ ln_revenue + aid_share_of_revenue", data=s).fit(cov_type="HC1")
+    report(f"Model 7.{sport}: GSR ~ ln(Revenue) + Aid Share, {sport} only (n={len(s)})", m)
+
 log.close()
 print("\nWrote results/analysis_log.txt")

@@ -44,6 +44,15 @@ soccer as an equalizer sport.
   covering all ~2,037 Title IV institutions, then filtered to the 83-school
   list. Real per-sport men's/women's revenue and expense figures, not just
   total athletics.
+- **Scholarship/aid investment share (institution-level)**: same EADA
+  survey year, pulled via the site's "ALL DATA COMBINED" category
+  (`categories: [22]`, distinct from the per-sport pull above), the one
+  path that actually includes athletically related student aid. Confirmed
+  against the raw federal EADA data dictionary that aid is genuinely never
+  broken out by individual sport, unlike revenue/expense/participants,
+  which are, so this is a school-level control (aid ÷ total athletics
+  revenue), the same variable and construction the original 30-school
+  project used.
 - **Win-loss records**: real 2025-26 season data (2025 for football/soccer,
   2025-26 for basketball/volleyball — whichever season is most recently
   complete), pulled from NCAA's own official stats site
@@ -95,8 +104,10 @@ presence, to avoid treating that absence as a real zero.
 ## Method
 
 `scripts/build_sport_dataset.py` filters the 4 raw EADA sport-code pulls
-down to the 83-school list. `scripts/build_master_dataset.py` merges in
-wins, GSR, and NIL data (each source uses different name conventions —
+down to the 83-school list. `scripts/build_aid_share.py` extracts the
+institution-level scholarship/aid share from the separate EADA "all data
+combined" pull. `scripts/build_master_dataset.py` merges in wins, GSR, NIL,
+and aid share (each source uses different name conventions —
 EADA official names, common/short names for wins, On3 slugs for NIL — all
 reconciled by hand-verified mapping, not fuzzy matching, given the schools
 list is small enough to check exactly). `scripts/analysis.py` runs the
@@ -115,17 +126,34 @@ revenue-to-wins relationships; **football** is only marginal (p=0.075);
 **soccer** shows no relationship (p=0.554, but n=10, underpowered).
 
 **Revenue's relationship with graduation rate is the surprising one, and
-it's sport-specific.** Pooled (GSR ~ ln(revenue), sport FE, P5 dummy,
-n=247), the revenue coefficient is negative and only marginally significant
-(p=0.087). Broken out by sport, **football is the real story**: more
-football revenue significantly predicts a *lower* GSR (coef -2.67,
-p=0.004) — the opposite direction from what "more resources helps
-academics" would suggest. Basketball, volleyball, and soccer show no
-significant revenue-GSR relationship on their own. This is a genuinely
-different finding from the original 30-school project, which found that
-*scholarship-investment share* (not raw revenue) was what predicted GSR —
-this expanded analysis didn't re-test that specific variable per sport,
-worth a follow-up if revisited.
+it's sport-specific, until scholarship share enters the model.** Pooled
+(GSR ~ ln(revenue), sport FE, P5 dummy, n=247), the revenue coefficient is
+negative and only marginally significant (p=0.087). Broken out by sport,
+**football is the real story on its own**: more football revenue
+significantly predicts a *lower* GSR (coef -2.67, p=0.004), the opposite
+direction from what "more resources helps academics" would suggest.
+
+**Adding scholarship/aid investment share resolves it, and replicates the
+original 30-school project's core finding at this larger scale.** EADA
+does not report athletically related student aid broken out by individual
+sport (confirmed against the raw federal data dictionary — revenue,
+expense, and participants are all reported per sport, aid is not, only as
+an institution-wide men's/women's/coed total), so this is a school-level
+control rather than a per-sport one, same as the original project's own
+variable. Once it's added (GSR ~ ln(revenue) + aid share + sport FE + P5,
+n=247), **aid share is a significant positive predictor of GSR** (coef
+44.12, p=0.009, R² rises to 0.311). Broken out by sport, the effect is
+concentrated in **football**: aid share is significant there on its own
+(coef 52.83, p=0.029), and — this is the real finding — **once aid share
+is in the model, football's revenue coefficient stops being significant**
+(p=0.328, down from p=0.004 without it). Raw football revenue's apparent
+negative effect on GSR was standing in for scholarship reinvestment share
+all along: it's not that more football money hurts academics, it's that
+big-revenue programs which *don't* reinvest proportionally in aid have
+worse outcomes, exactly the original project's core insight, now shown to
+hold specifically within football. Basketball, volleyball, and soccer show
+no significant aid-share effect on their own (basketball p=0.132,
+volleyball p=0.865, soccer p=0.289, the last two likely underpowered).
 
 **NIL, restricted to the schools that actually have national-tier NIL
 valuations**: NIL sum significantly predicts win% (coef 0.071, p=0.005,
@@ -140,9 +168,6 @@ packet summarizing schools, findings, and methodology is at
 
 ## What's not in this analysis
 
-- No per-sport scholarship/student-aid share (the driver the original
-  30-school project found mattered) — only revenue and expense were pulled
-  per sport. Worth adding if this gets revisited.
 - Women's basketball is not included; "basketball" here means men's only,
   a deliberate scope call matching where NIL/revenue conversation actually
   concentrates, documented here rather than left silent.

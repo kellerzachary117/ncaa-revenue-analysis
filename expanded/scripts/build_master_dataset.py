@@ -28,6 +28,7 @@ gsr = pd.concat([
 ], ignore_index=True)
 
 nil = pd.read_csv("data/raw/nil_estimates.csv")
+aid = pd.read_csv("data/raw/aid_share.csv")
 
 # On3 slug -> EADA institution_name mapping, only for schools that appear in nil_estimates.csv
 SLUG_TO_NAME = {
@@ -165,6 +166,13 @@ panel = panel.merge(gsr[["institution_name", "sport", "cohort_year", "gsr", "fgr
 panel = panel.merge(nil, on=["institution_name", "sport"], how="left")
 panel["nil100_player_count"] = panel["nil100_player_count"].fillna(0)
 panel["nil100_sum_valuation_estimate"] = panel["nil100_sum_valuation_estimate"].fillna(0)
+
+# Institution-level scholarship/aid share: EADA does not break athletically related
+# student aid out by individual sport (confirmed against the raw federal data
+# dictionary -- it only reports men's/women's/coed totals), unlike revenue/expense/
+# participants, which ARE reported per sport. So this is a school-level control,
+# not a per-sport one, same as the original 30-school project's own variable.
+panel = panel.merge(aid[["institution_name", "aid_share_of_revenue"]], on="institution_name", how="left")
 
 # Combined revenue/expense (men's + women's, since football/men's basketball/men's soccer are
 # effectively men's-only rows but volleyball is women's-only -- use whichever side has real data)
