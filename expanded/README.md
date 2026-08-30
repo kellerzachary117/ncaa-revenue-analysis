@@ -134,7 +134,9 @@ whether a school has any NIL-100 presence at all (p<0.001) — NIL
 visibility concentrates at the schools that already have the most money,
 it isn't an independent variable spreading opportunity more evenly.
 
-Full regression output: `results/analysis_log.txt`.
+Full regression output: `results/analysis_log.txt`. A 2-page interview
+packet summarizing schools, findings, and methodology is at
+`packet/NCAA_Expanded_Analysis_Packet.{docx,pdf}`.
 
 ## What's not in this analysis
 
