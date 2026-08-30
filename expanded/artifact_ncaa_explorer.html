@@ -161,6 +161,21 @@
     border-radius: 0 10px 10px 0; padding: 16px 20px; font-size: 14.5px; line-height: 1.6; color: var(--text);
   }
   .finding b { color: var(--ink); }
+  .finding details { margin-top: 10px; }
+  .finding summary {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: .04em; text-transform: uppercase; color: var(--gold-strong);
+    cursor: pointer; user-select: none; list-style: none;
+  }
+  .finding summary::-webkit-details-marker { display: none; }
+  .finding summary::before { content: "+ "; }
+  .finding details[open] summary::before { content: "\2212 "; }
+  .finding .stats {
+    margin-top: 8px; padding-top: 10px; border-top: 1px dashed var(--rule);
+    font-family: "IBM Plex Mono", monospace; font-size: 12.5px; line-height: 1.7;
+    color: var(--muted); font-variant-numeric: tabular-nums;
+  }
+  .finding .stats b { color: var(--muted); }
 
   .table-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 12px; }
   .searchbox {
@@ -262,10 +277,47 @@
     <h2>What the numbers say</h2>
     <p class="lede">Four real findings from the regression models &mdash; not decided in advance. Full methodology in the interview packet and README.</p>
     <div style="display:flex; flex-direction:column; gap:12px">
-      <div class="finding"><b>Scholarship reinvestment, not raw revenue, drives football's graduation rate.</b> On its own, more football revenue predicts a <i>lower</i> GSR (p&nbsp;=&nbsp;0.004). Add scholarship/aid share to the model and that revenue effect disappears (p&nbsp;=&nbsp;0.328) while aid share becomes the real, significant predictor (p&nbsp;=&nbsp;0.029).</div>
-      <div class="finding"><b>Revenue predicts wins, but only in some sports.</b> Basketball (p&nbsp;&lt;&nbsp;0.001) and volleyball (p&nbsp;=&nbsp;0.005) show real revenue-to-wins relationships. Football is only marginal (p&nbsp;=&nbsp;0.071); soccer shows none.</div>
-      <div class="finding"><b>NIL valuation tracks wins, not grades, and it's concentrated.</b> Among schools with a player in On3's national NIL 100, valuation predicts win percentage (p&nbsp;=&nbsp;0.005) but not GSR (p&nbsp;=&nbsp;0.584). Revenue itself predicts NIL-100 presence (p&nbsp;&lt;&nbsp;0.001): visibility concentrates at the wealthiest programs.</div>
-      <div class="finding"><b>Real corrections, not smoothed over.</b> Three Big East schools assumed &ldquo;no football&rdquo; (Butler, Georgetown, Villanova) actually sponsor real FCS programs, caught against the source data. A circulating NIL &ldquo;team rankings&rdquo; list turned out to be from November 2023 and was discarded.</div>
+      <div class="finding">
+        <b>Scholarship reinvestment, not raw revenue, drives football's graduation rate.</b> On its own, more football revenue predicts a <i>lower</i> GSR (p&nbsp;=&nbsp;0.004). Add scholarship/aid share to the model and that revenue effect disappears (p&nbsp;=&nbsp;0.328) while aid share becomes the real, significant predictor (p&nbsp;=&nbsp;0.029).
+        <details>
+          <summary>Show the regression detail</summary>
+          <div class="stats">
+            Pooled model, all sports (GSR ~ ln(revenue) + aid share + sport FE + P5, n=247): <b>aid share coef +44.12, p=0.009, R&sup2;=0.311.</b><br>
+            Football alone: aid share coef +52.83 (p=0.029); football's standalone revenue coef of &minus;2.67 (p=0.004) drops to non-significant (p=0.328) once aid share enters the model.<br>
+            No significant aid-share effect in basketball (p=0.132), volleyball (p=0.865), or soccer (p=0.289, n=10, likely underpowered).
+          </div>
+        </details>
+      </div>
+      <div class="finding">
+        <b>Revenue predicts wins, but only in some sports.</b> Basketball (p&nbsp;&lt;&nbsp;0.001) and volleyball (p&nbsp;=&nbsp;0.005) show real revenue-to-wins relationships. Football is only marginal (p&nbsp;=&nbsp;0.071); soccer shows none.
+        <details>
+          <summary>Show the regression detail</summary>
+          <div class="stats">
+            Pooled (win% ~ ln(revenue), sport FE, P5 dummy, n=246): <b>revenue coef +0.062, p&lt;0.001.</b><br>
+            By sport: basketball coef +0.150 (p&lt;0.001) &middot; volleyball coef +0.059 (p=0.005) &middot; football coef marginal (p=0.071) &middot; soccer n=10, underpowered (p=0.537).
+          </div>
+        </details>
+      </div>
+      <div class="finding">
+        <b>NIL valuation tracks wins, not grades, and it's concentrated.</b> Among schools with a player in On3's national NIL 100, valuation predicts win percentage (p&nbsp;=&nbsp;0.005) but not GSR (p&nbsp;=&nbsp;0.584). Revenue itself predicts NIL-100 presence (p&nbsp;&lt;&nbsp;0.001): visibility concentrates at the wealthiest programs.
+        <details>
+          <summary>Show the regression detail</summary>
+          <div class="stats">
+            NIL sum ~ win%, restricted to schools with NIL-100 presence: <b>coef +0.071, p=0.005, n=70.</b><br>
+            Meaningfully populated for only ~40 of 83 schools in football and ~27 in basketball &mdash; a school with no NIL-100 figure isn't a zero, it means no player from that school is currently ranked nationally. Volleyball and soccer have no public NIL data at all.
+          </div>
+        </details>
+      </div>
+      <div class="finding">
+        <b>Real corrections, not smoothed over.</b> Three Big East schools assumed &ldquo;no football&rdquo; (Butler, Georgetown, Villanova) actually sponsor real FCS programs, caught against the source data. A circulating NIL &ldquo;team rankings&rdquo; list turned out to be from November 2023 and was discarded.
+        <details>
+          <summary>Show the detail</summary>
+          <div class="stats">
+            Butler (Pioneer League), Georgetown (Patriot League), and Villanova (CAA) each sponsor real FCS football, confirmed directly against EADA rather than assumed from Big East membership &mdash; their real football numbers replace the soccer-equalizer treatment used for the other 10 non-football Big East schools.<br>
+            A separate untracked file already sitting in the repo (~94 schools' worth of GSR numbers, no session or git history behind it) had every signature of fabricated placeholder data and was moved to <code>.discarded_unverified/</code>, not used.
+          </div>
+        </details>
+      </div>
     </div>
   </section>
 
