@@ -131,7 +131,8 @@ const doc = new Document({
       }),
       new Paragraph({
         spacing: { after: 180 },
-        children: [new TextRun({ text: "Zach Keller  ·  Data Analytics Project", size: 19, color: GRAY })],
+        children: [new TextRun({ text: "Zach Keller  ·  Data Analytics Project  ·  ", size: 19, color: GRAY }),
+          new TextRun({ text: "github.com/kellerzachary117/ncaa-revenue-analysis", size: 19, color: GRAY, italics: true })],
       }),
 
       h1("Overview"),
