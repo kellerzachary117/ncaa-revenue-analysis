@@ -61,6 +61,7 @@
   }
 
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--paper);
@@ -69,6 +70,21 @@
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 1180px; margin: 0 auto; padding: 40px 28px 80px; }
+  section[id] { scroll-margin-top: 64px; }
+
+  .jumpnav {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; gap: 4px; padding: 12px 0;
+    background: var(--paper); border-bottom: 1px solid var(--rule);
+    margin-bottom: 28px;
+  }
+  .jumpnav a {
+    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; font-weight: 600;
+    letter-spacing: .06em; text-transform: uppercase; white-space: nowrap;
+    padding: 7px 14px; border-radius: 999px; color: var(--muted);
+    text-decoration: none; transition: background .15s, color .15s;
+  }
+  .jumpnav a:hover, .jumpnav a:focus-visible { background: var(--surface-2); color: var(--ink); outline: none; }
 
   h1, h2, h3 { font-family: "Fraunces", Georgia, serif; text-wrap: balance; margin: 0; }
   .eyebrow {
@@ -196,9 +212,21 @@
     <div class="byline">Zach Keller<br>Companion to the interview packet<br><a href="https://github.com/kellerzachary117/ncaa-revenue-analysis" target="_blank" rel="noopener">github.com/kellerzachary117/ncaa-revenue-analysis</a></div>
   </header>
 
+  <nav class="jumpnav" aria-label="Section navigation">
+    <a href="#question">Question</a>
+    <a href="#charts">Charts</a>
+    <a href="#findings">Findings</a>
+    <a href="#schools">All schools</a>
+  </nav>
+
+  <section id="question">
+    <h2>What we're testing</h2>
+    <p class="lede">Athletic departments generate wildly different amounts of revenue. This page asks whether that revenue actually correlates with anything real &mdash; win percentage, graduation rates, and NIL exposure &mdash; across 83 schools and four sports, or whether raw spending and scholarship reinvestment tell different stories.</p>
+  </section>
+
   <div class="stats" id="statStrip"></div>
 
-  <section>
+  <section id="charts">
     <div class="toolrow">
       <div>
         <h2>Explore the data</h2>
@@ -230,7 +258,7 @@
     <div class="legend-row" id="legendRow"></div>
   </section>
 
-  <section>
+  <section id="findings">
     <h2>What the numbers say</h2>
     <p class="lede">Four real findings from the regression models &mdash; not decided in advance. Full methodology in the interview packet and README.</p>
     <div style="display:flex; flex-direction:column; gap:12px">
@@ -241,7 +269,7 @@
     </div>
   </section>
 
-  <section>
+  <section id="schools">
     <h2>All 83 schools</h2>
     <p class="lede">Every school-sport record behind the charts above. Search, sort any column, or use the sport filter above to narrow it down.</p>
     <div class="table-controls">
