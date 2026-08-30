@@ -1,0 +1,308 @@
+-------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/zacharykeller/Zeus/ncaa-revenue-analysis/results/analysis_l
+> og.log
+  log type:  text
+ opened on:  29 Aug 2026, 22:18:48
+
+. 
+. di as text _n "===== Descriptive statistics ====="
+
+===== Descriptive statistics =====
+
+. summarize revenue_millions expense_millions student_aid_millions ///
+>     aid_share_of_revenue gsr fgr enrollment_thousands, detail
+
+                  Total athletic revenue ()
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%     13.65729       13.65729
+ 5%     15.22854       15.22854
+10%     15.56647       15.37454       Obs                  30
+25%     22.30126       15.75839       Sum of wgt.          30
+
+50%     30.70772                      Mean           54.65091
+                        Largest       Std. dev.      58.10628
+75%     53.78044        129.892
+90%     147.0006       164.1092       Variance        3376.34
+95%     215.0319       215.0319       Skewness       1.839523
+99%     221.3711       221.3711       Kurtosis       5.208488
+
+                  Total athletic expense ()
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%     12.03274       12.03274
+ 5%     13.65729       13.65729
+10%     15.56647       15.37454       Obs                  30
+25%     22.30126       15.75839       Sum of wgt.          30
+
+50%     30.44042                      Mean           51.77174
+                        Largest       Std. dev.      52.63284
+75%     53.78044       127.8233
+90%     141.9321       156.0408       Variance       2770.215
+95%     164.1092       164.1092       Skewness       1.830391
+99%     220.8141       220.8141       Kurtosis       5.409086
+
+           Athletic student aid / scholarships ()
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%     2.984652       2.984652
+ 5%     3.138932       3.138932
+10%     3.611349       3.238643       Obs                  30
+25%     5.416565       3.984054       Sum of wgt.          30
+
+50%     7.291266                      Mean           8.927354
+                        Largest       Std. dev.      5.932031
+75%     10.99035       13.91257
+90%     13.98989       14.06722       Variance       35.18899
+95%      18.3323        18.3323       Skewness       2.457478
+99%     33.28502       33.28502       Kurtosis       10.58124
+
+            Student aid as share of total revenue
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%     .0533856       .0533856
+ 5%        .0647          .0647
+10%     .1099002       .1080924       Obs                  30
+25%     .1714063       .1117079       Sum of wgt.          30
+
+50%     .2166965                      Mean           .2281444
+                        Largest       Std. dev.      .1011436
+75%      .286837       .3241528
+90%      .339919       .3556851       Variance         .01023
+95%     .4437314       .4437314       Skewness       .6541387
+99%      .501433        .501433       Kurtosis       3.608257
+
+          Graduation Success Rate, 2018 cohort (%)
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%           76             76
+ 5%           78             78
+10%           82             80       Obs                  30
+25%           88             84       Sum of wgt.          30
+
+50%         92.5                      Mean           90.63333
+                        Largest       Std. dev.      5.798236
+75%           94             96
+90%         96.5             97       Variance       33.61954
+95%           97             97       Skewness      -.9811063
+99%           99             99       Kurtosis       3.210639
+
+          Federal Graduation Rate, 2018 cohort (%)
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%           39             39
+ 5%           53             53
+10%         58.5             57       Obs                  30
+25%           62             60       Sum of wgt.          30
+
+50%           69                      Mean           68.46667
+                        Largest       Std. dev.      9.988729
+75%           75             81
+90%           82             83       Variance       99.77471
+95%           83             83       Skewness      -.5971896
+99%           84             84       Kurtosis       3.827458
+
+           Total undergrad+grad enrollment (000s)
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%        1.711          1.711
+ 5%        2.196          2.196
+10%        3.331          2.336       Obs                  30
+25%        5.999          4.326       Sum of wgt.          30
+
+50%        9.206                      Mean           13.23687
+                        Largest       Std. dev.      10.49668
+75%       17.404         29.261
+90%        30.72         32.179       Variance       110.1803
+95%       37.367         37.367       Skewness       1.247966
+99%       41.433         41.433       Kurtosis       3.715344
+
+. 
+. di as text _n "===== Revenue by classification tier ====="
+
+===== Revenue by classification tier =====
+
+. tabstat revenue_millions student_aid_millions gsr, by(classification_name) //
+> /
+>     statistics(mean sd n) columns(statistics)
+
+Summary for variables: revenue_millions student_aid_millions gsr
+Group variable: classification_name 
+
+classification_name |      Mean        SD         N
+--------------------+------------------------------
+NCAA Division I wit |  31.67072  12.13575        10
+                    |   8.47833  3.276447        10
+                    |      94.5  2.321398        10
+--------------------+------------------------------
+NCAA Division I-FBS |  111.5275   72.3404        10
+                    |  13.14187  8.017675        10
+                    |      90.5  5.016639        10
+--------------------+------------------------------
+NCAA Division I-FCS |  20.75454  6.413629        10
+                    |  5.161861  1.629235        10
+                    |      86.9  6.756889        10
+--------------------+------------------------------
+              Total |  54.65091  58.10628        30
+                    |  8.927354  5.932031        30
+                    |  90.63333  5.798236        30
+---------------------------------------------------
+
+. 
+. di as text _n "===== Correlation matrix ====="
+
+===== Correlation matrix =====
+
+. pwcorr revenue_millions student_aid_millions aid_share_of_revenue gsr fgr, si
+> g star(5)
+
+             | revenu~s studen~s aid_sh~e      gsr      fgr
+-------------+---------------------------------------------
+revenue_mi~s |   1.0000 
+             |
+             |
+student_ai~s |   0.7898*  1.0000 
+             |   0.0000
+             |
+aid_share_~e |  -0.6233* -0.1769   1.0000 
+             |   0.0002   0.3497
+             |
+         gsr |   0.1180   0.3858*  0.1553   1.0000 
+             |   0.5347   0.0353   0.4126
+             |
+         fgr |   0.3519   0.4625* -0.0389   0.5794*  1.0000 
+             |   0.0565   0.0101   0.8384   0.0008
+             |
+
+. 
+. * ---------------------------------------------------------------------------
+> --
+. * Model 1: Does raw athletic revenue predict student-athlete graduation
+. * outcomes, before controlling for anything else?
+. * ---------------------------------------------------------------------------
+> --
+. di as text _n "===== Model 1: GSR on ln(revenue) ====="
+
+===== Model 1: GSR on ln(revenue) =====
+
+. regress gsr ln_revenue, robust
+
+Linear regression                               Number of obs     =         30
+                                                F(1, 28)          =       1.48
+                                                Prob > F          =     0.2340
+                                                R-squared         =     0.0574
+                                                Root MSE          =     5.7289
+
+------------------------------------------------------------------------------
+             |               Robust
+         gsr | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  ln_revenue |   1.700207   1.397695     1.22   0.234    -1.162843    4.563256
+       _cons |   84.47955   5.350836    15.79   0.000     73.51886    95.44024
+------------------------------------------------------------------------------
+
+. 
+. * ---------------------------------------------------------------------------
+> --
+. * Model 2: Add scholarship investment (the resource that plausibly runs
+. * through to graduation, as opposed to revenue itself)
+. * ---------------------------------------------------------------------------
+> --
+. di as text _n "===== Model 2: GSR on ln(revenue) + aid share ====="
+
+===== Model 2: GSR on ln(revenue) + aid share =====
+
+. regress gsr ln_revenue aid_share_of_revenue, robust
+
+Linear regression                               Number of obs     =         30
+                                                F(2, 27)          =       3.92
+                                                Prob > F          =     0.0321
+                                                R-squared         =     0.2276
+                                                Root MSE          =     5.2813
+
+------------------------------------------------------------------------------
+             |               Robust
+         gsr | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  ln_revenue |   4.229673   1.608054     2.63   0.014     .9302179    7.529128
+aid_share_~e |   31.25553   12.75645     2.45   0.021     5.081454     57.4296
+       _cons |   68.19355   8.643177     7.89   0.000     50.45921    85.92788
+------------------------------------------------------------------------------
+
+. 
+. * ---------------------------------------------------------------------------
+> --
+. * Model 3: Control for program tier (FBS is the omitted/base category) and
+. * institution size, since both are plausible confounds for both revenue and
+. * graduation outcomes.
+. * ---------------------------------------------------------------------------
+> --
+. di as text _n "===== Model 3: full model with tier + enrollment controls ====
+> ="
+
+===== Model 3: full model with tier + enrollment controls =====
+
+. regress gsr ln_revenue aid_share_of_revenue fcs no_football enrollment_thousa
+> nds, robust
+
+Linear regression                               Number of obs     =         30
+                                                F(5, 24)          =       3.62
+                                                Prob > F          =     0.0140
+                                                R-squared         =     0.4001
+                                                Root MSE          =     4.9366
+
+------------------------------------------------------------------------------
+             |               Robust
+         gsr | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  ln_revenue |   4.184039   1.573346     2.66   0.014     .9368128    7.431265
+aid_share_~e |   17.79215   12.70265     1.40   0.174    -8.424841    44.00914
+         fcs |   .1611624   2.808022     0.06   0.955     -5.63431    5.956635
+ no_football |   5.524294   2.356223     2.34   0.028       .66129     10.3873
+enrollment~s |  -.0338448   .1236883    -0.27   0.787     -.289125    .2214353
+       _cons |   69.98316   7.947787     8.81   0.000     53.57973    86.38658
+------------------------------------------------------------------------------
+
+. 
+. * ---------------------------------------------------------------------------
+> --
+. * Model 4: Same specification, Federal Graduation Rate as the outcome
+. * instead of GSR, as a robustness check (FGR counts transfers against the
+. * school; GSR does not - if results hold under both, that's a stronger claim)
+> .
+. * ---------------------------------------------------------------------------
+> --
+. di as text _n "===== Model 4: robustness check, FGR as outcome ====="
+
+===== Model 4: robustness check, FGR as outcome =====
+
+. regress fgr ln_revenue aid_share_of_revenue fcs no_football enrollment_thousa
+> nds, robust
+
+Linear regression                               Number of obs     =         30
+                                                F(5, 24)          =       2.74
+                                                Prob > F          =     0.0425
+                                                R-squared         =     0.3339
+                                                Root MSE          =     8.9617
+
+------------------------------------------------------------------------------
+             |               Robust
+         fgr | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  ln_revenue |   12.40948   3.538851     3.51   0.002     5.105655    19.71331
+aid_share_~e |   36.82414   25.86059     1.42   0.167     -16.5495    90.19778
+         fcs |   9.179126   4.678202     1.96   0.061    -.4762092    18.83446
+ no_football |   6.945936   5.144571     1.35   0.190    -3.671936    17.56381
+enrollment~s |  -.0569447   .2621103    -0.22   0.830    -.5979137    .4840243
+       _cons |   10.52891   17.06736     0.62   0.543    -24.69639    45.75421
+------------------------------------------------------------------------------
+
+. 
+. log close
+      name:  <unnamed>
+       log:  /Users/zacharykeller/Zeus/ncaa-revenue-analysis/results/analysis_l
+> og.log
+  log type:  text
+ closed on:  29 Aug 2026, 22:18:48
+-------------------------------------------------------------------------------

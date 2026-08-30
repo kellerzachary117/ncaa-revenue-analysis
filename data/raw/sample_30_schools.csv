@@ -1,0 +1,31 @@
+unitid,institution_name,state_cd,classification_name,EFTotalCount,sector_name,GRND_TOTAL_REVENUE,GRND_TOTAL_EXPENSE,STUDENTAID_MEN,STUDENTAID_WOMEN,STUDENTAID_TOTAL
+195809,St. John's University-New York,NY,NCAA Division I without football,9558,"Private nonprofit, 4-year or above",53780439,53780439,4382380.0,5718008.0,10100388
+239105,Marquette University,WI,NCAA Division I without football,7123,"Private nonprofit, 4-year or above",46585799,46585799,2540440.0,3286630.0,5827070
+117946,Loyola Marymount University,CA,NCAA Division I without football,7035,"Private nonprofit, 4-year or above",39654261,39654261,4578842.0,7382010.0,11960852
+198695,High Point University,NC,NCAA Division I without football,4943,"Private nonprofit, 4-year or above",32794432,27989156,4879322.0,5242849.0,10122171
+130226,Quinnipiac University,CT,NCAA Division I without football,6070,"Private nonprofit, 4-year or above",31702101,31702101,4835016.0,9232202.0,14067218
+104717,Grand Canyon University,AZ,NCAA Division I without football,24995,"Private for-profit, 4-year or above",30628914,30628914,2398700.0,3388871.0,5787571
+166513,University of Massachusetts-Lowell,MA,NCAA Division I without football,9437,"Public, 4-year or above",23849995,23303628,3568764.0,3272298.0,6841062
+219709,Belmont University,TN,NCAA Division I without football,7035,"Private nonprofit, 4-year or above",22705462,22705462,3085037.0,4275002.0,7360039
+163462,Mount St. Mary's University,MD,NCAA Division I without football,1711,"Private nonprofit, 4-year or above",19101249,19101249,3877771.0,5700225.0,9577996
+224147,Texas A & M University-Corpus Christi,TX,NCAA Division I without football,5999,"Public, 4-year or above",15904566,15904566,1006899.0,2132033.0,3138932
+170976,University of Michigan-Ann Arbor,MI,NCAA Division I-FBS,32179,"Public, 4-year or above",221371145,220814081,18702932.0,14582090.0,33285022
+155317,University of Kansas,KS,NCAA Division I-FBS,18192,"Public, 4-year or above",215031889,156040840,7212821.0,6699748.0,13912569
+171100,Michigan State University,MI,NCAA Division I-FBS,37367,"Public, 4-year or above",164109191,164109191,10212193.0,8120103.0,18332296
+230038,Brigham Young University,UT,NCAA Division I-FBS,29261,"Private nonprofit, 4-year or above",129891998,115666650,4040210.0,2894152.0,6934362
+139755,Georgia Institute of Technology-Main Campus,GA,NCAA Division I-FBS,17083,"Public, 4-year or above",128210764,127823348,9980688.0,3877919.0,13858607
+132903,University of Central Florida,FL,NCAA Division I-FBS,41433,"Public, 4-year or above",93417587,90055820,6623778.0,4904013.0,11527791
+142115,Boise State University,ID,NCAA Division I-FBS,13589,"Public, 4-year or above",59885466,59885465,6129043.0,4861302.0,10990345
+196088,University at Buffalo,NY,NCAA Division I-FBS,18902,"Public, 4-year or above",42271934,42113971,5274766.0,3807525.0,9082291
+203517,Kent State University at Kent,OH,NCAA Division I-FBS,16575,"Public, 4-year or above",34453185,34453185,4034105.0,3319886.0,7353991
+227881,Sam Houston State University,TX,NCAA Division I-FBS,14533,"Public, 4-year or above",26631390,26567953,3815079.0,2326358.0,6141437
+145813,Illinois State University,IL,NCAA Division I-FCS,17404,"Public, 4-year or above",30786532,30786532,4195589.0,3723796.0,7919385
+200332,North Dakota State University-Main Campus,ND,NCAA Division I-FCS,8766,"Public, 4-year or above",30251922,30251922,3235528.0,1949842.0,5185370
+179566,Missouri State University-Springfield,MO,NCAA Division I-FCS,11497,"Public, 4-year or above",25259555,25259555,3305182.0,2832304.0,6137486
+221740,The University of Tennessee-Chattanooga,TN,NCAA Division I-FCS,8975,"Public, 4-year or above",22508082,22508082,3367981.0,2046360.0,5414341
+192819,Marist College,NY,NCAA Division I-FCS,4878,"Private nonprofit, 4-year or above",22301262,22301262,3290651.0,3937890.0,7228541
+152600,Valparaiso University,IN,NCAA Division I-FCS,2196,"Private nonprofit, 4-year or above",16419261,16335955,1556368.0,2427686.0,3984054
+179557,Southeast Missouri State University,MO,NCAA Division I-FCS,5846,"Public, 4-year or above",15758389,15758389,2390260.0,1719314.0,4109574
+227526,Prairie View A & M University,TX,NCAA Division I-FCS,7862,"Public, 4-year or above",15374541,15374541,1949920.0,1288723.0,3238643
+160038,Northwestern State University of Louisiana,LA,NCAA Division I-FCS,4326,"Public, 4-year or above",15228540,12032739,3068508.0,2348057.0,5416565
+132602,Bethune-Cookman University,FL,NCAA Division I-FCS,2336,"Private nonprofit, 4-year or above",13657290,13657290,1990632.0,994020.0,2984652
