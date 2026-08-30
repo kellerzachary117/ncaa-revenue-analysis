@@ -99,7 +99,7 @@ for (let i = 0; i < 10; i++) {
   bodyRows.push(new TableRow({
     children: Object.keys(tiers).map((t) => {
       const [name, rev] = tiers[t][i];
-      return schoolCell(`${name} — ${rev}`);
+      return schoolCell(`${name}: ${rev}`);
     }),
   }));
 }
@@ -139,32 +139,32 @@ const doc = new Document({
       body("A regression analysis of the relationship between athletic department revenue, scholarship investment, and student-athlete graduation outcomes across 30 NCAA Division I athletic programs. The sample was built to span the real range of D1 program sizes ($13.7M–$221M in athletic revenue) rather than clustering around one tier of school."),
 
       h1("Schools Analyzed"),
-      body("A stratified random sample (seed 42) of 10 programs from each D1 subdivision, drawn from the full population of 356 D1 athletic programs in the US Department of Education's EADA database, AY2023-24. Stratifying across subdivisions — rather than a pure random draw, which would have skewed toward the ~250 smaller FCS/no-football programs — was a deliberate choice to get real revenue variation into the sample."),
+      body("A stratified random sample (seed 42) of 10 programs from each D1 subdivision, drawn from the full population of 356 D1 athletic programs in the US Department of Education's EADA database, AY2023-24. Stratifying across subdivisions, rather than a pure random draw (which would have skewed toward the ~250 smaller FCS/no-football programs), was a deliberate choice to get real revenue variation into the sample."),
       schoolTable,
 
       new Paragraph({ children: [new TextRun({ text: "", break: 1 })], spacing: { after: 40 } }),
       h1("Key Findings"),
       boldBullet("Revenue alone doesn't predict outcomes. ", "Raw athletic revenue has no significant relationship with graduation success on its own (p = 0.23). A bigger athletic budget by itself does not predict better academic outcomes."),
-      boldBullet("What matters is what a program does with the money. ", "Once scholarship investment (student aid as a share of total revenue) enters the model, both revenue and aid share become significant predictors (p = 0.014 and p = 0.021, R² = 0.23). Revenue and total scholarship dollars are highly correlated (r = 0.79) — bigger programs spend more on aid in absolute terms — but it's the share of revenue actually reinvested in student aid that predicts outcomes, not program size by itself."),
+      boldBullet("What matters is what a program does with the money. ", "Once scholarship investment (student aid as a share of total revenue) enters the model, both revenue and aid share become significant predictors (p = 0.014 and p = 0.021, R² = 0.23). Revenue and total scholarship dollars are highly correlated (r = 0.79): bigger programs spend more on aid in absolute terms, but it's the share of revenue actually reinvested in student aid that predicts outcomes, not program size by itself."),
       boldBullet("Sport mix matters as much as finances. ", "Programs without football post graduation rates about 5.5 points higher than otherwise-comparable FBS/FCS programs, controlling for revenue and scholarship investment (p = 0.028)."),
-      boldBullet("The finding holds under a robustness check. ", "The revenue relationship holds — and strengthens — when Federal Graduation Rate replaces the NCAA's own Graduation Success Rate as the outcome measure (p = 0.002), confirming the result isn't an artifact of one specific outcome metric."),
+      boldBullet("The finding holds under a robustness check. ", "The revenue relationship holds, and strengthens, when Federal Graduation Rate replaces the NCAA's own Graduation Success Rate as the outcome measure (p = 0.002), confirming the result isn't an artifact of one specific outcome metric."),
 
       h1("How It Was Built"),
-      numbered("Sourced real athletic-finance data from the US Dept. of Education's EADA (Equity in Athletics Data Analysis) survey, AY2023-24 — the same federal disclosure every D1 athletic department is legally required to file."),
+      numbered("Sourced real athletic-finance data from the US Dept. of Education's EADA (Equity in Athletics Data Analysis) survey, AY2023-24, the same federal disclosure every D1 athletic department is legally required to file."),
       numbered("Built a stratified random sample of 30 programs (10 FBS, 10 FCS, 10 D1-without-football) in Python (pandas), so the sample would span real variation in program size rather than cluster in one tier."),
-      numbered("Hand-collected student-athlete outcome data (Graduation Success Rate, 2018 entering cohort — the most recent cohort with a completed 6-year window) from the NCAA's own GSR database for all 30 sampled schools, since the NCAA does not offer a bulk-download option."),
-      numbered("Merged the two sources and engineered variables — log revenue, scholarship investment as a share of revenue, enrollment, D1-subdivision indicators — in Python (pandas)."),
+      numbered("Hand-collected student-athlete outcome data (Graduation Success Rate, 2018 entering cohort, the most recent cohort with a completed 6-year window) from the NCAA's own GSR database for all 30 sampled schools, since the NCAA does not offer a bulk-download option."),
+      numbered("Merged the two sources and engineered variables (log revenue, scholarship investment as a share of revenue, enrollment, D1-subdivision indicators) in Python (pandas)."),
       numbered("Ran a four-model OLS regression in Stata (StataNow/SE 19.5), building from a bivariate baseline up to a full model with subdivision and enrollment controls, plus a robustness check swapping in an alternate outcome measure."),
       numbered("Wrote up methodology, data provenance, and findings; version-controlled the full project (data pipeline, Stata do-file, regression log, writeup) in Git."),
 
       h2("Languages & Tools"),
-      bullet("Python (pandas) — data acquisition, sample construction, cleaning, variable construction"),
-      bullet("Stata (regress, robust standard errors) — the actual regression modeling"),
-      bullet("Git — version control for the full pipeline"),
+      bullet("Python (pandas): data acquisition, sample construction, cleaning, variable construction"),
+      bullet("Stata (regress, robust standard errors): the actual regression modeling"),
+      bullet("Git: version control for the full pipeline"),
       bullet("Data sources: US Dept. of Education EADA survey; NCAA Graduation Success Rate database"),
 
       h2("Presenting This"),
-      body("Lead with the finding, not the method: revenue alone doesn't move the needle, but how a program reinvests it does. Keep this packet ready as a follow-up, not the opener — the regression tables answer \"can you back that up,\" they're not the headline.", { italics: true, color: GRAY }),
+      body("Lead with the finding, not the method: revenue alone doesn't move the needle, but how a program reinvests it does. Keep this packet ready as a follow-up, not the opener: the regression tables answer \"can you back that up,\" they're not the headline.", { italics: true, color: GRAY }),
     ],
   }],
 });
