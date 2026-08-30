@@ -1,0 +1,388 @@
+
+======================================================================
+Model 1: Win% ~ ln(Revenue) + Sport FE + P5 dummy (pooled, all sports)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                win_pct   R-squared:                       0.115
+Model:                            OLS   Adj. R-squared:                  0.097
+Method:                 Least Squares   F-statistic:                     8.138
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):           4.11e-07
+Time:                        09:30:02   Log-Likelihood:                 76.692
+No. Observations:                 246   AIC:                            -141.4
+Df Residuals:                     240   BIC:                            -120.4
+Df Model:                           5                                         
+Covariance Type:                  HC1                                         
+==========================================================================================
+                             coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------------------
+Intercept                 -0.4493      0.267     -1.685      0.092      -0.972       0.073
+C(sport)[T.football]      -0.1000      0.035     -2.846      0.004      -0.169      -0.031
+C(sport)[T.soccer]        -0.1132      0.063     -1.805      0.071      -0.236       0.010
+C(sport)[T.volleyball]     0.1461      0.050      2.951      0.003       0.049       0.243
+ln_revenue                 0.0618      0.016      3.895      0.000       0.031       0.093
+p5                         0.0024      0.036      0.065      0.948      -0.069       0.074
+==============================================================================
+Omnibus:                        5.378   Durbin-Watson:                   1.936
+Prob(Omnibus):                  0.068   Jarque-Bera (JB):                4.414
+Skew:                          -0.232   Prob(JB):                        0.110
+Kurtosis:                       2.536   Cond. No.                         392.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 2: GSR ~ ln(Revenue) + Sport FE + P5 dummy (pooled, all sports)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    gsr   R-squared:                       0.292
+Model:                            OLS   Adj. R-squared:                  0.277
+Method:                 Least Squares   F-statistic:                     29.35
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):           3.09e-23
+Time:                        09:30:02   Log-Likelihood:                -951.63
+No. Observations:                 247   AIC:                             1915.
+Df Residuals:                     241   BIC:                             1936.
+Df Model:                           5                                         
+Covariance Type:                  HC1                                         
+==========================================================================================
+                             coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------------------
+Intercept                101.0889     11.382      8.881      0.000      78.780     123.398
+C(sport)[T.football]       8.1579      2.163      3.772      0.000       3.919      12.397
+C(sport)[T.soccer]        10.4949      3.397      3.089      0.002       3.837      17.153
+C(sport)[T.volleyball]    14.3220      2.812      5.094      0.000       8.811      19.833
+ln_revenue                -1.1458      0.670     -1.710      0.087      -2.459       0.167
+p5                        -2.2946      2.069     -1.109      0.267      -6.350       1.761
+==============================================================================
+Omnibus:                       52.872   Durbin-Watson:                   1.624
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              110.726
+Skew:                          -1.047   Prob(JB):                     9.04e-25
+Kurtosis:                       5.525   Cond. No.                         392.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 3.football: Win% ~ ln(Revenue), football only (n=73)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                win_pct   R-squared:                       0.027
+Model:                            OLS   Adj. R-squared:                  0.013
+Method:                 Least Squares   F-statistic:                     3.256
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):             0.0754
+Time:                        09:30:02   Log-Likelihood:                 9.2329
+No. Observations:                  73   AIC:                            -14.47
+Df Residuals:                      71   BIC:                            -9.885
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     -0.2298      0.438     -0.525      0.600      -1.088       0.629
+ln_revenue     0.0441      0.024      1.805      0.071      -0.004       0.092
+==============================================================================
+Omnibus:                        6.075   Durbin-Watson:                   1.920
+Prob(Omnibus):                  0.048   Jarque-Bera (JB):                3.388
+Skew:                          -0.316   Prob(JB):                        0.184
+Kurtosis:                       2.154   Cond. No.                         404.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 3.basketball: Win% ~ ln(Revenue), basketball only (n=83)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                win_pct   R-squared:                       0.140
+Model:                            OLS   Adj. R-squared:                  0.129
+Method:                 Least Squares   F-statistic:                     13.47
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):           0.000432
+Time:                        09:30:02   Log-Likelihood:                 44.755
+No. Observations:                  83   AIC:                            -85.51
+Df Residuals:                      81   BIC:                            -80.67
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     -1.9334      0.688     -2.810      0.005      -3.282      -0.585
+ln_revenue     0.1500      0.041      3.671      0.000       0.070       0.230
+==============================================================================
+Omnibus:                        2.361   Durbin-Watson:                   1.769
+Prob(Omnibus):                  0.307   Jarque-Bera (JB):                1.712
+Skew:                           0.155   Prob(JB):                        0.425
+Kurtosis:                       2.368   Cond. No.                         752.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 3.volleyball: Win% ~ ln(Revenue), volleyball only (n=80)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                win_pct   R-squared:                       0.089
+Model:                            OLS   Adj. R-squared:                  0.078
+Method:                 Least Squares   F-statistic:                     7.733
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):            0.00680
+Time:                        09:30:02   Log-Likelihood:                 25.842
+No. Observations:                  80   AIC:                            -47.68
+Df Residuals:                      78   BIC:                            -42.92
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     -0.2596      0.300     -0.865      0.387      -0.848       0.329
+ln_revenue     0.0589      0.021      2.781      0.005       0.017       0.100
+==============================================================================
+Omnibus:                        1.579   Durbin-Watson:                   1.805
+Prob(Omnibus):                  0.454   Jarque-Bera (JB):                1.602
+Skew:                          -0.281   Prob(JB):                        0.449
+Kurtosis:                       2.593   Cond. No.                         221.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 3.soccer: Win% ~ ln(Revenue), soccer only (n=10)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                win_pct   R-squared:                       0.020
+Model:                            OLS   Adj. R-squared:                 -0.102
+Method:                 Least Squares   F-statistic:                    0.3816
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):              0.554
+Time:                        09:30:02   Log-Likelihood:                 5.7267
+No. Observations:                  10   AIC:                            -7.453
+Df Residuals:                       8   BIC:                            -6.848
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     -0.6217      1.587     -0.392      0.695      -3.733       2.490
+ln_revenue     0.0658      0.106      0.618      0.537      -0.143       0.274
+==============================================================================
+Omnibus:                        1.271   Durbin-Watson:                   2.573
+Prob(Omnibus):                  0.530   Jarque-Bera (JB):                0.910
+Skew:                          -0.637   Prob(JB):                        0.634
+Kurtosis:                       2.249   Cond. No.                         746.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 4.football: GSR ~ ln(Revenue), football only (n=73)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    gsr   R-squared:                       0.067
+Model:                            OLS   Adj. R-squared:                  0.054
+Method:                 Least Squares   F-statistic:                     8.100
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):            0.00578
+Time:                        09:30:02   Log-Likelihood:                -255.36
+No. Observations:                  73   AIC:                             514.7
+Df Residuals:                      71   BIC:                             519.3
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept    134.4825     16.568      8.117      0.000     102.009     166.956
+ln_revenue    -2.6743      0.940     -2.846      0.004      -4.516      -0.833
+==============================================================================
+Omnibus:                        7.062   Durbin-Watson:                   1.654
+Prob(Omnibus):                  0.029   Jarque-Bera (JB):                6.334
+Skew:                          -0.661   Prob(JB):                       0.0421
+Kurtosis:                       3.579   Cond. No.                         404.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 4.basketball: GSR ~ ln(Revenue), basketball only (n=83)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    gsr   R-squared:                       0.020
+Model:                            OLS   Adj. R-squared:                  0.008
+Method:                 Least Squares   F-statistic:                     2.114
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):              0.150
+Time:                        09:30:02   Log-Likelihood:                -353.69
+No. Observations:                  83   AIC:                             711.4
+Df Residuals:                      81   BIC:                             716.2
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept    188.0265     74.643      2.519      0.012      41.730     334.323
+ln_revenue    -6.4191      4.415     -1.454      0.146     -15.073       2.235
+==============================================================================
+Omnibus:                       10.124   Durbin-Watson:                   2.349
+Prob(Omnibus):                  0.006   Jarque-Bera (JB):               10.513
+Skew:                          -0.864   Prob(JB):                      0.00521
+Kurtosis:                       3.227   Cond. No.                         752.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 4.volleyball: GSR ~ ln(Revenue), volleyball only (n=81)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    gsr   R-squared:                       0.006
+Model:                            OLS   Adj. R-squared:                 -0.006
+Method:                 Least Squares   F-statistic:                    0.5917
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):              0.444
+Time:                        09:30:02   Log-Likelihood:                -245.02
+No. Observations:                  81   AIC:                             494.0
+Df Residuals:                      79   BIC:                             498.8
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     90.9992      8.158     11.154      0.000      75.009     106.989
+ln_revenue     0.4313      0.561      0.769      0.442      -0.668       1.530
+==============================================================================
+Omnibus:                       25.128   Durbin-Watson:                   1.755
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               34.667
+Skew:                          -1.490   Prob(JB):                     2.97e-08
+Kurtosis:                       4.182   Cond. No.                         221.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 4.soccer: GSR ~ ln(Revenue), soccer only (n=10)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    gsr   R-squared:                       0.000
+Model:                            OLS   Adj. R-squared:                 -0.125
+Method:                 Least Squares   F-statistic:                 0.0003740
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):              0.985
+Time:                        09:30:02   Log-Likelihood:                -33.912
+No. Observations:                  10   AIC:                             71.82
+Df Residuals:                       8   BIC:                             72.43
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     92.5695    100.445      0.922      0.357    -104.299     289.438
+ln_revenue     0.1295      6.695      0.019      0.985     -12.992      13.251
+==============================================================================
+Omnibus:                        5.533   Durbin-Watson:                   2.655
+Prob(Omnibus):                  0.063   Jarque-Bera (JB):                2.486
+Skew:                          -1.215   Prob(JB):                        0.288
+Kurtosis:                       3.249   Cond. No.                         746.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 5a: GSR ~ ln(NIL100 sum) + sport FE, football+basketball schools WITH NIL-100 presence (n=70)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    gsr   R-squared:                       0.017
+Model:                            OLS   Adj. R-squared:                 -0.012
+Method:                 Least Squares   F-statistic:                    0.6380
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):              0.532
+Time:                        09:30:02   Log-Likelihood:                -278.11
+No. Observations:                  70   AIC:                             562.2
+Df Residuals:                      67   BIC:                             569.0
+Df Model:                           2                                         
+Covariance Type:                  HC1                                         
+========================================================================================
+                           coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+Intercept               66.2246     29.235      2.265      0.023       8.924     123.525
+C(sport)[T.football]     3.4053      3.619      0.941      0.347      -3.688      10.499
+ln_nil                   1.0622      1.940      0.547      0.584      -2.741       4.865
+==============================================================================
+Omnibus:                       18.743   Durbin-Watson:                   2.105
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               25.727
+Skew:                          -1.094   Prob(JB):                     2.59e-06
+Kurtosis:                       5.008   Cond. No.                         331.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 5b: Win% ~ ln(NIL100 sum) + sport FE, football+basketball schools WITH NIL-100 presence (n=70)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                win_pct   R-squared:                       0.083
+Model:                            OLS   Adj. R-squared:                  0.055
+Method:                 Least Squares   F-statistic:                     4.167
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):             0.0197
+Time:                        09:30:02   Log-Likelihood:                 22.286
+No. Observations:                  70   AIC:                            -38.57
+Df Residuals:                      67   BIC:                            -31.83
+Df Model:                           2                                         
+Covariance Type:                  HC1                                         
+========================================================================================
+                           coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+Intercept               -0.4183      0.390     -1.072      0.284      -1.183       0.346
+C(sport)[T.football]    -0.0162      0.041     -0.395      0.693      -0.097       0.064
+ln_nil                   0.0711      0.025      2.794      0.005       0.021       0.121
+==============================================================================
+Omnibus:                        5.540   Durbin-Watson:                   1.890
+Prob(Omnibus):                  0.063   Jarque-Bera (JB):                4.809
+Skew:                          -0.621   Prob(JB):                       0.0903
+Kurtosis:                       3.329   Cond. No.                         331.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+
+======================================================================
+Model 6: P(in NIL-100) ~ ln(Revenue) + sport FE (n=156)
+======================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           has_nil_data   R-squared:                       0.174
+Model:                            OLS   Adj. R-squared:                  0.163
+Method:                 Least Squares   F-statistic:                     23.80
+Date:                Sun, 30 Aug 2026   Prob (F-statistic):           1.00e-09
+Time:                        09:30:02   Log-Likelihood:                -97.502
+No. Observations:                 156   AIC:                             201.0
+Df Residuals:                     153   BIC:                             210.2
+Df Model:                           2                                         
+Covariance Type:                  HC1                                         
+========================================================================================
+                           coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+Intercept               -4.0718      0.781     -5.216      0.000      -5.602      -2.542
+C(sport)[T.football]    -0.0224      0.093     -0.241      0.809      -0.204       0.160
+ln_revenue               0.2609      0.047      5.594      0.000       0.169       0.352
+==============================================================================
+Omnibus:                      282.937   Durbin-Watson:                   2.091
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               13.296
+Skew:                           0.113   Prob(JB):                      0.00130
+Kurtosis:                       1.588   Cond. No.                         480.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)

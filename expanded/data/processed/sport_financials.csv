@@ -1,0 +1,320 @@
+institution_name,conference,subdivision,has_football,sport,men_participants,women_participants,revenue_men,revenue_women,expense_men,expense_women
+University of Illinois Urbana-Champaign,Big Ten,P5,1,football,119.0,,87939659.0,,48001399.0,
+University of Iowa,Big Ten,P5,1,football,131.0,,105190203.0,,50894414.0,
+Indiana University-Bloomington,Big Ten,P5,1,football,114.0,,80906601.0,,50207544.0,
+University of Maryland-College Park,Big Ten,P5,1,football,120.0,,63070858.0,,35502618.0,
+University of Michigan-Ann Arbor,Big Ten,P5,1,football,139.0,,175299592.0,,61663186.0,
+Michigan State University,Big Ten,P5,1,football,119.0,,77084648.0,,48227813.0,
+University of Minnesota-Twin Cities,Big Ten,P5,1,football,117.0,,101726085.0,,45452693.0,
+University of Nebraska-Lincoln,Big Ten,P5,1,football,155.0,,122283973.0,,70574668.0,
+Northwestern University,Big Ten,P5,1,football,109.0,,85587606.0,,37901761.0,
+Ohio State University-Main Campus,Big Ten,P5,1,football,122.0,,160549826.0,,92359309.0,
+University of Oregon,Big Ten,P5,1,football,126.0,,119584907.0,,60847472.0,
+Pennsylvania State University-Main Campus,Big Ten,P5,1,football,130.0,,150314572.0,,77386097.0,
+Purdue University-Main Campus,Big Ten,P5,1,football,126.0,,83144029.0,,37193229.0,
+Rutgers University-New Brunswick,Big Ten,P5,1,football,137.0,,75922954.0,,75922954.0,
+University of California-Los Angeles,Big Ten,P5,1,football,121.0,,55205071.0,,55205071.0,
+University of Southern California,Big Ten,P5,1,football,116.0,,74014972.0,,74014972.0,
+University of Washington-Seattle Campus,Big Ten,P5,1,football,114.0,,121018946.0,,68921774.0,
+University of Wisconsin-Madison,Big Ten,P5,1,football,122.0,,112319593.0,,40903448.0,
+The University of Alabama,SEC,P5,1,football,132.0,,146325227.0,,81502191.0,
+University of Arkansas,SEC,P5,1,football,127.0,,90791403.0,,57370871.0,
+Auburn University,SEC,P5,1,football,121.0,,121408732.0,,58724402.0,
+University of Florida,SEC,P5,1,football,131.0,,113351580.0,,51766013.0,
+University of Georgia,SEC,P5,1,football,135.0,,149285887.0,,71107704.0,
+University of Kentucky,SEC,P5,1,football,122.0,,43281917.0,,43281917.0,
+Louisiana State University and Agricultural & Mechanical College,SEC,P5,1,football,115.0,,117563889.0,,50738587.0,
+University of Missouri-Columbia,SEC,P5,1,football,122.0,,53301146.0,,49316139.0,
+Mississippi State University,SEC,P5,1,football,110.0,,37575575.0,,37575575.0,
+University of Mississippi,SEC,P5,1,football,126.0,,90702621.0,,61846036.0,
+University of Oklahoma-Norman Campus,SEC,P5,1,football,128.0,,126247146.0,,71184826.0,
+University of South Carolina-Columbia,SEC,P5,1,football,119.0,,76513171.0,,55859501.0,
+The University of Tennessee-Knoxville,SEC,P5,1,football,123.0,,162539638.0,,61240437.0,
+The University of Texas at Austin,SEC,P5,1,football,118.0,,171892714.0,,70405628.0,
+Texas A&M University-College Station,SEC,P5,1,football,146.0,,108474281.0,,60230146.0,
+Vanderbilt University,SEC,P5,1,football,116.0,,44124525.0,,44124525.0,
+University of Arizona,Big 12,P5,1,football,113.0,,37795880.0,,37795880.0,
+Arizona State University Campus Immersion,Big 12,P5,1,football,123.0,,50352139.0,,50352139.0,
+Baylor University,Big 12,P5,1,football,118.0,,44260293.0,,41050130.0,
+Brigham Young University,Big 12,P5,1,football,135.0,,51715899.0,,44561032.0,
+University of Central Florida,Big 12,P5,1,football,120.0,,30085713.0,,38695138.0,
+University of Cincinnati-Main Campus,Big 12,P5,1,football,120.0,,30429185.0,,30429185.0,
+University of Colorado Boulder,Big 12,P5,1,football,118.0,,69306235.0,,42805019.0,
+University of Houston,Big 12,P5,1,football,119.0,,23271364.0,,23271364.0,
+Iowa State University,Big 12,P5,1,football,135.0,,60744404.0,,32337385.0,
+University of Kansas,Big 12,P5,1,football,122.0,,37107691.0,,34516494.0,
+Kansas State University,Big 12,P5,1,football,125.0,,27087822.0,,27087822.0,
+Oklahoma State University-Main Campus,Big 12,P5,1,football,136.0,,56992244.0,,32830617.0,
+Texas Christian University,Big 12,P5,1,football,130.0,,59568339.0,,59568339.0,
+Texas Tech University,Big 12,P5,1,football,123.0,,69872378.0,,39745662.0,
+University of Utah,Big 12,P5,1,football,126.0,,95930953.0,,41410554.0,
+West Virginia University,Big 12,P5,1,football,127.0,,47642113.0,,35250569.0,
+Boston College,ACC,P5,1,football,148.0,,47531226.0,,41224780.0,
+University of California-Berkeley,ACC,P5,1,football,120.0,,63954618.0,,46721911.0,
+Clemson University,ACC,P5,1,football,137.0,,86902571.0,,81136726.0,
+Duke University,ACC,P5,1,football,121.0,,67356450.0,,47363558.0,
+Florida State University,ACC,P5,1,football,124.0,,83469718.0,,83267924.0,
+Georgia Institute of Technology-Main Campus,ACC,P5,1,football,120.0,,70541041.0,,42709508.0,
+University of Louisville,ACC,P5,1,football,120.0,,33090886.0,,30745125.0,
+University of Miami,ACC,P5,1,football,127.0,,99864288.0,,88117956.0,
+University of North Carolina at Chapel Hill,ACC,P5,1,football,123.0,,63337093.0,,49145749.0,
+North Carolina State University at Raleigh,ACC,P5,1,football,125.0,,69756644.0,,40535367.0,
+University of Pittsburgh-Pittsburgh Campus,ACC,P5,1,football,118.0,,57222645.0,,47141722.0,
+Southern Methodist University,ACC,P5,1,football,122.0,,45315587.0,,45315587.0,
+Stanford University,ACC,P5,1,football,110.0,,35992019.0,,35992019.0,
+Syracuse University,ACC,P5,1,football,124.0,,64585287.0,,42090055.0,
+Virginia Polytechnic Institute and State University,ACC,P5,1,football,124.0,,79735756.0,,37803976.0,
+University of Virginia-Main Campus,ACC,P5,1,football,127.0,,51441991.0,,33611796.0,
+Wake Forest University,ACC,P5,1,football,130.0,,39399925.0,,39399925.0,
+University of Notre Dame,ACC,P5,1,football,124.0,,195723436.0,,93255797.0,
+Oregon State University,Pac-12,P5,1,football,116.0,,32621301.0,,23847865.0,
+Washington State University,Pac-12,P5,1,football,124.0,,38831529.0,,22896016.0,
+Butler University,Big East,non-P5,1,football,119.0,,1498263.0,,1421775.0,
+Georgetown University,Big East,non-P5,1,football,100.0,,2575007.0,,2575007.0,
+Villanova University,Big East,non-P5,1,football,96.0,,8800183.0,,8800183.0,
+University of Illinois Urbana-Champaign,Big Ten,P5,1,basketball,14.0,26.0,34764436.0,2186498.0,20565967.0,7258435.0
+University of Iowa,Big Ten,P5,1,basketball,17.0,29.0,16702408.0,4779406.0,13292250.0,8482645.0
+Indiana University-Bloomington,Big Ten,P5,1,basketball,19.0,37.0,52276379.0,9293179.0,31818423.0,9293179.0
+University of Maryland-College Park,Big Ten,P5,1,basketball,15.0,15.0,16464647.0,1401819.0,12972857.0,8236450.0
+University of Michigan-Ann Arbor,Big Ten,P5,1,basketball,16.0,36.0,21209886.0,1138510.0,14358515.0,5858899.0
+Michigan State University,Big Ten,P5,1,basketball,16.0,16.0,21818193.0,7247013.0,20566735.0,7247013.0
+University of Minnesota-Twin Cities,Big Ten,P5,1,basketball,16.0,21.0,15997942.0,1638813.0,15623863.0,6587319.0
+University of Nebraska-Lincoln,Big Ten,P5,1,basketball,18.0,50.0,18447339.0,1996767.0,13196203.0,6092105.0
+Northwestern University,Big Ten,P5,1,basketball,14.0,16.0,14431898.0,1646018.0,14728871.0,5852067.0
+Ohio State University-Main Campus,Big Ten,P5,1,basketball,16.0,14.0,23355035.0,7163564.0,13158683.0,7163564.0
+University of Oregon,Big Ten,P5,1,basketball,18.0,29.0,11644706.0,1830118.0,14072866.0,6718334.0
+Pennsylvania State University-Main Campus,Big Ten,P5,1,basketball,14.0,13.0,15174250.0,782052.0,14434548.0,5101960.0
+Purdue University-Main Campus,Big Ten,P5,1,basketball,18.0,15.0,20966991.0,8493747.0,14040438.0,4911279.0
+Rutgers University-New Brunswick,Big Ten,P5,1,basketball,15.0,31.0,16076899.0,7528347.0,16076899.0,7528347.0
+University of California-Los Angeles,Big Ten,P5,1,basketball,17.0,29.0,17799741.0,9690479.0,17799741.0,9690479.0
+University of Southern California,Big Ten,P5,1,basketball,17.0,30.0,13074782.0,9610324.0,13074782.0,9610324.0
+University of Washington-Seattle Campus,Big Ten,P5,1,basketball,16.0,24.0,13456854.0,1951477.0,11725277.0,7531528.0
+University of Wisconsin-Madison,Big Ten,P5,1,basketball,17.0,28.0,19869281.0,760053.0,12464124.0,5120630.0
+The University of Alabama,SEC,P5,1,basketball,20.0,30.0,24406961.0,5433584.0,15230030.0,5433584.0
+University of Arkansas,SEC,P5,1,basketball,15.0,14.0,25392395.0,294472.0,21254027.0,6730975.0
+Auburn University,SEC,P5,1,basketball,18.0,21.0,26568984.0,847898.0,20535097.0,5812213.0
+University of Florida,SEC,P5,1,basketball,18.0,14.0,17258007.0,237160.0,13427727.0,5517320.0
+University of Georgia,SEC,P5,1,basketball,15.0,23.0,16079070.0,1472828.0,10400030.0,5472173.0
+University of Kentucky,SEC,P5,1,basketball,15.0,13.0,21370744.0,7659582.0,21370744.0,7659582.0
+Louisiana State University and Agricultural & Mechanical College,SEC,P5,1,basketball,16.0,13.0,13624943.0,4137970.0,11104405.0,12099217.0
+University of Missouri-Columbia,SEC,P5,1,basketball,18.0,16.0,18857854.0,5748392.0,14354000.0,5748392.0
+Mississippi State University,SEC,P5,1,basketball,18.0,26.0,12220601.0,6325217.0,12220601.0,6325217.0
+University of Mississippi,SEC,P5,1,basketball,16.0,15.0,18228379.0,8479325.0,18228379.0,8479325.0
+University of Oklahoma-Norman Campus,SEC,P5,1,basketball,17.0,24.0,9769244.0,2618570.0,14250771.0,8756319.0
+University of South Carolina-Columbia,SEC,P5,1,basketball,14.0,31.0,15446053.0,13119360.0,11074153.0,13119360.0
+The University of Tennessee-Knoxville,SEC,P5,1,basketball,15.0,30.0,35316920.0,4352348.0,20241922.0,7559834.0
+The University of Texas at Austin,SEC,P5,1,basketball,16.0,32.0,17377540.0,2445545.0,22209288.0,10400257.0
+Texas A&M University-College Station,SEC,P5,1,basketball,16.0,11.0,15734652.0,1036356.0,14312941.0,6645735.0
+Vanderbilt University,SEC,P5,1,basketball,18.0,28.0,13322320.0,8319805.0,13322320.0,8319805.0
+University of Arizona,Big 12,P5,1,basketball,20.0,15.0,22635363.0,8001360.0,22635363.0,8001360.0
+Arizona State University Campus Immersion,Big 12,P5,1,basketball,15.0,28.0,10063114.0,6733622.0,10063114.0,6733622.0
+Baylor University,Big 12,P5,1,basketball,14.0,34.0,18424983.0,9328990.0,18424983.0,9328990.0
+Brigham Young University,Big 12,P5,1,basketball,17.0,16.0,28047261.0,1566760.0,17030052.0,5082856.0
+University of Central Florida,Big 12,P5,1,basketball,16.0,15.0,7812023.0,4195677.0,7812023.0,4195677.0
+University of Cincinnati-Main Campus,Big 12,P5,1,basketball,16.0,13.0,12321038.0,4400216.0,12321038.0,4400216.0
+University of Colorado Boulder,Big 12,P5,1,basketball,17.0,24.0,11918793.0,2337461.0,8608358.0,5177230.0
+University of Houston,Big 12,P5,1,basketball,14.0,14.0,14577598.0,3685535.0,14577598.0,3685535.0
+Iowa State University,Big 12,P5,1,basketball,15.0,15.0,14437710.0,1201223.0,10382761.0,5282818.0
+University of Kansas,Big 12,P5,1,basketball,19.0,14.0,21918945.0,5492126.0,19732078.0,5492126.0
+Kansas State University,Big 12,P5,1,basketball,14.0,33.0,10907824.0,4912372.0,10907824.0,4912372.0
+Oklahoma State University-Main Campus,Big 12,P5,1,basketball,17.0,14.0,18083335.0,2361366.0,11530565.0,4718546.0
+Texas Christian University,Big 12,P5,1,basketball,17.0,14.0,15620468.0,9587284.0,15620468.0,9587284.0
+Texas Tech University,Big 12,P5,1,basketball,15.0,15.0,15976185.0,2215872.0,15637329.0,7100215.0
+University of Utah,Big 12,P5,1,basketball,18.0,14.0,16981671.0,764775.0,8954515.0,5015772.0
+West Virginia University,Big 12,P5,1,basketball,16.0,15.0,10222908.0,5476114.0,10222908.0,5476114.0
+Boston College,ACC,P5,1,basketball,15.0,15.0,9971317.0,2035289.0,10805531.0,6218313.0
+University of California-Berkeley,ACC,P5,1,basketball,22.0,33.0,13249051.0,10750160.0,14101936.0,10750160.0
+Clemson University,ACC,P5,1,basketball,17.0,17.0,12592738.0,6607428.0,12592738.0,6607428.0
+Duke University,ACC,P5,1,basketball,15.0,17.0,52729506.0,6243424.0,31868603.0,12300220.0
+Florida State University,ACC,P5,1,basketball,16.0,12.0,14557585.0,5736021.0,14557585.0,5736021.0
+Georgia Institute of Technology-Main Campus,ACC,P5,1,basketball,15.0,28.0,14536539.0,1219994.0,12013953.0,6654388.0
+University of Louisville,ACC,P5,1,basketball,17.0,25.0,22792373.0,8188113.0,14854067.0,6700777.0
+University of Miami,ACC,P5,1,basketball,14.0,16.0,17865162.0,7926455.0,14366552.0,7926455.0
+University of North Carolina at Chapel Hill,ACC,P5,1,basketball,16.0,32.0,39742088.0,2526799.0,16738604.0,6779610.0
+North Carolina State University at Raleigh,ACC,P5,1,basketball,15.0,13.0,18993591.0,1558266.0,11858910.0,6202637.0
+University of Pittsburgh-Pittsburgh Campus,ACC,P5,1,basketball,16.0,24.0,13874103.0,5131830.0,11437769.0,5131830.0
+Southern Methodist University,ACC,P5,1,basketball,16.0,13.0,16735281.0,7327986.0,16735281.0,7327986.0
+Stanford University,ACC,P5,1,basketball,16.0,24.0,10765368.0,7887092.0,10765368.0,7887092.0
+Syracuse University,ACC,P5,1,basketball,17.0,13.0,31587705.0,1968506.0,15936295.0,5994083.0
+Virginia Polytechnic Institute and State University,ACC,P5,1,basketball,15.0,11.0,8485407.0,2046594.0,9504271.0,4459989.0
+University of Virginia-Main Campus,ACC,P5,1,basketball,19.0,38.0,17841957.0,5796602.0,16646407.0,5796602.0
+Wake Forest University,ACC,P5,1,basketball,17.0,22.0,13055099.0,4702870.0,13055099.0,4702870.0
+University of Notre Dame,ACC,P5,1,basketball,17.0,12.0,13245301.0,9051995.0,13245301.0,9051995.0
+Oregon State University,Pac-12,P5,1,basketball,16.0,27.0,9165896.0,5009884.0,6899222.0,5009884.0
+Washington State University,Pac-12,P5,1,basketball,14.0,13.0,6640383.0,870584.0,4336028.0,3718741.0
+Butler University,Big East,non-P5,1,basketball,14.0,29.0,12918057.0,3168933.0,9560281.0,3200508.0
+Creighton University,Big East,non-P5,0,basketball,16.0,11.0,19767613.0,1281546.0,14019614.0,3166071.0
+DePaul University,Big East,non-P5,0,basketball,14.0,16.0,12746533.0,5519337.0,12746533.0,5519337.0
+Georgetown University,Big East,non-P5,1,basketball,16.0,18.0,17459258.0,4034580.0,17459258.0,4034580.0
+Marquette University,Big East,non-P5,0,basketball,20.0,12.0,25734325.0,4774668.0,20053484.0,4774607.0
+Providence College,Big East,non-P5,0,basketball,16.0,15.0,12518606.0,5171580.0,12518606.0,5171580.0
+Seton Hall University,Big East,non-P5,0,basketball,17.0,15.0,9788925.0,4388420.0,9788925.0,4388420.0
+St. John's University-New York,Big East,non-P5,0,basketball,13.0,14.0,31994396.0,6689315.0,31994396.0,6689315.0
+Villanova University,Big East,non-P5,1,basketball,15.0,28.0,16554290.0,5158438.0,15910105.0,5158438.0
+Xavier University,Big East,non-P5,0,basketball,20.0,16.0,16016940.0,3696345.0,11742338.0,3696344.0
+Gonzaga University,WCC,non-P5,0,basketball,19.0,16.0,19510548.0,5850940.0,13588661.0,5699567.0
+Saint Mary's College of California,WCC,non-P5,0,basketball,15.0,15.0,8298148.0,2874127.0,8298148.0,2874127.0
+University of Denver,Summit League,non-P5,0,basketball,15.0,15.0,3783572.0,2564970.0,3783572.0,2564970.0
+University of Illinois Urbana-Champaign,Big Ten,P5,1,volleyball,,19.0,,652337.0,,2768685.0
+University of Iowa,Big Ten,P5,1,volleyball,,26.0,,190823.0,,2903001.0
+Indiana University-Bloomington,Big Ten,P5,1,volleyball,,26.0,,2567065.0,,2567065.0
+University of Maryland-College Park,Big Ten,P5,1,volleyball,,18.0,,812643.0,,2416808.0
+University of Michigan-Ann Arbor,Big Ten,P5,1,volleyball,,23.0,,511857.0,,2949958.0
+Michigan State University,Big Ten,P5,1,volleyball,,21.0,,4152418.0,,4152418.0
+University of Minnesota-Twin Cities,Big Ten,P5,1,volleyball,,17.0,,1438406.0,,3531550.0
+University of Nebraska-Lincoln,Big Ten,P5,1,volleyball,,17.0,,5453618.0,,6814082.0
+Northwestern University,Big Ten,P5,1,volleyball,,17.0,,1748005.0,,3537732.0
+Ohio State University-Main Campus,Big Ten,P5,1,volleyball,19.0,20.0,1498024.0,3161017.0,1498024.0,3161017.0
+University of Oregon,Big Ten,P5,1,volleyball,,16.0,,906343.0,,2582926.0
+Pennsylvania State University-Main Campus,Big Ten,P5,1,volleyball,20.0,19.0,238463.0,882808.0,1228606.0,3168305.0
+Purdue University-Main Campus,Big Ten,P5,1,volleyball,,24.0,,8621165.0,,3237136.0
+Rutgers University-New Brunswick,Big Ten,P5,1,volleyball,,17.0,,3208516.0,,3208516.0
+University of California-Los Angeles,Big Ten,P5,1,volleyball,22.0,20.0,2454572.0,2770248.0,2454572.0,2770248.0
+University of Southern California,Big Ten,P5,1,volleyball,22.0,23.0,1709180.0,3740682.0,1709180.0,3740682.0
+University of Washington-Seattle Campus,Big Ten,P5,1,volleyball,,19.0,,1498709.0,,3441059.0
+University of Wisconsin-Madison,Big Ten,P5,1,volleyball,,19.0,,4055436.0,,5189615.0
+The University of Alabama,SEC,P5,1,volleyball,,22.0,,2682809.0,,2682809.0
+University of Arkansas,SEC,P5,1,volleyball,,18.0,,149803.0,,2196530.0
+Auburn University,SEC,P5,1,volleyball,,18.0,,351116.0,,2619459.0
+University of Florida,SEC,P5,1,volleyball,,20.0,,1478468.0,,4862559.0
+University of Georgia,SEC,P5,1,volleyball,,18.0,,108137.0,,2127964.0
+University of Kentucky,SEC,P5,1,volleyball,,16.0,,3429647.0,,3429647.0
+Louisiana State University and Agricultural & Mechanical College,SEC,P5,1,volleyball,,22.0,,156245.0,,2377341.0
+University of Missouri-Columbia,SEC,P5,1,volleyball,,22.0,,3048994.0,,3048994.0
+Mississippi State University,SEC,P5,1,volleyball,,19.0,,2122385.0,,2122385.0
+University of Mississippi,SEC,P5,1,volleyball,,17.0,,2749126.0,,2749126.0
+University of Oklahoma-Norman Campus,SEC,P5,1,volleyball,,16.0,,243922.0,,2672376.0
+University of South Carolina-Columbia,SEC,P5,1,volleyball,,20.0,,2725093.0,,2725093.0
+The University of Tennessee-Knoxville,SEC,P5,1,volleyball,,21.0,,435953.0,,3357470.0
+The University of Texas at Austin,SEC,P5,1,volleyball,,24.0,,2086242.0,,4912104.0
+Texas A&M University-College Station,SEC,P5,1,volleyball,,16.0,,1196880.0,,3922450.0
+University of Arizona,Big 12,P5,1,volleyball,,17.0,,1883610.0,,1883610.0
+Arizona State University Campus Immersion,Big 12,P5,1,volleyball,,24.0,,2955239.0,,2955239.0
+Baylor University,Big 12,P5,1,volleyball,,22.0,,3123397.0,,3123397.0
+Brigham Young University,Big 12,P5,1,volleyball,18.0,19.0,1796663.0,2062226.0,2184689.0,2759500.0
+University of Central Florida,Big 12,P5,1,volleyball,,14.0,,1847029.0,,1722014.0
+University of Cincinnati-Main Campus,Big 12,P5,1,volleyball,,20.0,,1946468.0,,1946468.0
+University of Colorado Boulder,Big 12,P5,1,volleyball,,19.0,,728185.0,,2225370.0
+University of Houston,Big 12,P5,1,volleyball,,19.0,,1780695.0,,1780695.0
+Iowa State University,Big 12,P5,1,volleyball,,20.0,,291641.0,,2250994.0
+University of Kansas,Big 12,P5,1,volleyball,,19.0,,2581006.0,,2581006.0
+Kansas State University,Big 12,P5,1,volleyball,,19.0,,1831029.0,,1831029.0
+Texas Christian University,Big 12,P5,1,volleyball,,20.0,,3729667.0,,3729667.0
+Texas Tech University,Big 12,P5,1,volleyball,,21.0,,297865.0,,1915763.0
+University of Utah,Big 12,P5,1,volleyball,,17.0,,739043.0,,2573263.0
+West Virginia University,Big 12,P5,1,volleyball,,13.0,,1254290.0,,1254290.0
+Boston College,ACC,P5,1,volleyball,,22.0,,2259934.0,,2259934.0
+University of California-Berkeley,ACC,P5,1,volleyball,,18.0,,2873590.0,,2873590.0
+Clemson University,ACC,P5,1,volleyball,,22.0,,2980269.0,,2980269.0
+Duke University,ACC,P5,1,volleyball,,19.0,,2393193.0,,2362485.0
+Florida State University,ACC,P5,1,volleyball,,16.0,,1546789.0,,1546789.0
+Georgia Institute of Technology-Main Campus,ACC,P5,1,volleyball,,21.0,,519389.0,,2462261.0
+University of Louisville,ACC,P5,1,volleyball,,17.0,,10845580.0,,3059112.0
+University of Miami,ACC,P5,1,volleyball,,17.0,,2721374.0,,2721374.0
+University of North Carolina at Chapel Hill,ACC,P5,1,volleyball,,19.0,,881622.0,,1702233.0
+North Carolina State University at Raleigh,ACC,P5,1,volleyball,,18.0,,929645.0,,1763173.0
+University of Pittsburgh-Pittsburgh Campus,ACC,P5,1,volleyball,,16.0,,3363298.0,,3363298.0
+Southern Methodist University,ACC,P5,1,volleyball,,14.0,,3585674.0,,3585674.0
+Stanford University,ACC,P5,1,volleyball,16.0,15.0,1222045.0,3706537.0,1222045.0,3706537.0
+Syracuse University,ACC,P5,1,volleyball,,19.0,,1032461.0,,1969072.0
+Virginia Polytechnic Institute and State University,ACC,P5,1,volleyball,,19.0,,348944.0,,1767653.0
+University of Virginia-Main Campus,ACC,P5,1,volleyball,,19.0,,2309426.0,,2309426.0
+Wake Forest University,ACC,P5,1,volleyball,,20.0,,2573425.0,,2573425.0
+University of Notre Dame,ACC,P5,1,volleyball,,22.0,,3691281.0,,3691281.0
+Oregon State University,Pac-12,P5,1,volleyball,,14.0,,1909379.0,,1909379.0
+Washington State University,Pac-12,P5,1,volleyball,,24.0,,1130274.0,,1902894.0
+Butler University,Big East,non-P5,1,volleyball,,22.0,,1205171.0,,1215599.0
+Creighton University,Big East,non-P5,0,volleyball,,19.0,,2249516.0,,2328459.0
+DePaul University,Big East,non-P5,0,volleyball,,15.0,,1335270.0,,1335270.0
+Georgetown University,Big East,non-P5,1,volleyball,,17.0,,1620817.0,,1620817.0
+Marquette University,Big East,non-P5,0,volleyball,,16.0,,2469167.0,,2469167.0
+Providence College,Big East,non-P5,0,volleyball,,17.0,,1283845.0,,1283845.0
+Seton Hall University,Big East,non-P5,0,volleyball,,23.0,,1197626.0,,1197626.0
+St. John's University-New York,Big East,non-P5,0,volleyball,,14.0,,1495633.0,,1495633.0
+Villanova University,Big East,non-P5,1,volleyball,,19.0,,1864439.0,,1864439.0
+Xavier University,Big East,non-P5,0,volleyball,,17.0,,1279154.0,,1279157.0
+Gonzaga University,WCC,non-P5,0,volleyball,,18.0,,1775851.0,,1864491.0
+Saint Mary's College of California,WCC,non-P5,0,volleyball,,16.0,,1481557.0,,1481557.0
+University of Denver,Summit League,non-P5,0,volleyball,,15.0,,1592057.0,,1592057.0
+University of Illinois Urbana-Champaign,Big Ten,P5,1,soccer,,27.0,,241551.0,,2798415.0
+University of Iowa,Big Ten,P5,1,soccer,,43.0,,389611.0,,2521548.0
+Indiana University-Bloomington,Big Ten,P5,1,soccer,35.0,33.0,2565055.0,2418676.0,2565055.0,2418676.0
+University of Maryland-College Park,Big Ten,P5,1,soccer,29.0,32.0,542896.0,291136.0,2862342.0,1975248.0
+University of Michigan-Ann Arbor,Big Ten,P5,1,soccer,30.0,33.0,166307.0,134226.0,2214856.0,2539203.0
+Michigan State University,Big Ten,P5,1,soccer,28.0,32.0,1796598.0,2506914.0,1796598.0,2506914.0
+University of Minnesota-Twin Cities,Big Ten,P5,1,soccer,,29.0,,154953.0,,2210521.0
+University of Nebraska-Lincoln,Big Ten,P5,1,soccer,,38.0,,162927.0,,2461665.0
+Northwestern University,Big Ten,P5,1,soccer,29.0,31.0,737081.0,1464744.0,1650824.0,2434828.0
+Ohio State University-Main Campus,Big Ten,P5,1,soccer,28.0,28.0,2280643.0,2775323.0,2280643.0,2775323.0
+University of Oregon,Big Ten,P5,1,soccer,,29.0,,210824.0,,2422748.0
+Pennsylvania State University-Main Campus,Big Ten,P5,1,soccer,27.0,36.0,538565.0,849569.0,1926335.0,3067352.0
+Purdue University-Main Campus,Big Ten,P5,1,soccer,,36.0,,531926.0,,2222579.0
+Rutgers University-New Brunswick,Big Ten,P5,1,soccer,28.0,38.0,2239058.0,2661648.0,2239058.0,2661648.0
+University of California-Los Angeles,Big Ten,P5,1,soccer,27.0,41.0,2176275.0,3174019.0,2176275.0,3174019.0
+University of Southern California,Big Ten,P5,1,soccer,,36.0,,3701474.0,,3701474.0
+University of Washington-Seattle Campus,Big Ten,P5,1,soccer,32.0,34.0,696263.0,1092810.0,3121941.0,3507930.0
+University of Wisconsin-Madison,Big Ten,P5,1,soccer,27.0,35.0,776696.0,765174.0,2349665.0,2575091.0
+The University of Alabama,SEC,P5,1,soccer,,39.0,,3108965.0,,3108965.0
+University of Arkansas,SEC,P5,1,soccer,,37.0,,172775.0,,3020704.0
+Auburn University,SEC,P5,1,soccer,,35.0,,456839.0,,3108462.0
+University of Florida,SEC,P5,1,soccer,,34.0,,126662.0,,2617495.0
+University of Georgia,SEC,P5,1,soccer,,44.0,,111244.0,,3117362.0
+University of Kentucky,SEC,P5,1,soccer,27.0,56.0,2283310.0,2600180.0,2283310.0,2600180.0
+Louisiana State University and Agricultural & Mechanical College,SEC,P5,1,soccer,,32.0,,202609.0,,2748277.0
+University of Missouri-Columbia,SEC,P5,1,soccer,,30.0,,2567615.0,,2567615.0
+Mississippi State University,SEC,P5,1,soccer,,41.0,,3058114.0,,3058114.0
+University of Mississippi,SEC,P5,1,soccer,,34.0,,2819404.0,,2819404.0
+University of Oklahoma-Norman Campus,SEC,P5,1,soccer,,32.0,,264902.0,,3152445.0
+University of South Carolina-Columbia,SEC,P5,1,soccer,29.0,43.0,2147812.0,2810092.0,2147812.0,2810092.0
+The University of Tennessee-Knoxville,SEC,P5,1,soccer,,40.0,,283832.0,,3450190.0
+The University of Texas at Austin,SEC,P5,1,soccer,,39.0,,1341805.0,,3413500.0
+Texas A&M University-College Station,SEC,P5,1,soccer,,34.0,,2591858.0,,4516707.0
+Vanderbilt University,SEC,P5,1,soccer,,44.0,,4026149.0,,4026149.0
+University of Arizona,Big 12,P5,1,soccer,,34.0,,2339596.0,,2339596.0
+Arizona State University Campus Immersion,Big 12,P5,1,soccer,,31.0,,2550164.0,,2550164.0
+Baylor University,Big 12,P5,1,soccer,,33.0,,3398434.0,,3398434.0
+Brigham Young University,Big 12,P5,1,soccer,,31.0,,5004505.0,,4378229.0
+University of Central Florida,Big 12,P5,1,soccer,27.0,30.0,3293275.0,3685441.0,1862097.0,1900711.0
+University of Cincinnati-Main Campus,Big 12,P5,1,soccer,,32.0,,1663077.0,,1663077.0
+University of Colorado Boulder,Big 12,P5,1,soccer,,28.0,,760901.0,,2516780.0
+University of Houston,Big 12,P5,1,soccer,,32.0,,1405457.0,,1405457.0
+Iowa State University,Big 12,P5,1,soccer,,36.0,,157095.0,,1902937.0
+University of Kansas,Big 12,P5,1,soccer,,30.0,,2896029.0,,2896029.0
+Kansas State University,Big 12,P5,1,soccer,,35.0,,1754882.0,,1754882.0
+Oklahoma State University-Main Campus,Big 12,P5,1,soccer,,30.0,,537554.0,,1927857.0
+Texas Christian University,Big 12,P5,1,soccer,,38.0,,3389833.0,,3389833.0
+Texas Tech University,Big 12,P5,1,soccer,,29.0,,623515.0,,3142884.0
+University of Utah,Big 12,P5,1,soccer,,26.0,,830609.0,,2278819.0
+West Virginia University,Big 12,P5,1,soccer,30.0,32.0,1242903.0,1480512.0,1242903.0,1480512.0
+Boston College,ACC,P5,1,soccer,35.0,38.0,1990839.0,2777121.0,1990839.0,2777121.0
+University of California-Berkeley,ACC,P5,1,soccer,42.0,33.0,713043.0,1732547.0,1577158.0,1732547.0
+Clemson University,ACC,P5,1,soccer,34.0,27.0,3583872.0,2843918.0,3583872.0,2843918.0
+Duke University,ACC,P5,1,soccer,31.0,27.0,2168207.0,3043304.0,2500862.0,3146339.0
+Florida State University,ACC,P5,1,soccer,,26.0,,2800112.0,,2800112.0
+University of Louisville,ACC,P5,1,soccer,30.0,31.0,66594.0,28969.0,1475405.0,1555046.0
+University of Miami,ACC,P5,1,soccer,,30.0,,3357289.0,,3357289.0
+University of North Carolina at Chapel Hill,ACC,P5,1,soccer,41.0,37.0,1152768.0,1870729.0,1942182.0,2971639.0
+North Carolina State University at Raleigh,ACC,P5,1,soccer,32.0,29.0,1100806.0,1047299.0,2039362.0,1911394.0
+University of Pittsburgh-Pittsburgh Campus,ACC,P5,1,soccer,29.0,38.0,2300789.0,2231347.0,2300789.0,2231347.0
+Southern Methodist University,ACC,P5,1,soccer,33.0,31.0,2857263.0,3063751.0,2857263.0,3063751.0
+Stanford University,ACC,P5,1,soccer,28.0,29.0,2615880.0,3356314.0,2615880.0,3356314.0
+Syracuse University,ACC,P5,1,soccer,32.0,34.0,1254894.0,1258716.0,2572355.0,2317361.0
+Virginia Polytechnic Institute and State University,ACC,P5,1,soccer,28.0,36.0,273077.0,442369.0,2016178.0,2268510.0
+University of Virginia-Main Campus,ACC,P5,1,soccer,41.0,36.0,2322205.0,2621126.0,2322205.0,2621126.0
+Wake Forest University,ACC,P5,1,soccer,30.0,35.0,2929818.0,3211779.0,2929818.0,3211779.0
+University of Notre Dame,ACC,P5,1,soccer,31.0,32.0,2749910.0,3403376.0,2749910.0,3403376.0
+Oregon State University,Pac-12,P5,1,soccer,30.0,25.0,1821766.0,1434947.0,1821766.0,1434947.0
+Washington State University,Pac-12,P5,1,soccer,,29.0,,1175671.0,,2048907.0
+Butler University,Big East,non-P5,1,soccer,29.0,32.0,1298105.0,1641354.0,1299790.0,1599496.0
+Creighton University,Big East,non-P5,0,soccer,31.0,30.0,1165236.0,1009607.0,1635003.0,1607978.0
+DePaul University,Big East,non-P5,0,soccer,30.0,31.0,1310822.0,1403151.0,1310822.0,1403151.0
+Georgetown University,Big East,non-P5,1,soccer,28.0,33.0,1998318.0,2119632.0,1998318.0,2119632.0
+Marquette University,Big East,non-P5,0,soccer,33.0,32.0,1334925.0,1744552.0,1334925.0,1744552.0
+Providence College,Big East,non-P5,0,soccer,40.0,31.0,2570147.0,1875547.0,2570147.0,1875547.0
+Seton Hall University,Big East,non-P5,0,soccer,34.0,31.0,1433534.0,1576966.0,1433534.0,1576966.0
+St. John's University-New York,Big East,non-P5,0,soccer,41.0,32.0,1645216.0,1495231.0,1645216.0,1495231.0
+Villanova University,Big East,non-P5,1,soccer,29.0,34.0,1457020.0,1885201.0,1457020.0,1885201.0
+Xavier University,Big East,non-P5,0,soccer,31.0,35.0,88550.0,1435867.0,1271264.0,1435866.0
+Gonzaga University,WCC,non-P5,0,soccer,31.0,36.0,1625864.0,1929509.0,1710680.0,2032285.0
+Saint Mary's College of California,WCC,non-P5,0,soccer,35.0,39.0,1427481.0,1726727.0,1427481.0,1726727.0
+University of Denver,Summit League,non-P5,0,soccer,36.0,32.0,2387022.0,1950934.0,2387022.0,1950934.0
