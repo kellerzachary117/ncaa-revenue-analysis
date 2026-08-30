@@ -2,7 +2,7 @@ const fs = require("fs");
 const {
   Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell,
   WidthType, ShadingType, BorderStyle, AlignmentType,
-  LevelFormat,
+  LevelFormat, ImageRun,
 } = require("docx");
 
 const PAGE_W = 12240, PAGE_H = 15840; // US Letter, DXA
@@ -78,6 +78,105 @@ const conferenceRows = [
   ["Summit League", "1", "non-P5"],
 ];
 
+function statTile(value, label) {
+  return new TableCell({
+    width: { size: 2700, type: WidthType.DXA },
+    margins: { top: 100, bottom: 100, left: 80, right: 80 },
+    children: [
+      new Paragraph({
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 20 },
+        children: [new TextRun({ text: value, bold: true, size: 30, color: NAVY })],
+      }),
+      new Paragraph({
+        alignment: AlignmentType.CENTER,
+        children: [new TextRun({ text: label, size: 15, color: GRAY })],
+      }),
+    ],
+  });
+}
+
+const statStrip = new Table({
+  width: { size: 10800, type: WidthType.DXA },
+  columnWidths: [2700, 2700, 2700, 2700],
+  borders: {
+    top: { style: BorderStyle.NONE }, bottom: { style: BorderStyle.NONE },
+    left: { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE },
+    insideHorizontal: { style: BorderStyle.NONE }, insideVertical: { style: BorderStyle.NONE },
+  },
+  rows: [new TableRow({ children: [
+    statTile("83", "schools analyzed"),
+    statTile("4", "sports"),
+    statTile("249", "school-sport rows"),
+    statTile("p=0.009", "aid share predicts GSR"),
+  ] })],
+});
+
+function statsRowCell(text, opts = {}) {
+  return new TableCell({
+    width: { size: opts.width || 2160, type: WidthType.DXA },
+    margins: { top: 40, bottom: 40, left: 100, right: 100 },
+    shading: opts.header ? { type: ShadingType.CLEAR, fill: NAVY } : undefined,
+    children: [new Paragraph({
+      spacing: { after: 0 },
+      alignment: opts.center ? AlignmentType.CENTER : AlignmentType.LEFT,
+      children: [new TextRun({
+        text,
+        size: opts.header ? 18 : 16,
+        bold: !!opts.header,
+        color: opts.header ? "FFFFFF" : "000000",
+      })],
+    })],
+  });
+}
+
+const sportStatsRows = [
+  ["Football", "$77.2M", "86", "56%"],
+  ["Basketball", "$22.4M", "80", "59%"],
+  ["Volleyball", "$2.1M", "97", "58%"],
+  ["Soccer (equalizer)", "$3.1M", "94", "36%"],
+];
+
+const sportStatsTable = new Table({
+  width: { size: 10800, type: WidthType.DXA },
+  columnWidths: [2700, 2700, 2700, 2700],
+  rows: [
+    new TableRow({
+      tableHeader: true,
+      children: [
+        statsRowCell("Sport", { header: true }),
+        statsRowCell("Avg. Revenue", { header: true, center: true }),
+        statsRowCell("Avg. GSR", { header: true, center: true }),
+        statsRowCell("Avg. Win %", { header: true, center: true }),
+      ],
+    }),
+    ...sportStatsRows.map(([sport, rev, gsr, wp]) => new TableRow({
+      children: [
+        statsRowCell(sport),
+        statsRowCell(rev, { center: true }),
+        statsRowCell(gsr, { center: true }),
+        statsRowCell(wp, { center: true }),
+      ],
+    })),
+  ],
+});
+
+function chartImage(path, widthPx, heightPx) {
+  const targetW = 640; // ~6.7in at 96dpi, fits the 7.5in usable page width
+  const scale = targetW / widthPx;
+  const w = Math.round(widthPx * scale);
+  const h = Math.round(heightPx * scale);
+  return new Paragraph({
+    alignment: AlignmentType.CENTER,
+    spacing: { before: 80, after: 120 },
+    children: [new ImageRun({
+      data: fs.readFileSync(path),
+      transformation: { width: w, height: h },
+      type: "png",
+    })],
+  });
+}
+
 const confTable = new Table({
   width: { size: 10800, type: WidthType.DXA },
   columnWidths: [5400, 2700, 2700],
@@ -120,6 +219,8 @@ const doc = new Document({
         children: [new TextRun({ text: "Zach Keller  ·  Expanded Multi-Sport Analysis  ·  ", size: 19, color: GRAY }),
           new TextRun({ text: "github.com/kellerzachary117/ncaa-revenue-analysis", size: 19, color: GRAY, italics: true })],
       }),
+      statStrip,
+      new Paragraph({ children: [new TextRun({ text: "", break: 1 })], spacing: { after: 20 } }),
 
       h1("Overview"),
       body("An expanded follow-on to the original 30-school NCAA Revenue Allocation Analysis: the full population of Power 4 + Pac-12-remnant conference schools, plus 13 non-P5 schools known for prominent basketball or other-sport programs, tested across four sports (football, basketball, volleyball, and a men's-soccer equalizer for schools without football). Tests whether revenue and NIL valuation predict wins and graduation outcomes, and whether the answer differs by sport."),
@@ -129,9 +230,15 @@ const doc = new Document({
       confTable,
 
       new Paragraph({ children: [new TextRun({ text: "", break: 1 })], spacing: { after: 40 } }),
+      h2("By the Numbers"),
+      sportStatsTable,
+
+      new Paragraph({ children: [new TextRun({ text: "", break: 1 })], spacing: { after: 40 } }),
       h1("Key Findings"),
       boldBullet("Scholarship reinvestment explains football's revenue effect. ", "On its own, more football revenue significantly predicts a LOWER Graduation Success Rate (p = 0.004). But once scholarship/aid investment share is added to the model, that revenue effect stops being significant (p = 0.328), while aid share itself becomes a significant positive predictor (p = 0.029). It isn't that football money hurts academics; it's that big-revenue programs that don't reinvest proportionally in aid have worse outcomes, replicating the original 30-school project's core finding at this larger scale, and pinpointing it specifically to football."),
-      boldBullet("Revenue predicts wins, but it depends heavily on the sport. ", "Basketball (p < 0.001) and volleyball (p = 0.005) both show real, significant revenue-to-wins relationships. Football's is only marginal (p = 0.075); soccer shows none (small sample)."),
+      chartImage("chart_aid_share_gsr.png", 1280, 760),
+      boldBullet("Revenue predicts wins, but it depends heavily on the sport. ", "Basketball (p < 0.001) and volleyball (p = 0.005) both show real, significant revenue-to-wins relationships. Football's is only marginal (p = 0.071); soccer shows none (small sample)."),
+      chartImage("chart_revenue_wins_by_sport.png", 1280, 600),
       boldBullet("NIL valuation predicts wins, not grades, and it's concentrated. ", "Among schools that actually have a player in On3's national NIL 100, a higher NIL valuation significantly predicts a higher win percentage (p = 0.005), but has no relationship with graduation rate (p = 0.584). Revenue itself strongly predicts whether a school has any NIL-100 presence at all (p < 0.001): NIL visibility concentrates at the schools that are already the wealthiest, it doesn't spread opportunity more evenly."),
       boldBullet("Real corrections made along the way, not smoothed over. ", "Three Big East schools assumed \"no football\" (Butler, Georgetown, Villanova) actually sponsor real FCS programs, confirmed against the source data and corrected before analysis. A circulating NIL \"team rankings\" dataset turned out to be from November 2023, not current, and was discarded rather than used."),
 

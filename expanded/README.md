@@ -122,8 +122,8 @@ Pooled across all sports (win% ~ ln(revenue), sport fixed effects, P5
 dummy, n=246): revenue is a significant positive predictor (coef 0.062,
 p<0.001). Broken out by sport: **basketball** (coef 0.150, p<0.001) and
 **volleyball** (coef 0.059, p=0.005) both show real, significant
-revenue-to-wins relationships; **football** is only marginal (p=0.075);
-**soccer** shows no relationship (p=0.554, but n=10, underpowered).
+revenue-to-wins relationships; **football** is only marginal (p=0.071);
+**soccer** shows no relationship (p=0.537, but n=10, underpowered).
 
 **Revenue's relationship with graduation rate is the surprising one, and
 it's sport-specific, until scholarship share enters the model.** Pooled

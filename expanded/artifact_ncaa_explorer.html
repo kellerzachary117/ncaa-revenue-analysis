@@ -1,0 +1,525 @@
+<title>The Reinvestment Effect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    color-scheme: light;
+    --ink: #14213d;
+    --ink-soft: #2b3a63;
+    --paper: #f7f5ef;
+    --surface: #ffffff;
+    --surface-2: #efece1;
+    --gold: #a5751f;
+    --gold-strong: #8a611a;
+    --rule: #ddd7c8;
+    --muted: #6b6558;
+    --text: #211f19;
+    --shadow: 0 1px 2px rgba(20,33,61,.06), 0 6px 20px rgba(20,33,61,.05);
+
+    --s1: #2a78d6; /* football */
+    --s2: #eb6834; /* basketball */
+    --s3: #1baf7a; /* volleyball */
+    --s4: #eda100; /* soccer */
+    --sig: #14213d;
+    --nsig: #b8b2a1;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ink: #eef0f7;
+      --ink-soft: #c7cde3;
+      --paper: #14130f;
+      --surface: #1c1a15;
+      --surface-2: #242019;
+      --gold: #d9a648;
+      --gold-strong: #e9bb63;
+      --rule: #38332a;
+      --muted: #a39b89;
+      --text: #f2efe7;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+      --sig: #eef0f7; --nsig: #524b3c;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ink: #eef0f7;
+    --ink-soft: #c7cde3;
+    --paper: #14130f;
+    --surface: #1c1a15;
+    --surface-2: #242019;
+    --gold: #d9a648;
+    --gold-strong: #e9bb63;
+    --rule: #38332a;
+    --muted: #a39b89;
+    --text: #f2efe7;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --sig: #eef0f7; --nsig: #524b3c;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--text);
+    font-family: "Work Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 40px 28px 80px; }
+
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; text-wrap: balance; margin: 0; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--gold-strong);
+    font-weight: 600;
+  }
+
+  header.hero {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end;
+    gap: 20px; padding-bottom: 26px; border-bottom: 1px solid var(--rule); margin-bottom: 28px;
+  }
+  header.hero h1 { font-size: clamp(30px, 4vw, 44px); font-weight: 600; color: var(--ink); line-height: 1.05; }
+  header.hero .sub { max-width: 46ch; color: var(--muted); font-size: 15px; line-height: 1.5; margin-top: 10px; }
+  header.hero .byline { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted); text-align: right; }
+  header.hero .byline a { color: var(--ink-soft); }
+
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+    border-radius: 10px; overflow: hidden; margin-bottom: 34px;
+  }
+  .stat {
+    background: var(--surface); padding: 18px 18px 16px;
+  }
+  .stat .v { font-family: "IBM Plex Mono", monospace; font-size: 26px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .stat .l { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+
+  section { margin-bottom: 46px; }
+  section > h2 { font-size: 22px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  section > .lede { color: var(--muted); font-size: 14.5px; max-width: 68ch; line-height: 1.55; margin-bottom: 18px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .chip {
+    font-family: "Work Sans", sans-serif; font-size: 13.5px; font-weight: 600;
+    padding: 7px 14px 7px 12px; border-radius: 999px; border: 1.5px solid var(--rule);
+    background: var(--surface); color: var(--text); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 7px; transition: border-color .15s, background .15s;
+  }
+  .chip .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); flex: none; }
+  .chip[aria-pressed="true"] { border-color: var(--ink); background: var(--surface-2); }
+  .chip:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .chip:hover { border-color: var(--ink-soft); }
+
+  .toolrow { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 4px; }
+  .seg { display: inline-flex; border: 1.5px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .seg button {
+    font-family: "Work Sans", sans-serif; font-size: 13px; font-weight: 600; color: var(--muted);
+    background: var(--surface); border: none; padding: 7px 13px; cursor: pointer;
+  }
+  .seg button + button { border-left: 1.5px solid var(--rule); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .seg button:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  @media (max-width: 880px) { .chart-grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 12px;
+    padding: 18px 18px 10px; box-shadow: var(--shadow);
+  }
+  .card h3 { font-size: 15.5px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+  .card .note { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .chart-holder { position: relative; height: 320px; }
+
+  .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--rule); }
+  .legend-row .item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); font-family: "IBM Plex Mono", monospace; }
+  .legend-row .sw { width: 10px; height: 10px; border-radius: 2px; }
+
+  .finding {
+    background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--gold);
+    border-radius: 0 10px 10px 0; padding: 16px 20px; font-size: 14.5px; line-height: 1.6; color: var(--text);
+  }
+  .finding b { color: var(--ink); }
+
+  .table-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 12px; }
+  .searchbox {
+    font-family: "Work Sans", sans-serif; font-size: 13.5px; padding: 8px 12px;
+    border: 1.5px solid var(--rule); border-radius: 8px; background: var(--surface); color: var(--text);
+    min-width: 220px;
+  }
+  .searchbox:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+  .count { font-size: 12.5px; color: var(--muted); font-family: "IBM Plex Mono", monospace; }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; min-width: 780px; background: var(--surface); }
+  thead th {
+    position: sticky; top: 0; background: var(--ink); color: var(--paper);
+    font-family: "Work Sans", sans-serif; font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .04em; text-align: left;
+    padding: 10px 12px; cursor: pointer; user-select: none; white-space: nowrap;
+  }
+  thead th .arrow { opacity: .5; margin-left: 4px; font-size: 10px; }
+  thead th[aria-sort="ascending"] .arrow, thead th[aria-sort="descending"] .arrow { opacity: 1; color: var(--gold); }
+  tbody td {
+    padding: 8px 12px; border-top: 1px solid var(--rule); font-size: 13.5px;
+    font-family: "IBM Plex Mono", monospace; white-space: nowrap;
+  }
+  tbody td.school { font-family: "Work Sans", sans-serif; white-space: normal; min-width: 220px; }
+  tbody tr:hover td { background: var(--surface-2); }
+  .sporttag {
+    display: inline-block; font-family: "Work Sans", sans-serif; font-size: 11px; font-weight: 600;
+    padding: 2px 8px; border-radius: 999px; color: #fff;
+  }
+
+  footer {
+    border-top: 1px solid var(--rule); padding-top: 20px; margin-top: 10px;
+    font-size: 12.5px; color: var(--muted); line-height: 1.6;
+  }
+  footer a { color: var(--ink-soft); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div>
+      <div class="eyebrow">NCAA Revenue &amp; Outcomes &middot; Expanded Analysis</div>
+      <h1>The Reinvestment Effect</h1>
+      <p class="sub">83 schools, 4 sports, 249 school-sport records. Real revenue, graduation rate, win, and NIL data &mdash; filter by sport, switch what the charts measure, and browse every school below.</p>
+    </div>
+    <div class="byline">Zach Keller<br>Companion to the interview packet<br><a href="https://github.com/kellerzachary117/ncaa-revenue-analysis" target="_blank" rel="noopener">github.com/kellerzachary117/ncaa-revenue-analysis</a></div>
+  </header>
+
+  <div class="stats" id="statStrip"></div>
+
+  <section>
+    <div class="toolrow">
+      <div>
+        <h2>Explore the data</h2>
+        <p class="lede" style="margin-bottom:0">Filter by sport &mdash; both charts and the table below update together.</p>
+      </div>
+    </div>
+    <div class="chips" id="sportChips" role="group" aria-label="Filter by sport"></div>
+
+    <div class="chart-grid">
+      <div class="card">
+        <div class="toolrow" style="margin-bottom:2px">
+          <div>
+            <h3>Revenue vs. outcomes</h3>
+            <div class="note" id="chartANote">Each point is one school's program in one sport.</div>
+          </div>
+          <div class="seg" id="yToggle" role="group" aria-label="Y-axis measure">
+            <button data-y="gsr" aria-pressed="true">GSR</button>
+            <button data-y="winpct" aria-pressed="false">Win %</button>
+          </div>
+        </div>
+        <div class="chart-holder"><canvas id="chartA" role="img" aria-label="Scatter plot of athletics revenue against graduation rate or win percentage, colored by sport"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Scholarship/aid share vs. GSR</h3>
+        <div class="note">The headline finding: within football, more reinvestment predicts a higher graduation rate.</div>
+        <div class="chart-holder"><canvas id="chartB" role="img" aria-label="Scatter plot of scholarship aid share of revenue against graduation rate, colored by sport"></canvas></div>
+      </div>
+    </div>
+    <div class="legend-row" id="legendRow"></div>
+  </section>
+
+  <section>
+    <h2>What the numbers say</h2>
+    <p class="lede">Four real findings from the regression models &mdash; not decided in advance. Full methodology in the interview packet and README.</p>
+    <div style="display:flex; flex-direction:column; gap:12px">
+      <div class="finding"><b>Scholarship reinvestment, not raw revenue, drives football's graduation rate.</b> On its own, more football revenue predicts a <i>lower</i> GSR (p&nbsp;=&nbsp;0.004). Add scholarship/aid share to the model and that revenue effect disappears (p&nbsp;=&nbsp;0.328) while aid share becomes the real, significant predictor (p&nbsp;=&nbsp;0.029).</div>
+      <div class="finding"><b>Revenue predicts wins, but only in some sports.</b> Basketball (p&nbsp;&lt;&nbsp;0.001) and volleyball (p&nbsp;=&nbsp;0.005) show real revenue-to-wins relationships. Football is only marginal (p&nbsp;=&nbsp;0.071); soccer shows none.</div>
+      <div class="finding"><b>NIL valuation tracks wins, not grades, and it's concentrated.</b> Among schools with a player in On3's national NIL 100, valuation predicts win percentage (p&nbsp;=&nbsp;0.005) but not GSR (p&nbsp;=&nbsp;0.584). Revenue itself predicts NIL-100 presence (p&nbsp;&lt;&nbsp;0.001): visibility concentrates at the wealthiest programs.</div>
+      <div class="finding"><b>Real corrections, not smoothed over.</b> Three Big East schools assumed &ldquo;no football&rdquo; (Butler, Georgetown, Villanova) actually sponsor real FCS programs, caught against the source data. A circulating NIL &ldquo;team rankings&rdquo; list turned out to be from November 2023 and was discarded.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>All 83 schools</h2>
+    <p class="lede">Every school-sport record behind the charts above. Search, sort any column, or use the sport filter above to narrow it down.</p>
+    <div class="table-controls">
+      <input class="searchbox" id="searchBox" type="text" placeholder="Search school or conference&hellip;" aria-label="Search school or conference">
+      <span class="count" id="rowCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th data-key="school">School <span class="arrow">&#9660;</span></th>
+          <th data-key="conf">Conf. <span class="arrow">&#9660;</span></th>
+          <th data-key="sport">Sport <span class="arrow">&#9660;</span></th>
+          <th data-key="revenue">Revenue <span class="arrow">&#9660;</span></th>
+          <th data-key="gsr">GSR <span class="arrow">&#9660;</span></th>
+          <th data-key="winpct">Win % <span class="arrow">&#9660;</span></th>
+          <th data-key="aidshare">Aid % <span class="arrow">&#9660;</span></th>
+          <th data-key="nilsum">NIL-100 <span class="arrow">&#9660;</span></th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    Data: US Dept. of Education EADA survey (AY2023-24, real per-sport revenue/expense and institution-level aid share); NCAA Graduation Success Rate database (2018 cohort); NCAA official statistics (2025-26 season wins); On3 NIL 100 (dated 2026-08-30, football/basketball only &mdash; a school with no NIL-100 figure isn't a zero, it means no player from that school is currently ranked nationally). Full methodology, data-quality notes, and the two real corrections made during collection are in the project README.
+  </footer>
+
+</div>
+
+<script>
+const RAW = [{"school":"University of Illinois Urbana-Champaign","conf":"Big Ten","tier":"P5","sport":"football","revenue":87939659,"expense":48001399,"gsr":79,"fgr":62,"wins":9,"losses":4,"winpct":0.692,"aidshare":8.6,"nilcount":0,"nilsum":null},{"school":"University of Illinois Urbana-Champaign","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":36950934,"expense":27824402,"gsr":55,"fgr":13,"wins":28,"losses":9,"winpct":0.757,"aidshare":8.6,"nilcount":1,"nilsum":2800000},{"school":"University of Illinois Urbana-Champaign","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":652337,"expense":2768685,"gsr":100,"fgr":69,"wins":13,"losses":16,"winpct":0.448,"aidshare":8.6,"nilcount":0,"nilsum":null},{"school":"University of Iowa","conf":"Big Ten","tier":"P5","sport":"football","revenue":105190203,"expense":50894414,"gsr":76,"fgr":53,"wins":9,"losses":4,"winpct":0.692,"aidshare":9.54,"nilcount":0,"nilsum":null},{"school":"University of Iowa","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":21481814,"expense":21774895,"gsr":88,"fgr":50,"wins":24,"losses":13,"winpct":0.649,"aidshare":9.54,"nilcount":0,"nilsum":null},{"school":"University of Iowa","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":190823,"expense":2903001,"gsr":86,"fgr":57,"wins":15,"losses":17,"winpct":0.469,"aidshare":9.54,"nilcount":0,"nilsum":null},{"school":"Indiana University-Bloomington","conf":"Big Ten","tier":"P5","sport":"football","revenue":80906601,"expense":50207544,"gsr":88,"fgr":67,"wins":16,"losses":0,"winpct":1.0,"aidshare":10.65,"nilcount":2,"nilsum":5000000},{"school":"Indiana University-Bloomington","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":61569558,"expense":41111602,"gsr":91,"fgr":44,"wins":18,"losses":14,"winpct":0.562,"aidshare":10.65,"nilcount":3,"nilsum":10500000},{"school":"Indiana University-Bloomington","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":2567065,"expense":2567065,"gsr":93,"fgr":89,"wins":25,"losses":8,"winpct":0.758,"aidshare":10.65,"nilcount":0,"nilsum":null},{"school":"University of Maryland-College Park","conf":"Big Ten","tier":"P5","sport":"football","revenue":63070858,"expense":35502618,"gsr":79,"fgr":60,"wins":4,"losses":8,"winpct":0.333,"aidshare":14.39,"nilcount":0,"nilsum":null},{"school":"University of Maryland-College Park","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":17866466,"expense":21209307,"gsr":38,"fgr":21,"wins":12,"losses":21,"winpct":0.364,"aidshare":14.39,"nilcount":0,"nilsum":null},{"school":"University of Maryland-College Park","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":812643,"expense":2416808,"gsr":89,"fgr":78,"wins":8,"losses":22,"winpct":0.267,"aidshare":14.39,"nilcount":0,"nilsum":null},{"school":"University of Michigan-Ann Arbor","conf":"Big Ten","tier":"P5","sport":"football","revenue":175299592,"expense":61663186,"gsr":89,"fgr":60,"wins":9,"losses":4,"winpct":0.692,"aidshare":13.19,"nilcount":2,"nilsum":5000000},{"school":"University of Michigan-Ann Arbor","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":22348396,"expense":20217414,"gsr":100,"fgr":54,"wins":37,"losses":3,"winpct":0.925,"aidshare":13.19,"nilcount":2,"nilsum":6000000},{"school":"University of Michigan-Ann Arbor","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":511857,"expense":2949958,"gsr":100,"fgr":89,"wins":22,"losses":11,"winpct":0.667,"aidshare":13.19,"nilcount":0,"nilsum":null},{"school":"Michigan State University","conf":"Big Ten","tier":"P5","sport":"football","revenue":77084648,"expense":48227813,"gsr":76,"fgr":65,"wins":4,"losses":8,"winpct":0.333,"aidshare":12.13,"nilcount":0,"nilsum":null},{"school":"Michigan State University","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":29065206,"expense":27813748,"gsr":80,"fgr":57,"wins":27,"losses":8,"winpct":0.771,"aidshare":12.13,"nilcount":0,"nilsum":null},{"school":"Michigan State University","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":4152418,"expense":4152418,"gsr":100,"fgr":100,"wins":18,"losses":12,"winpct":0.6,"aidshare":12.13,"nilcount":0,"nilsum":null},{"school":"University of Minnesota-Twin Cities","conf":"Big Ten","tier":"P5","sport":"football","revenue":101726085,"expense":45452693,"gsr":87,"fgr":59,"wins":8,"losses":5,"winpct":0.615,"aidshare":12.13,"nilcount":0,"nilsum":null},{"school":"University of Minnesota-Twin Cities","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":17636755,"expense":22211182,"gsr":90,"fgr":38,"wins":15,"losses":18,"winpct":0.455,"aidshare":12.13,"nilcount":0,"nilsum":null},{"school":"University of Minnesota-Twin Cities","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":1438406,"expense":3531550,"gsr":100,"fgr":86,"wins":24,"losses":10,"winpct":0.706,"aidshare":12.13,"nilcount":0,"nilsum":null},{"school":"University of Nebraska-Lincoln","conf":"Big Ten","tier":"P5","sport":"football","revenue":122283973,"expense":70574668,"gsr":84,"fgr":63,"wins":7,"losses":6,"winpct":0.538,"aidshare":6.17,"nilcount":1,"nilsum":2000000},{"school":"University of Nebraska-Lincoln","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":20444106,"expense":19288308,"gsr":91,"fgr":27,"wins":28,"losses":7,"winpct":0.8,"aidshare":6.17,"nilcount":0,"nilsum":null},{"school":"University of Nebraska-Lincoln","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":5453618,"expense":6814082,"gsr":100,"fgr":55,"wins":33,"losses":1,"winpct":0.971,"aidshare":6.17,"nilcount":0,"nilsum":null},{"school":"Northwestern University","conf":"Big Ten","tier":"P5","sport":"football","revenue":85587606,"expense":37901761,"gsr":99,"fgr":97,"wins":7,"losses":6,"winpct":0.538,"aidshare":21.19,"nilcount":1,"nilsum":1200000},{"school":"Northwestern University","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":16077916,"expense":20580938,"gsr":100,"fgr":75,"wins":15,"losses":19,"winpct":0.441,"aidshare":21.19,"nilcount":0,"nilsum":null},{"school":"Northwestern University","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":1748005,"expense":3537732,"gsr":100,"fgr":100,"wins":17,"losses":15,"winpct":0.531,"aidshare":21.19,"nilcount":0,"nilsum":null},{"school":"Ohio State University-Main Campus","conf":"Big Ten","tier":"P5","sport":"football","revenue":160549826,"expense":92359309,"gsr":89,"fgr":60,"wins":12,"losses":2,"winpct":0.857,"aidshare":10.03,"nilcount":2,"nilsum":7500000},{"school":"Ohio State University-Main Campus","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":30518599,"expense":20322247,"gsr":67,"fgr":19,"wins":21,"losses":13,"winpct":0.618,"aidshare":10.03,"nilcount":0,"nilsum":null},{"school":"Ohio State University-Main Campus","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":4659041,"expense":4659041,"gsr":93,"fgr":91,"wins":6,"losses":22,"winpct":0.214,"aidshare":10.03,"nilcount":0,"nilsum":null},{"school":"University of Oregon","conf":"Big Ten","tier":"P5","sport":"football","revenue":119584907,"expense":60847472,"gsr":88,"fgr":65,"wins":13,"losses":2,"winpct":0.867,"aidshare":9.06,"nilcount":7,"nilsum":14500000},{"school":"University of Oregon","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":13474824,"expense":20791200,"gsr":44,"fgr":13,"wins":12,"losses":20,"winpct":0.375,"aidshare":9.06,"nilcount":0,"nilsum":null},{"school":"University of Oregon","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":906343,"expense":2582926,"gsr":85,"fgr":69,"wins":17,"losses":13,"winpct":0.567,"aidshare":9.06,"nilcount":0,"nilsum":null},{"school":"Pennsylvania State University-Main Campus","conf":"Big Ten","tier":"P5","sport":"football","revenue":150314572,"expense":77386097,"gsr":85,"fgr":65,"wins":7,"losses":6,"winpct":0.538,"aidshare":9.58,"nilcount":0,"nilsum":null},{"school":"Pennsylvania State University-Main Campus","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":15956302,"expense":19536508,"gsr":69,"fgr":50,"wins":12,"losses":20,"winpct":0.375,"aidshare":9.58,"nilcount":0,"nilsum":null},{"school":"Pennsylvania State University-Main Campus","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":1121271,"expense":4396911,"gsr":92,"fgr":58,"wins":19,"losses":13,"winpct":0.594,"aidshare":9.58,"nilcount":0,"nilsum":null},{"school":"Purdue University-Main Campus","conf":"Big Ten","tier":"P5","sport":"football","revenue":83144029,"expense":37193229,"gsr":83,"fgr":61,"wins":2,"losses":10,"winpct":0.167,"aidshare":8.52,"nilcount":0,"nilsum":null},{"school":"Purdue University-Main Campus","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":29460738,"expense":18951717,"gsr":75,"fgr":50,"wins":30,"losses":9,"winpct":0.769,"aidshare":8.52,"nilcount":0,"nilsum":null},{"school":"Purdue University-Main Campus","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":8621165,"expense":3237136,"gsr":100,"fgr":75,"wins":27,"losses":7,"winpct":0.794,"aidshare":8.52,"nilcount":0,"nilsum":null},{"school":"Rutgers University-New Brunswick","conf":"Big Ten","tier":"P5","sport":"football","revenue":75922954,"expense":75922954,"gsr":85,"fgr":55,"wins":5,"losses":7,"winpct":0.417,"aidshare":14.74,"nilcount":0,"nilsum":null},{"school":"Rutgers University-New Brunswick","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":23605246,"expense":23605246,"gsr":91,"fgr":45,"wins":14,"losses":20,"winpct":0.412,"aidshare":14.74,"nilcount":0,"nilsum":null},{"school":"Rutgers University-New Brunswick","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":3208516,"expense":3208516,"gsr":91,"fgr":46,"wins":12,"losses":20,"winpct":0.375,"aidshare":14.74,"nilcount":0,"nilsum":null},{"school":"University of California-Los Angeles","conf":"Big Ten","tier":"P5","sport":"football","revenue":55205071,"expense":55205071,"gsr":80,"fgr":69,"wins":3,"losses":9,"winpct":0.25,"aidshare":11.03,"nilcount":1,"nilsum":2000000},{"school":"University of California-Los Angeles","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":27490220,"expense":27490220,"gsr":63,"fgr":29,"wins":24,"losses":12,"winpct":0.667,"aidshare":11.03,"nilcount":0,"nilsum":null},{"school":"University of California-Los Angeles","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":5224820,"expense":5224820,"gsr":100,"fgr":85,"wins":19,"losses":13,"winpct":0.594,"aidshare":11.03,"nilcount":0,"nilsum":null},{"school":"University of Southern California","conf":"Big Ten","tier":"P5","sport":"football","revenue":74014972,"expense":74014972,"gsr":85,"fgr":55,"wins":9,"losses":4,"winpct":0.692,"aidshare":12.24,"nilcount":3,"nilsum":3500000},{"school":"University of Southern California","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":22685106,"expense":22685106,"gsr":88,"fgr":33,"wins":18,"losses":14,"winpct":0.562,"aidshare":12.24,"nilcount":1,"nilsum":2000000},{"school":"University of Southern California","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":5449862,"expense":5449862,"gsr":100,"fgr":73,"wins":25,"losses":7,"winpct":0.781,"aidshare":12.24,"nilcount":0,"nilsum":null},{"school":"University of Washington-Seattle Campus","conf":"Big Ten","tier":"P5","sport":"football","revenue":121018946,"expense":68921774,"gsr":93,"fgr":68,"wins":9,"losses":4,"winpct":0.692,"aidshare":10.43,"nilcount":1,"nilsum":4000000},{"school":"University of Washington-Seattle Campus","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":15408331,"expense":19256805,"gsr":100,"fgr":50,"wins":16,"losses":17,"winpct":0.485,"aidshare":10.43,"nilcount":0,"nilsum":null},{"school":"University of Washington-Seattle Campus","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":1498709,"expense":3441059,"gsr":100,"fgr":100,"wins":13,"losses":17,"winpct":0.433,"aidshare":10.43,"nilcount":0,"nilsum":null},{"school":"University of Wisconsin-Madison","conf":"Big Ten","tier":"P5","sport":"football","revenue":112319593,"expense":40903448,"gsr":94,"fgr":83,"wins":4,"losses":8,"winpct":0.333,"aidshare":9.78,"nilcount":0,"nilsum":null},{"school":"University of Wisconsin-Madison","conf":"Big Ten","tier":"P5","sport":"basketball","revenue":20629334,"expense":17584754,"gsr":80,"fgr":58,"wins":24,"losses":11,"winpct":0.686,"aidshare":9.78,"nilcount":0,"nilsum":null},{"school":"University of Wisconsin-Madison","conf":"Big Ten","tier":"P5","sport":"volleyball","revenue":4055436,"expense":5189615,"gsr":100,"fgr":91,"wins":28,"losses":5,"winpct":0.848,"aidshare":9.78,"nilcount":0,"nilsum":null},{"school":"The University of Alabama","conf":"SEC","tier":"P5","sport":"football","revenue":146325227,"expense":81502191,"gsr":98,"fgr":58,"wins":11,"losses":4,"winpct":0.733,"aidshare":7.03,"nilcount":3,"nilsum":4800000},{"school":"The University of Alabama","conf":"SEC","tier":"P5","sport":"basketball","revenue":29840545,"expense":20663614,"gsr":91,"fgr":50,"wins":25,"losses":10,"winpct":0.714,"aidshare":7.03,"nilcount":0,"nilsum":null},{"school":"The University of Alabama","conf":"SEC","tier":"P5","sport":"volleyball","revenue":2682809,"expense":2682809,"gsr":91,"fgr":55,"wins":14,"losses":13,"winpct":0.519,"aidshare":7.03,"nilcount":0,"nilsum":null},{"school":"University of Arkansas","conf":"SEC","tier":"P5","sport":"football","revenue":90791403,"expense":57370871,"gsr":84,"fgr":62,"wins":2,"losses":10,"winpct":0.167,"aidshare":6.42,"nilcount":0,"nilsum":null},{"school":"University of Arkansas","conf":"SEC","tier":"P5","sport":"basketball","revenue":25686867,"expense":27985002,"gsr":57,"fgr":13,"wins":28,"losses":9,"winpct":0.757,"aidshare":6.42,"nilcount":1,"nilsum":2500000},{"school":"University of Arkansas","conf":"SEC","tier":"P5","sport":"volleyball","revenue":149803,"expense":2196530,"gsr":100,"fgr":77,"wins":5,"losses":22,"winpct":0.185,"aidshare":6.42,"nilcount":0,"nilsum":null},{"school":"Auburn University","conf":"SEC","tier":"P5","sport":"football","revenue":121408732,"expense":58724402,"gsr":89,"fgr":61,"wins":5,"losses":7,"winpct":0.417,"aidshare":9.17,"nilcount":1,"nilsum":3000000},{"school":"Auburn University","conf":"SEC","tier":"P5","sport":"basketball","revenue":27416882,"expense":26347310,"gsr":67,"fgr":22,"wins":22,"losses":16,"winpct":0.579,"aidshare":9.17,"nilcount":0,"nilsum":null},{"school":"Auburn University","conf":"SEC","tier":"P5","sport":"volleyball","revenue":351116,"expense":2619459,"gsr":100,"fgr":78,"wins":17,"losses":11,"winpct":0.607,"aidshare":9.17,"nilcount":0,"nilsum":null},{"school":"University of Florida","conf":"SEC","tier":"P5","sport":"football","revenue":113351580,"expense":51766013,"gsr":85,"fgr":42,"wins":4,"losses":8,"winpct":0.333,"aidshare":8.18,"nilcount":0,"nilsum":null},{"school":"University of Florida","conf":"SEC","tier":"P5","sport":"basketball","revenue":17495167,"expense":18945047,"gsr":100,"fgr":46,"wins":27,"losses":8,"winpct":0.771,"aidshare":8.18,"nilcount":1,"nilsum":5000000},{"school":"University of Florida","conf":"SEC","tier":"P5","sport":"volleyball","revenue":1478468,"expense":4862559,"gsr":100,"fgr":75,"wins":16,"losses":12,"winpct":0.571,"aidshare":8.18,"nilcount":0,"nilsum":null},{"school":"University of Georgia","conf":"SEC","tier":"P5","sport":"football","revenue":149285887,"expense":71107704,"gsr":58,"fgr":31,"wins":12,"losses":2,"winpct":0.857,"aidshare":5.49,"nilcount":1,"nilsum":2000000},{"school":"University of Georgia","conf":"SEC","tier":"P5","sport":"basketball","revenue":17551898,"expense":15872203,"gsr":50,"fgr":21,"wins":22,"losses":11,"winpct":0.667,"aidshare":5.49,"nilcount":0,"nilsum":null},{"school":"University of Georgia","conf":"SEC","tier":"P5","sport":"volleyball","revenue":108137,"expense":2127964,"gsr":100,"fgr":92,"wins":16,"losses":10,"winpct":0.615,"aidshare":5.49,"nilcount":0,"nilsum":null},{"school":"University of Kentucky","conf":"SEC","tier":"P5","sport":"football","revenue":43281917,"expense":43281917,"gsr":80,"fgr":49,"wins":5,"losses":7,"winpct":0.417,"aidshare":9.19,"nilcount":3,"nilsum":5000000},{"school":"University of Kentucky","conf":"SEC","tier":"P5","sport":"basketball","revenue":29030326,"expense":29030326,"gsr":100,"fgr":0,"wins":22,"losses":14,"winpct":0.611,"aidshare":9.19,"nilcount":3,"nilsum":12200000},{"school":"University of Kentucky","conf":"SEC","tier":"P5","sport":"volleyball","revenue":3429647,"expense":3429647,"gsr":100,"fgr":82,"wins":30,"losses":3,"winpct":0.909,"aidshare":9.19,"nilcount":0,"nilsum":null},{"school":"Louisiana State University and Agricultural & Mechanical College","conf":"SEC","tier":"P5","sport":"football","revenue":117563889,"expense":50738587,"gsr":70,"fgr":44,"wins":7,"losses":6,"winpct":0.538,"aidshare":5.71,"nilcount":7,"nilsum":14200000},{"school":"Louisiana State University and Agricultural & Mechanical College","conf":"SEC","tier":"P5","sport":"basketball","revenue":17762913,"expense":23203622,"gsr":33,"fgr":7,"wins":15,"losses":17,"winpct":0.469,"aidshare":5.71,"nilcount":0,"nilsum":null},{"school":"Louisiana State University and Agricultural & Mechanical College","conf":"SEC","tier":"P5","sport":"volleyball","revenue":156245,"expense":2377341,"gsr":100,"fgr":82,"wins":13,"losses":14,"winpct":0.481,"aidshare":5.71,"nilcount":0,"nilsum":null},{"school":"University of Missouri-Columbia","conf":"SEC","tier":"P5","sport":"football","revenue":53301146,"expense":49316139,"gsr":80,"fgr":52,"wins":8,"losses":5,"winpct":0.615,"aidshare":6.29,"nilcount":3,"nilsum":4000000},{"school":"University of Missouri-Columbia","conf":"SEC","tier":"P5","sport":"basketball","revenue":24606246,"expense":20102392,"gsr":73,"fgr":29,"wins":20,"losses":13,"winpct":0.606,"aidshare":6.29,"nilcount":0,"nilsum":null},{"school":"University of Missouri-Columbia","conf":"SEC","tier":"P5","sport":"volleyball","revenue":3048994,"expense":3048994,"gsr":100,"fgr":71,"wins":17,"losses":11,"winpct":0.607,"aidshare":6.29,"nilcount":0,"nilsum":null},{"school":"Mississippi State University","conf":"SEC","tier":"P5","sport":"football","revenue":37575575,"expense":37575575,"gsr":92,"fgr":69,"wins":5,"losses":8,"winpct":0.385,"aidshare":7.23,"nilcount":1,"nilsum":1500000},{"school":"Mississippi State University","conf":"SEC","tier":"P5","sport":"basketball","revenue":18545818,"expense":18545818,"gsr":88,"fgr":31,"wins":13,"losses":19,"winpct":0.406,"aidshare":7.23,"nilcount":0,"nilsum":null},{"school":"Mississippi State University","conf":"SEC","tier":"P5","sport":"volleyball","revenue":2122385,"expense":2122385,"gsr":100,"fgr":33,"wins":16,"losses":10,"winpct":0.615,"aidshare":7.23,"nilcount":0,"nilsum":null},{"school":"University of Mississippi","conf":"SEC","tier":"P5","sport":"football","revenue":90702621,"expense":61846036,"gsr":86,"fgr":55,"wins":13,"losses":2,"winpct":0.867,"aidshare":6.82,"nilcount":5,"nilsum":10100000},{"school":"University of Mississippi","conf":"SEC","tier":"P5","sport":"basketball","revenue":26707704,"expense":26707704,"gsr":90,"fgr":25,"wins":15,"losses":20,"winpct":0.429,"aidshare":6.82,"nilcount":0,"nilsum":null},{"school":"University of Mississippi","conf":"SEC","tier":"P5","sport":"volleyball","revenue":2749126,"expense":2749126,"gsr":100,"fgr":92,"wins":14,"losses":15,"winpct":0.483,"aidshare":6.82,"nilcount":0,"nilsum":null},{"school":"University of Oklahoma-Norman Campus","conf":"SEC","tier":"P5","sport":"football","revenue":126247146,"expense":71184826,"gsr":78,"fgr":60,"wins":10,"losses":3,"winpct":0.769,"aidshare":8.37,"nilcount":1,"nilsum":1500000},{"school":"University of Oklahoma-Norman Campus","conf":"SEC","tier":"P5","sport":"basketball","revenue":12387814,"expense":23007090,"gsr":85,"fgr":50,"wins":21,"losses":16,"winpct":0.568,"aidshare":8.37,"nilcount":0,"nilsum":null},{"school":"University of Oklahoma-Norman Campus","conf":"SEC","tier":"P5","sport":"volleyball","revenue":243922,"expense":2672376,"gsr":100,"fgr":77,"wins":16,"losses":11,"winpct":0.593,"aidshare":8.37,"nilcount":0,"nilsum":null},{"school":"University of South Carolina-Columbia","conf":"SEC","tier":"P5","sport":"football","revenue":76513171,"expense":55859501,"gsr":96,"fgr":61,"wins":4,"losses":8,"winpct":0.333,"aidshare":6.73,"nilcount":3,"nilsum":5000000},{"school":"University of South Carolina-Columbia","conf":"SEC","tier":"P5","sport":"basketball","revenue":28565413,"expense":24193513,"gsr":75,"fgr":21,"wins":13,"losses":19,"winpct":0.406,"aidshare":6.73,"nilcount":0,"nilsum":null},{"school":"University of South Carolina-Columbia","conf":"SEC","tier":"P5","sport":"volleyball","revenue":2725093,"expense":2725093,"gsr":100,"fgr":100,"wins":10,"losses":16,"winpct":0.385,"aidshare":6.73,"nilcount":0,"nilsum":null},{"school":"The University of Tennessee-Knoxville","conf":"SEC","tier":"P5","sport":"football","revenue":162539638,"expense":61240437,"gsr":79,"fgr":49,"wins":8,"losses":5,"winpct":0.615,"aidshare":8.31,"nilcount":3,"nilsum":5300000},{"school":"The University of Tennessee-Knoxville","conf":"SEC","tier":"P5","sport":"basketball","revenue":39669268,"expense":27801756,"gsr":100,"fgr":64,"wins":25,"losses":12,"winpct":0.676,"aidshare":8.31,"nilcount":3,"nilsum":10000000},{"school":"The University of Tennessee-Knoxville","conf":"SEC","tier":"P5","sport":"volleyball","revenue":435953,"expense":3357470,"gsr":100,"fgr":82,"wins":20,"losses":8,"winpct":0.714,"aidshare":8.31,"nilcount":0,"nilsum":null},{"school":"The University of Texas at Austin","conf":"SEC","tier":"P5","sport":"football","revenue":171892714,"expense":70405628,"gsr":77,"fgr":58,"wins":10,"losses":3,"winpct":0.769,"aidshare":4.73,"nilcount":9,"nilsum":15000000},{"school":"The University of Texas at Austin","conf":"SEC","tier":"P5","sport":"basketball","revenue":19823085,"expense":32609545,"gsr":73,"fgr":47,"wins":21,"losses":15,"winpct":0.583,"aidshare":4.73,"nilcount":2,"nilsum":7500000},{"school":"The University of Texas at Austin","conf":"SEC","tier":"P5","sport":"volleyball","revenue":2086242,"expense":4912104,"gsr":94,"fgr":86,"wins":26,"losses":4,"winpct":0.867,"aidshare":4.73,"nilcount":0,"nilsum":null},{"school":"Texas A&M University-College Station","conf":"SEC","tier":"P5","sport":"football","revenue":108474281,"expense":60230146,"gsr":78,"fgr":53,"wins":11,"losses":2,"winpct":0.846,"aidshare":5.66,"nilcount":2,"nilsum":4000000},{"school":"Texas A&M University-College Station","conf":"SEC","tier":"P5","sport":"basketball","revenue":16771008,"expense":20958676,"gsr":58,"fgr":23,"wins":22,"losses":12,"winpct":0.647,"aidshare":5.66,"nilcount":1,"nilsum":4000000},{"school":"Texas A&M University-College Station","conf":"SEC","tier":"P5","sport":"volleyball","revenue":1196880,"expense":3922450,"gsr":100,"fgr":57,"wins":29,"losses":4,"winpct":0.879,"aidshare":5.66,"nilcount":0,"nilsum":null},{"school":"Vanderbilt University","conf":"SEC","tier":"P5","sport":"football","revenue":44124525,"expense":44124525,"gsr":90,"fgr":82,"wins":10,"losses":3,"winpct":0.769,"aidshare":14.69,"nilcount":1,"nilsum":2000000},{"school":"Vanderbilt University","conf":"SEC","tier":"P5","sport":"basketball","revenue":21642125,"expense":21642125,"gsr":91,"fgr":42,"wins":27,"losses":9,"winpct":0.75,"aidshare":14.69,"nilcount":0,"nilsum":null},{"school":"Vanderbilt University","conf":"SEC","tier":"P5","sport":"volleyball","revenue":0,"expense":0,"gsr":null,"fgr":null,"wins":9,"losses":18,"winpct":0.333,"aidshare":14.69,"nilcount":0,"nilsum":null},{"school":"University of Arizona","conf":"Big 12","tier":"P5","sport":"football","revenue":37795880,"expense":37795880,"gsr":88,"fgr":68,"wins":9,"losses":4,"winpct":0.692,"aidshare":9.62,"nilcount":1,"nilsum":2000000},{"school":"University of Arizona","conf":"Big 12","tier":"P5","sport":"basketball","revenue":30636723,"expense":30636723,"gsr":56,"fgr":13,"wins":36,"losses":3,"winpct":0.923,"aidshare":9.62,"nilcount":0,"nilsum":null},{"school":"University of Arizona","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":1883610,"expense":1883610,"gsr":89,"fgr":43,"wins":17,"losses":13,"winpct":0.567,"aidshare":9.62,"nilcount":0,"nilsum":null},{"school":"Arizona State University Campus Immersion","conf":"Big 12","tier":"P5","sport":"football","revenue":50352139,"expense":50352139,"gsr":82,"fgr":57,"wins":8,"losses":5,"winpct":0.615,"aidshare":13.11,"nilcount":1,"nilsum":1500000},{"school":"Arizona State University Campus Immersion","conf":"Big 12","tier":"P5","sport":"basketball","revenue":16796736,"expense":16796736,"gsr":100,"fgr":33,"wins":17,"losses":16,"winpct":0.515,"aidshare":13.11,"nilcount":1,"nilsum":3000000},{"school":"Arizona State University Campus Immersion","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":2955239,"expense":2955239,"gsr":90,"fgr":44,"wins":28,"losses":4,"winpct":0.875,"aidshare":13.11,"nilcount":0,"nilsum":null},{"school":"Baylor University","conf":"Big 12","tier":"P5","sport":"football","revenue":44260293,"expense":41050130,"gsr":91,"fgr":70,"wins":5,"losses":7,"winpct":0.417,"aidshare":13.99,"nilcount":1,"nilsum":2000000},{"school":"Baylor University","conf":"Big 12","tier":"P5","sport":"basketball","revenue":27753973,"expense":27753973,"gsr":80,"fgr":78,"wins":17,"losses":17,"winpct":0.5,"aidshare":13.99,"nilcount":1,"nilsum":2500000},{"school":"Baylor University","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":3123397,"expense":3123397,"gsr":100,"fgr":89,"wins":18,"losses":10,"winpct":0.643,"aidshare":13.99,"nilcount":0,"nilsum":null},{"school":"Brigham Young University","conf":"Big 12","tier":"P5","sport":"football","revenue":51715899,"expense":44561032,"gsr":70,"fgr":69,"wins":12,"losses":2,"winpct":0.857,"aidshare":6.12,"nilcount":1,"nilsum":2000000},{"school":"Brigham Young University","conf":"Big 12","tier":"P5","sport":"basketball","revenue":29614021,"expense":22112908,"gsr":92,"fgr":50,"wins":23,"losses":12,"winpct":0.657,"aidshare":6.12,"nilcount":0,"nilsum":null},{"school":"Brigham Young University","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":3858889,"expense":4944189,"gsr":90,"fgr":88,"wins":22,"losses":9,"winpct":0.71,"aidshare":6.12,"nilcount":0,"nilsum":null},{"school":"University of Central Florida","conf":"Big 12","tier":"P5","sport":"football","revenue":30085713,"expense":38695138,"gsr":91,"fgr":52,"wins":5,"losses":7,"winpct":0.417,"aidshare":11.06,"nilcount":0,"nilsum":null},{"school":"University of Central Florida","conf":"Big 12","tier":"P5","sport":"basketball","revenue":12007700,"expense":12007700,"gsr":85,"fgr":63,"wins":21,"losses":12,"winpct":0.636,"aidshare":11.06,"nilcount":0,"nilsum":null},{"school":"University of Central Florida","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":1847029,"expense":1722014,"gsr":100,"fgr":53,"wins":17,"losses":12,"winpct":0.586,"aidshare":11.06,"nilcount":0,"nilsum":null},{"school":"University of Cincinnati-Main Campus","conf":"Big 12","tier":"P5","sport":"football","revenue":30429185,"expense":30429185,"gsr":98,"fgr":69,"wins":7,"losses":6,"winpct":0.538,"aidshare":9.26,"nilcount":0,"nilsum":null},{"school":"University of Cincinnati-Main Campus","conf":"Big 12","tier":"P5","sport":"basketball","revenue":16721254,"expense":16721254,"gsr":90,"fgr":42,"wins":18,"losses":15,"winpct":0.545,"aidshare":9.26,"nilcount":0,"nilsum":null},{"school":"University of Cincinnati-Main Campus","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":1946468,"expense":1946468,"gsr":88,"fgr":55,"wins":15,"losses":13,"winpct":0.536,"aidshare":9.26,"nilcount":0,"nilsum":null},{"school":"University of Colorado Boulder","conf":"Big 12","tier":"P5","sport":"football","revenue":69306235,"expense":42805019,"gsr":87,"fgr":62,"wins":3,"losses":9,"winpct":0.25,"aidshare":8.5,"nilcount":0,"nilsum":null},{"school":"University of Colorado Boulder","conf":"Big 12","tier":"P5","sport":"basketball","revenue":14256254,"expense":13785588,"gsr":64,"fgr":38,"wins":17,"losses":16,"winpct":0.515,"aidshare":8.5,"nilcount":0,"nilsum":null},{"school":"University of Colorado Boulder","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":728185,"expense":2225370,"gsr":86,"fgr":36,"wins":23,"losses":9,"winpct":0.719,"aidshare":8.5,"nilcount":0,"nilsum":null},{"school":"University of Houston","conf":"Big 12","tier":"P5","sport":"football","revenue":23271364,"expense":23271364,"gsr":73,"fgr":60,"wins":10,"losses":3,"winpct":0.769,"aidshare":9.36,"nilcount":0,"nilsum":null},{"school":"University of Houston","conf":"Big 12","tier":"P5","sport":"basketball","revenue":18263133,"expense":18263133,"gsr":100,"fgr":33,"wins":30,"losses":7,"winpct":0.811,"aidshare":9.36,"nilcount":1,"nilsum":2500000},{"school":"University of Houston","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":1780695,"expense":1780695,"gsr":88,"fgr":67,"wins":9,"losses":20,"winpct":0.31,"aidshare":9.36,"nilcount":0,"nilsum":null},{"school":"Iowa State University","conf":"Big 12","tier":"P5","sport":"football","revenue":60744404,"expense":32337385,"gsr":95,"fgr":69,"wins":8,"losses":4,"winpct":0.667,"aidshare":9.49,"nilcount":0,"nilsum":null},{"school":"Iowa State University","conf":"Big 12","tier":"P5","sport":"basketball","revenue":15638933,"expense":15665579,"gsr":82,"fgr":20,"wins":29,"losses":8,"winpct":0.784,"aidshare":9.49,"nilcount":0,"nilsum":null},{"school":"Iowa State University","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":291641,"expense":2250994,"gsr":100,"fgr":60,"wins":23,"losses":8,"winpct":0.742,"aidshare":9.49,"nilcount":0,"nilsum":null},{"school":"University of Kansas","conf":"Big 12","tier":"P5","sport":"football","revenue":37107691,"expense":34516494,"gsr":83,"fgr":56,"wins":5,"losses":7,"winpct":0.417,"aidshare":8.48,"nilcount":0,"nilsum":null},{"school":"University of Kansas","conf":"Big 12","tier":"P5","sport":"basketball","revenue":27411071,"expense":25224204,"gsr":82,"fgr":46,"wins":24,"losses":11,"winpct":0.686,"aidshare":8.48,"nilcount":1,"nilsum":5000000},{"school":"University of Kansas","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":2581006,"expense":2581006,"gsr":100,"fgr":75,"wins":24,"losses":11,"winpct":0.686,"aidshare":8.48,"nilcount":0,"nilsum":null},{"school":"Kansas State University","conf":"Big 12","tier":"P5","sport":"football","revenue":27087822,"expense":27087822,"gsr":94,"fgr":64,"wins":6,"losses":6,"winpct":0.5,"aidshare":9.15,"nilcount":3,"nilsum":5200000},{"school":"Kansas State University","conf":"Big 12","tier":"P5","sport":"basketball","revenue":15820196,"expense":15820196,"gsr":80,"fgr":43,"wins":12,"losses":20,"winpct":0.375,"aidshare":9.15,"nilcount":0,"nilsum":null},{"school":"Kansas State University","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":1831029,"expense":1831029,"gsr":100,"fgr":71,"wins":18,"losses":10,"winpct":0.643,"aidshare":9.15,"nilcount":0,"nilsum":null},{"school":"Oklahoma State University-Main Campus","conf":"Big 12","tier":"P5","sport":"football","revenue":56992244,"expense":32830617,"gsr":88,"fgr":67,"wins":1,"losses":11,"winpct":0.083,"aidshare":4.84,"nilcount":2,"nilsum":4500000},{"school":"Oklahoma State University-Main Campus","conf":"Big 12","tier":"P5","sport":"basketball","revenue":20444701,"expense":16249111,"gsr":86,"fgr":31,"wins":20,"losses":15,"winpct":0.571,"aidshare":4.84,"nilcount":0,"nilsum":null},{"school":"Oklahoma State University-Main Campus","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":0,"expense":0,"gsr":null,"fgr":null,"wins":null,"losses":null,"winpct":null,"aidshare":4.84,"nilcount":0,"nilsum":null},{"school":"Texas Christian University","conf":"Big 12","tier":"P5","sport":"football","revenue":59568339,"expense":59568339,"gsr":68,"fgr":47,"wins":9,"losses":4,"winpct":0.692,"aidshare":16.11,"nilcount":1,"nilsum":1500000},{"school":"Texas Christian University","conf":"Big 12","tier":"P5","sport":"basketball","revenue":25207752,"expense":25207752,"gsr":50,"fgr":17,"wins":23,"losses":12,"winpct":0.657,"aidshare":16.11,"nilcount":0,"nilsum":null},{"school":"Texas Christian University","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":3729667,"expense":3729667,"gsr":91,"fgr":80,"wins":21,"losses":11,"winpct":0.656,"aidshare":16.11,"nilcount":0,"nilsum":null},{"school":"Texas Tech University","conf":"Big 12","tier":"P5","sport":"football","revenue":69872378,"expense":39745662,"gsr":75,"fgr":49,"wins":12,"losses":2,"winpct":0.857,"aidshare":6.04,"nilcount":3,"nilsum":4500000},{"school":"Texas Tech University","conf":"Big 12","tier":"P5","sport":"basketball","revenue":18192057,"expense":22737544,"gsr":33,"fgr":10,"wins":23,"losses":11,"winpct":0.676,"aidshare":6.04,"nilcount":2,"nilsum":7000000},{"school":"Texas Tech University","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":297865,"expense":1915763,"gsr":93,"fgr":64,"wins":10,"losses":20,"winpct":0.333,"aidshare":6.04,"nilcount":0,"nilsum":null},{"school":"University of Utah","conf":"Big 12","tier":"P5","sport":"football","revenue":95930953,"expense":41410554,"gsr":93,"fgr":75,"wins":11,"losses":2,"winpct":0.846,"aidshare":13.3,"nilcount":1,"nilsum":2000000},{"school":"University of Utah","conf":"Big 12","tier":"P5","sport":"basketball","revenue":17746446,"expense":13970287,"gsr":67,"fgr":15,"wins":10,"losses":22,"winpct":0.312,"aidshare":13.3,"nilcount":0,"nilsum":null},{"school":"University of Utah","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":739043,"expense":2573263,"gsr":100,"fgr":75,"wins":15,"losses":15,"winpct":0.5,"aidshare":13.3,"nilcount":0,"nilsum":null},{"school":"West Virginia University","conf":"Big 12","tier":"P5","sport":"football","revenue":47642113,"expense":35250569,"gsr":95,"fgr":60,"wins":4,"losses":8,"winpct":0.333,"aidshare":9.5,"nilcount":0,"nilsum":null},{"school":"West Virginia University","conf":"Big 12","tier":"P5","sport":"basketball","revenue":15699022,"expense":15699022,"gsr":100,"fgr":50,"wins":21,"losses":14,"winpct":0.6,"aidshare":9.5,"nilcount":1,"nilsum":2500000},{"school":"West Virginia University","conf":"Big 12","tier":"P5","sport":"volleyball","revenue":1254290,"expense":1254290,"gsr":100,"fgr":50,"wins":15,"losses":15,"winpct":0.5,"aidshare":9.5,"nilcount":0,"nilsum":null},{"school":"Boston College","conf":"ACC","tier":"P5","sport":"football","revenue":47531226,"expense":41224780,"gsr":96,"fgr":80,"wins":2,"losses":10,"winpct":0.167,"aidshare":19.05,"nilcount":0,"nilsum":null},{"school":"Boston College","conf":"ACC","tier":"P5","sport":"basketball","revenue":12006606,"expense":17023844,"gsr":89,"fgr":29,"wins":11,"losses":20,"winpct":0.355,"aidshare":19.05,"nilcount":0,"nilsum":null},{"school":"Boston College","conf":"ACC","tier":"P5","sport":"volleyball","revenue":2259934,"expense":2259934,"gsr":100,"fgr":86,"wins":16,"losses":16,"winpct":0.5,"aidshare":19.05,"nilcount":0,"nilsum":null},{"school":"University of California-Berkeley","conf":"ACC","tier":"P5","sport":"football","revenue":63954618,"expense":46721911,"gsr":85,"fgr":71,"wins":7,"losses":6,"winpct":0.538,"aidshare":13.37,"nilcount":1,"nilsum":3000000},{"school":"University of California-Berkeley","conf":"ACC","tier":"P5","sport":"basketball","revenue":23999211,"expense":24852096,"gsr":57,"fgr":21,"wins":22,"losses":12,"winpct":0.647,"aidshare":13.37,"nilcount":0,"nilsum":null},{"school":"University of California-Berkeley","conf":"ACC","tier":"P5","sport":"volleyball","revenue":2873590,"expense":2873590,"gsr":100,"fgr":100,"wins":9,"losses":21,"winpct":0.3,"aidshare":13.37,"nilcount":0,"nilsum":null},{"school":"Clemson University","conf":"ACC","tier":"P5","sport":"football","revenue":86902571,"expense":81136726,"gsr":98,"fgr":80,"wins":7,"losses":6,"winpct":0.538,"aidshare":7.89,"nilcount":1,"nilsum":1000000},{"school":"Clemson University","conf":"ACC","tier":"P5","sport":"basketball","revenue":19200166,"expense":19200166,"gsr":100,"fgr":50,"wins":24,"losses":11,"winpct":0.686,"aidshare":7.89,"nilcount":0,"nilsum":null},{"school":"Clemson University","conf":"ACC","tier":"P5","sport":"volleyball","revenue":2980269,"expense":2980269,"gsr":100,"fgr":81,"wins":18,"losses":14,"winpct":0.562,"aidshare":7.89,"nilcount":0,"nilsum":null},{"school":"Duke University","conf":"ACC","tier":"P5","sport":"football","revenue":67356450,"expense":47363558,"gsr":94,"fgr":87,"wins":9,"losses":5,"winpct":0.643,"aidshare":16.57,"nilcount":0,"nilsum":null},{"school":"Duke University","conf":"ACC","tier":"P5","sport":"basketball","revenue":58972930,"expense":44168823,"gsr":60,"fgr":25,"wins":35,"losses":3,"winpct":0.921,"aidshare":16.57,"nilcount":1,"nilsum":4000000},{"school":"Duke University","conf":"ACC","tier":"P5","sport":"volleyball","revenue":2393193,"expense":2362485,"gsr":100,"fgr":82,"wins":5,"losses":26,"winpct":0.161,"aidshare":16.57,"nilcount":0,"nilsum":null},{"school":"Florida State University","conf":"ACC","tier":"P5","sport":"football","revenue":83469718,"expense":83267924,"gsr":84,"fgr":54,"wins":5,"losses":7,"winpct":0.417,"aidshare":4.06,"nilcount":0,"nilsum":null},{"school":"Florida State University","conf":"ACC","tier":"P5","sport":"basketball","revenue":20293606,"expense":20293606,"gsr":100,"fgr":50,"wins":18,"losses":15,"winpct":0.545,"aidshare":4.06,"nilcount":0,"nilsum":null},{"school":"Florida State University","conf":"ACC","tier":"P5","sport":"volleyball","revenue":1546789,"expense":1546789,"gsr":100,"fgr":63,"wins":16,"losses":13,"winpct":0.552,"aidshare":4.06,"nilcount":0,"nilsum":null},{"school":"Georgia Institute of Technology-Main Campus","conf":"ACC","tier":"P5","sport":"football","revenue":70541041,"expense":42709508,"gsr":93,"fgr":70,"wins":9,"losses":4,"winpct":0.692,"aidshare":9.51,"nilcount":0,"nilsum":null},{"school":"Georgia Institute of Technology-Main Campus","conf":"ACC","tier":"P5","sport":"basketball","revenue":15756533,"expense":18668341,"gsr":80,"fgr":42,"wins":11,"losses":20,"winpct":0.355,"aidshare":9.51,"nilcount":0,"nilsum":null},{"school":"Georgia Institute of Technology-Main Campus","conf":"ACC","tier":"P5","sport":"volleyball","revenue":519389,"expense":2462261,"gsr":100,"fgr":82,"wins":16,"losses":14,"winpct":0.533,"aidshare":9.51,"nilcount":0,"nilsum":null},{"school":"University of Louisville","conf":"ACC","tier":"P5","sport":"football","revenue":33090886,"expense":30745125,"gsr":95,"fgr":66,"wins":9,"losses":4,"winpct":0.692,"aidshare":10.2,"nilcount":2,"nilsum":3000000},{"school":"University of Louisville","conf":"ACC","tier":"P5","sport":"basketball","revenue":30980486,"expense":21554844,"gsr":100,"fgr":40,"wins":24,"losses":11,"winpct":0.686,"aidshare":10.2,"nilcount":2,"nilsum":9000000},{"school":"University of Louisville","conf":"ACC","tier":"P5","sport":"volleyball","revenue":10845580,"expense":3059112,"gsr":100,"fgr":75,"wins":26,"losses":7,"winpct":0.788,"aidshare":10.2,"nilcount":0,"nilsum":null},{"school":"University of Miami","conf":"ACC","tier":"P5","sport":"football","revenue":99864288,"expense":88117956,"gsr":91,"fgr":55,"wins":13,"losses":3,"winpct":0.812,"aidshare":8.93,"nilcount":6,"nilsum":15500000},{"school":"University of Miami","conf":"ACC","tier":"P5","sport":"basketball","revenue":25791617,"expense":22293007,"gsr":92,"fgr":67,"wins":26,"losses":9,"winpct":0.743,"aidshare":8.93,"nilcount":2,"nilsum":7000000},{"school":"University of Miami","conf":"ACC","tier":"P5","sport":"volleyball","revenue":2721374,"expense":2721374,"gsr":100,"fgr":69,"wins":27,"losses":6,"winpct":0.818,"aidshare":8.93,"nilcount":0,"nilsum":null},{"school":"University of North Carolina at Chapel Hill","conf":"ACC","tier":"P5","sport":"football","revenue":63337093,"expense":49145749,"gsr":89,"fgr":76,"wins":4,"losses":8,"winpct":0.333,"aidshare":9.48,"nilcount":0,"nilsum":null},{"school":"University of North Carolina at Chapel Hill","conf":"ACC","tier":"P5","sport":"basketball","revenue":42268887,"expense":23518214,"gsr":70,"fgr":54,"wins":24,"losses":9,"winpct":0.727,"aidshare":9.48,"nilcount":3,"nilsum":8500000},{"school":"University of North Carolina at Chapel Hill","conf":"ACC","tier":"P5","sport":"volleyball","revenue":881622,"expense":1702233,"gsr":100,"fgr":44,"wins":22,"losses":9,"winpct":0.71,"aidshare":9.48,"nilcount":0,"nilsum":null},{"school":"North Carolina State University at Raleigh","conf":"ACC","tier":"P5","sport":"football","revenue":69756644,"expense":40535367,"gsr":84,"fgr":55,"wins":8,"losses":5,"winpct":0.615,"aidshare":8.99,"nilcount":1,"nilsum":2000000},{"school":"North Carolina State University at Raleigh","conf":"ACC","tier":"P5","sport":"basketball","revenue":20551857,"expense":18061547,"gsr":75,"fgr":18,"wins":20,"losses":14,"winpct":0.588,"aidshare":8.99,"nilcount":0,"nilsum":null},{"school":"North Carolina State University at Raleigh","conf":"ACC","tier":"P5","sport":"volleyball","revenue":929645,"expense":1763173,"gsr":100,"fgr":80,"wins":null,"losses":null,"winpct":null,"aidshare":8.99,"nilcount":0,"nilsum":null},{"school":"University of Pittsburgh-Pittsburgh Campus","conf":"ACC","tier":"P5","sport":"football","revenue":57222645,"expense":47141722,"gsr":90,"fgr":66,"wins":8,"losses":5,"winpct":0.615,"aidshare":13.29,"nilcount":1,"nilsum":3000000},{"school":"University of Pittsburgh-Pittsburgh Campus","conf":"ACC","tier":"P5","sport":"basketball","revenue":19005933,"expense":16569599,"gsr":88,"fgr":8,"wins":13,"losses":20,"winpct":0.394,"aidshare":13.29,"nilcount":0,"nilsum":null},{"school":"University of Pittsburgh-Pittsburgh Campus","conf":"ACC","tier":"P5","sport":"volleyball","revenue":3363298,"expense":3363298,"gsr":100,"fgr":82,"wins":30,"losses":5,"winpct":0.857,"aidshare":13.29,"nilcount":0,"nilsum":null},{"school":"Southern Methodist University","conf":"ACC","tier":"P5","sport":"football","revenue":45315587,"expense":45315587,"gsr":87,"fgr":76,"wins":9,"losses":4,"winpct":0.692,"aidshare":17.38,"nilcount":2,"nilsum":4000000},{"school":"Southern Methodist University","conf":"ACC","tier":"P5","sport":"basketball","revenue":24063267,"expense":24063267,"gsr":77,"fgr":38,"wins":20,"losses":14,"winpct":0.588,"aidshare":17.38,"nilcount":1,"nilsum":500000},{"school":"Southern Methodist University","conf":"ACC","tier":"P5","sport":"volleyball","revenue":3585674,"expense":3585674,"gsr":92,"fgr":64,"wins":27,"losses":6,"winpct":0.818,"aidshare":17.38,"nilcount":0,"nilsum":null},{"school":"Stanford University","conf":"ACC","tier":"P5","sport":"football","revenue":35992019,"expense":35992019,"gsr":90,"fgr":83,"wins":4,"losses":8,"winpct":0.333,"aidshare":20.59,"nilcount":0,"nilsum":null},{"school":"Stanford University","conf":"ACC","tier":"P5","sport":"basketball","revenue":18652460,"expense":18652460,"gsr":100,"fgr":86,"wins":20,"losses":13,"winpct":0.606,"aidshare":20.59,"nilcount":0,"nilsum":null},{"school":"Stanford University","conf":"ACC","tier":"P5","sport":"volleyball","revenue":4928582,"expense":4928582,"gsr":100,"fgr":100,"wins":29,"losses":5,"winpct":0.853,"aidshare":20.59,"nilcount":0,"nilsum":null},{"school":"Syracuse University","conf":"ACC","tier":"P5","sport":"football","revenue":64585287,"expense":42090055,"gsr":77,"fgr":64,"wins":3,"losses":9,"winpct":0.25,"aidshare":19.4,"nilcount":1,"nilsum":1000000},{"school":"Syracuse University","conf":"ACC","tier":"P5","sport":"basketball","revenue":33556211,"expense":21930378,"gsr":57,"fgr":23,"wins":15,"losses":17,"winpct":0.469,"aidshare":19.4,"nilcount":0,"nilsum":null},{"school":"Syracuse University","conf":"ACC","tier":"P5","sport":"volleyball","revenue":1032461,"expense":1969072,"gsr":100,"fgr":90,"wins":13,"losses":17,"winpct":0.433,"aidshare":19.4,"nilcount":0,"nilsum":null},{"school":"Virginia Polytechnic Institute and State University","conf":"ACC","tier":"P5","sport":"football","revenue":79735756,"expense":37803976,"gsr":85,"fgr":57,"wins":3,"losses":9,"winpct":0.25,"aidshare":13.75,"nilcount":1,"nilsum":2000000},{"school":"Virginia Polytechnic Institute and State University","conf":"ACC","tier":"P5","sport":"basketball","revenue":10532001,"expense":13964260,"gsr":100,"fgr":58,"wins":19,"losses":13,"winpct":0.594,"aidshare":13.75,"nilcount":0,"nilsum":null},{"school":"Virginia Polytechnic Institute and State University","conf":"ACC","tier":"P5","sport":"volleyball","revenue":348944,"expense":1767653,"gsr":91,"fgr":80,"wins":12,"losses":19,"winpct":0.387,"aidshare":13.75,"nilcount":0,"nilsum":null},{"school":"University of Virginia-Main Campus","conf":"ACC","tier":"P5","sport":"football","revenue":51441991,"expense":33611796,"gsr":95,"fgr":83,"wins":11,"losses":3,"winpct":0.786,"aidshare":16.82,"nilcount":1,"nilsum":1500000},{"school":"University of Virginia-Main Campus","conf":"ACC","tier":"P5","sport":"basketball","revenue":23638559,"expense":22443009,"gsr":83,"fgr":55,"wins":30,"losses":6,"winpct":0.833,"aidshare":16.82,"nilcount":0,"nilsum":null},{"school":"University of Virginia-Main Campus","conf":"ACC","tier":"P5","sport":"volleyball","revenue":2309426,"expense":2309426,"gsr":100,"fgr":91,"wins":13,"losses":17,"winpct":0.433,"aidshare":16.82,"nilcount":0,"nilsum":null},{"school":"Wake Forest University","conf":"ACC","tier":"P5","sport":"football","revenue":39399925,"expense":39399925,"gsr":99,"fgr":71,"wins":9,"losses":4,"winpct":0.692,"aidshare":18.71,"nilcount":0,"nilsum":null},{"school":"Wake Forest University","conf":"ACC","tier":"P5","sport":"basketball","revenue":17757969,"expense":17757969,"gsr":80,"fgr":19,"wins":18,"losses":17,"winpct":0.514,"aidshare":18.71,"nilcount":0,"nilsum":null},{"school":"Wake Forest University","conf":"ACC","tier":"P5","sport":"volleyball","revenue":2573425,"expense":2573425,"gsr":100,"fgr":69,"wins":15,"losses":16,"winpct":0.484,"aidshare":18.71,"nilcount":0,"nilsum":null},{"school":"University of Notre Dame","conf":"ACC","tier":"P5","sport":"football","revenue":195723436,"expense":93255797,"gsr":98,"fgr":81,"wins":10,"losses":2,"winpct":0.833,"aidshare":10.72,"nilcount":4,"nilsum":6700000},{"school":"University of Notre Dame","conf":"ACC","tier":"P5","sport":"basketball","revenue":22297296,"expense":22297296,"gsr":100,"fgr":75,"wins":13,"losses":18,"winpct":0.419,"aidshare":10.72,"nilcount":0,"nilsum":null},{"school":"University of Notre Dame","conf":"ACC","tier":"P5","sport":"volleyball","revenue":3691281,"expense":3691281,"gsr":100,"fgr":90,"wins":12,"losses":16,"winpct":0.429,"aidshare":10.72,"nilcount":0,"nilsum":null},{"school":"Oregon State University","conf":"Pac-12","tier":"P5","sport":"football","revenue":32621301,"expense":23847865,"gsr":86,"fgr":55,"wins":2,"losses":10,"winpct":0.167,"aidshare":10.73,"nilcount":0,"nilsum":null},{"school":"Oregon State University","conf":"Pac-12","tier":"P5","sport":"basketball","revenue":14175780,"expense":11909106,"gsr":54,"fgr":33,"wins":20,"losses":13,"winpct":0.606,"aidshare":10.73,"nilcount":0,"nilsum":null},{"school":"Oregon State University","conf":"Pac-12","tier":"P5","sport":"volleyball","revenue":1909379,"expense":1909379,"gsr":100,"fgr":67,"wins":19,"losses":9,"winpct":0.679,"aidshare":10.73,"nilcount":0,"nilsum":null},{"school":"Washington State University","conf":"Pac-12","tier":"P5","sport":"football","revenue":38831529,"expense":22896016,"gsr":80,"fgr":47,"wins":7,"losses":6,"winpct":0.538,"aidshare":13.65,"nilcount":0,"nilsum":null},{"school":"Washington State University","conf":"Pac-12","tier":"P5","sport":"basketball","revenue":7510967,"expense":8054769,"gsr":92,"fgr":40,"wins":12,"losses":20,"winpct":0.375,"aidshare":13.65,"nilcount":0,"nilsum":null},{"school":"Washington State University","conf":"Pac-12","tier":"P5","sport":"volleyball","revenue":1130274,"expense":1902894,"gsr":100,"fgr":73,"wins":17,"losses":11,"winpct":0.607,"aidshare":13.65,"nilcount":0,"nilsum":null},{"school":"Butler University","conf":"Big East","tier":"non-P5","sport":"football","revenue":1498263,"expense":1421775,"gsr":95,"fgr":null,"wins":6,"losses":6,"winpct":0.5,"aidshare":18.72,"nilcount":0,"nilsum":null},{"school":"Butler University","conf":"Big East","tier":"non-P5","sport":"basketball","revenue":16086990,"expense":12760789,"gsr":83,"fgr":75,"wins":16,"losses":16,"winpct":0.5,"aidshare":18.72,"nilcount":0,"nilsum":null},{"school":"Butler University","conf":"Big East","tier":"non-P5","sport":"volleyball","revenue":1205171,"expense":1215599,"gsr":79,"fgr":58,"wins":12,"losses":17,"winpct":0.414,"aidshare":18.72,"nilcount":0,"nilsum":null},{"school":"Creighton University","conf":"Big East","tier":"non-P5","sport":"basketball","revenue":21049159,"expense":17185685,"gsr":80,"fgr":42,"wins":16,"losses":18,"winpct":0.471,"aidshare":15.45,"nilcount":1,"nilsum":2700000},{"school":"Creighton University","conf":"Big East","tier":"non-P5","sport":"volleyball","revenue":2249516,"expense":2328459,"gsr":100,"fgr":73,"wins":28,"losses":6,"winpct":0.824,"aidshare":15.45,"nilcount":0,"nilsum":null},{"school":"Creighton University","conf":"Big East","tier":"non-P5","sport":"soccer","revenue":2174843,"expense":3242981,"gsr":100,"fgr":33,"wins":8,"losses":4,"winpct":0.5,"aidshare":15.45,"nilcount":0,"nilsum":null},{"school":"DePaul University","conf":"Big East","tier":"non-P5","sport":"basketball","revenue":18265870,"expense":18265870,"gsr":60,"fgr":27,"wins":16,"losses":16,"winpct":0.5,"aidshare":15.31,"nilcount":0,"nilsum":null},{"school":"DePaul University","conf":"Big East","tier":"non-P5","sport":"volleyball","revenue":1335270,"expense":1335270,"gsr":86,"fgr":82,"wins":14,"losses":13,"winpct":0.519,"aidshare":15.31,"nilcount":0,"nilsum":null},{"school":"DePaul University","conf":"Big East","tier":"non-P5","sport":"soccer","revenue":2713973,"expense":2713973,"gsr":78,"fgr":61,"wins":2,"losses":8,"winpct":0.118,"aidshare":15.31,"nilcount":0,"nilsum":null},{"school":"Georgetown University","conf":"Big East","tier":"non-P5","sport":"football","revenue":2575007,"expense":2575007,"gsr":97,"fgr":85,"wins":6,"losses":6,"winpct":0.5,"aidshare":21.59,"nilcount":0,"nilsum":null},{"school":"Georgetown University","conf":"Big East","tier":"non-P5","sport":"basketball","revenue":21493838,"expense":21493838,"gsr":63,"fgr":25,"wins":16,"losses":18,"winpct":0.471,"aidshare":21.59,"nilcount":0,"nilsum":null},{"school":"Georgetown University","conf":"Big East","tier":"non-P5","sport":"volleyball","revenue":1620817,"expense":1620817,"gsr":100,"fgr":100,"wins":14,"losses":15,"winpct":0.483,"aidshare":21.59,"nilcount":0,"nilsum":null},{"school":"Marquette University","conf":"Big East","tier":"non-P5","sport":"basketball","revenue":30508993,"expense":24828091,"gsr":82,"fgr":58,"wins":12,"losses":20,"winpct":0.375,"aidshare":14.6,"nilcount":1,"nilsum":4000000},{"school":"Marquette University","conf":"Big East","tier":"non-P5","sport":"volleyball","revenue":2469167,"expense":2469167,"gsr":100,"fgr":69,"wins":18,"losses":11,"winpct":0.621,"aidshare":14.6,"nilcount":0,"nilsum":null},{"school":"Marquette University","conf":"Big East","tier":"non-P5","sport":"soccer","revenue":3079477,"expense":3079477,"gsr":100,"fgr":57,"wins":7,"losses":7,"winpct":0.438,"aidshare":14.6,"nilcount":0,"nilsum":null},{"school":"Providence College","conf":"Big East","tier":"non-P5","sport":"basketball","revenue":17690186,"expense":17690186,"gsr":82,"fgr":43,"wins":15,"losses":18,"winpct":0.455,"aidshare":23.2,"nilcount":1,"nilsum":3000000},{"school":"Providence College","conf":"Big East","tier":"non-P5","sport":"volleyball","revenue":1283845,"expense":1283845,"gsr":100,"fgr":75,"wins":12,"losses":17,"winpct":0.414,"aidshare":23.2,"nilcount":0,"nilsum":null},{"school":"Providence College","conf":"Big East","tier":"non-P5","sport":"soccer","revenue":4445694,"expense":4445694,"gsr":100,"fgr":83,"wins":6,"losses":7,"winpct":0.375,"aidshare":23.2,"nilcount":0,"nilsum":null},{"school":"Seton Hall University","conf":"Big East","tier":"non-P5","sport":"basketball","revenue":14177345,"expense":14177345,"gsr":100,"fgr":36,"wins":21,"losses":12,"winpct":0.636,"aidshare":28.05,"nilcount":0,"nilsum":null},{"school":"Seton Hall University","conf":"Big East","tier":"non-P5","sport":"volleyball","revenue":1197626,"expense":1197626,"gsr":100,"fgr":100,"wins":6,"losses":21,"winpct":0.222,"aidshare":28.05,"nilcount":0,"nilsum":null},{"school":"Seton Hall University","conf":"Big East","tier":"non-P5","sport":"soccer","revenue":3010500,"expense":3010500,"gsr":93,"fgr":29,"wins":7,"losses":4,"winpct":0.368,"aidshare":28.05,"nilcount":0,"nilsum":null},{"school":"St. John's University-New York","conf":"Big East","tier":"non-P5","sport":"basketball","revenue":38683711,"expense":38683711,"gsr":80,"fgr":17,"wins":30,"losses":7,"winpct":0.811,"aidshare":14.42,"nilcount":2,"nilsum":8200000},{"school":"St. John's University-New York","conf":"Big East","tier":"non-P5","sport":"volleyball","revenue":1495633,"expense":1495633,"gsr":100,"fgr":73,"wins":10,"losses":19,"winpct":0.345,"aidshare":14.42,"nilcount":0,"nilsum":null},{"school":"St. John's University-New York","conf":"Big East","tier":"non-P5","sport":"soccer","revenue":3140447,"expense":3140447,"gsr":85,"fgr":21,"wins":9,"losses":6,"winpct":0.474,"aidshare":14.42,"nilcount":0,"nilsum":null},{"school":"Villanova University","conf":"Big East","tier":"non-P5","sport":"football","revenue":8800183,"expense":8800183,"gsr":95,"fgr":87,"wins":12,"losses":3,"winpct":0.8,"aidshare":27.68,"nilcount":0,"nilsum":null},{"school":"Villanova University","conf":"Big East","tier":"non-P5","sport":"basketball","revenue":21712728,"expense":21068543,"gsr":100,"fgr":50,"wins":24,"losses":9,"winpct":0.727,"aidshare":27.68,"nilcount":1,"nilsum":3000000},{"school":"Villanova University","conf":"Big East","tier":"non-P5","sport":"volleyball","revenue":1864439,"expense":1864439,"gsr":100,"fgr":100,"wins":20,"losses":8,"winpct":0.714,"aidshare":27.68,"nilcount":0,"nilsum":null},{"school":"Xavier University","conf":"Big East","tier":"non-P5","sport":"basketball","revenue":19713285,"expense":15438682,"gsr":78,"fgr":40,"wins":15,"losses":18,"winpct":0.455,"aidshare":27.93,"nilcount":0,"nilsum":null},{"school":"Xavier University","conf":"Big East","tier":"non-P5","sport":"volleyball","revenue":1279154,"expense":1279157,"gsr":100,"fgr":70,"wins":26,"losses":5,"winpct":0.839,"aidshare":27.93,"nilcount":0,"nilsum":null},{"school":"Xavier University","conf":"Big East","tier":"non-P5","sport":"soccer","revenue":1524417,"expense":2707130,"gsr":100,"fgr":71,"wins":5,"losses":6,"winpct":0.333,"aidshare":27.93,"nilcount":0,"nilsum":null},{"school":"Gonzaga University","conf":"WCC","tier":"non-P5","sport":"basketball","revenue":25361488,"expense":19288228,"gsr":86,"fgr":40,"wins":31,"losses":4,"winpct":0.886,"aidshare":15.54,"nilcount":1,"nilsum":5000000},{"school":"Gonzaga University","conf":"WCC","tier":"non-P5","sport":"volleyball","revenue":1775851,"expense":1864491,"gsr":100,"fgr":89,"wins":14,"losses":15,"winpct":0.483,"aidshare":15.54,"nilcount":0,"nilsum":null},{"school":"Gonzaga University","conf":"WCC","tier":"non-P5","sport":"soccer","revenue":3555373,"expense":3742965,"gsr":95,"fgr":92,"wins":5,"losses":8,"winpct":0.312,"aidshare":15.54,"nilcount":0,"nilsum":null},{"school":"Saint Mary's College of California","conf":"WCC","tier":"non-P5","sport":"basketball","revenue":11172275,"expense":11172275,"gsr":91,"fgr":69,"wins":27,"losses":6,"winpct":0.818,"aidshare":27.92,"nilcount":0,"nilsum":null},{"school":"Saint Mary's College of California","conf":"WCC","tier":"non-P5","sport":"volleyball","revenue":1481557,"expense":1481557,"gsr":92,"fgr":82,"wins":11,"losses":18,"winpct":0.379,"aidshare":27.92,"nilcount":0,"nilsum":null},{"school":"Saint Mary's College of California","conf":"WCC","tier":"non-P5","sport":"soccer","revenue":3154208,"expense":3154208,"gsr":94,"fgr":62,"wins":2,"losses":8,"winpct":0.125,"aidshare":27.92,"nilcount":0,"nilsum":null},{"school":"University of Denver","conf":"Summit League","tier":"non-P5","sport":"basketball","revenue":6348542,"expense":6348542,"gsr":100,"fgr":19,"wins":15,"losses":16,"winpct":0.484,"aidshare":27.17,"nilcount":0,"nilsum":null},{"school":"University of Denver","conf":"Summit League","tier":"non-P5","sport":"volleyball","revenue":1592057,"expense":1592057,"gsr":100,"fgr":73,"wins":17,"losses":11,"winpct":0.607,"aidshare":27.17,"nilcount":0,"nilsum":null},{"school":"University of Denver","conf":"Summit League","tier":"non-P5","sport":"soccer","revenue":4337956,"expense":4337956,"gsr":100,"fgr":68,"wins":12,"losses":7,"winpct":0.545,"aidshare":27.17,"nilcount":0,"nilsum":null}];
+
+const SPORTS = [
+  { key: "football",   label: "Football",   color: "var(--s1)" },
+  { key: "basketball", label: "Basketball", color: "var(--s2)" },
+  { key: "volleyball", label: "Volleyball", color: "var(--s3)" },
+  { key: "soccer",      label: "Soccer (equalizer)", color: "var(--s4)" },
+];
+const SPORT_COLOR = Object.fromEntries(SPORTS.map(s => [s.key, s.color]));
+
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function resolveColors() {
+  return {
+    football: cssVar("--s1"), basketball: cssVar("--s2"), volleyball: cssVar("--s3"), soccer: cssVar("--s4"),
+    ink: cssVar("--ink"), muted: cssVar("--muted"), rule: cssVar("--rule"), surface: cssVar("--surface"),
+    text: cssVar("--text"),
+  };
+}
+
+// ---------- state ----------
+let activeSports = new Set(SPORTS.map(s => s.key));
+let yMeasure = "gsr";
+let search = "";
+let sortKey = "revenue";
+let sortDir = "desc";
+
+// ---------- stat strip ----------
+const nSchools = new Set(RAW.map(r => r.school)).size;
+const nRows = RAW.length;
+document.getElementById("statStrip").innerHTML = [
+  [nSchools, "schools analyzed"],
+  ["4", "sports tracked"],
+  [nRows, "school-sport rows"],
+  ["p = 0.009", "aid share predicts GSR"],
+].map(([v, l]) => `<div class="stat"><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
+
+// ---------- sport chips ----------
+const chipsEl = document.getElementById("sportChips");
+chipsEl.innerHTML = SPORTS.map(s => `
+  <button class="chip" data-sport="${s.key}" aria-pressed="true">
+    <span class="dot" style="background:${s.color}"></span>${s.label}
+  </button>`).join("");
+chipsEl.addEventListener("click", (e) => {
+  const btn = e.target.closest(".chip");
+  if (!btn) return;
+  const key = btn.dataset.sport;
+  if (activeSports.has(key) && activeSports.size === 1) return; // keep at least one
+  if (activeSports.has(key)) activeSports.delete(key); else activeSports.add(key);
+  btn.setAttribute("aria-pressed", activeSports.has(key) ? "true" : "false");
+  refreshAll();
+});
+
+// ---------- y toggle ----------
+document.getElementById("yToggle").addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+  yMeasure = btn.dataset.y;
+  [...btn.parentElement.children].forEach(b => b.setAttribute("aria-pressed", b === btn ? "true" : "false"));
+  document.getElementById("chartANote").textContent = yMeasure === "gsr"
+    ? "Each point is one school's program in one sport."
+    : "Win percentage for the 2025-26 season, plotted against athletics revenue.";
+  buildChartA();
+});
+
+// ---------- legend ----------
+document.getElementById("legendRow").innerHTML = SPORTS.map(s =>
+  `<span class="item"><span class="sw" style="background:${s.color}"></span>${s.label}</span>`
+).join("") + `<span class="item"><span class="sw" style="background:var(--muted);opacity:.5"></span>trend line = simple linear fit on visible points</span>`;
+
+// ---------- charts ----------
+let chartA, chartB;
+
+function fmtMoney(v) {
+  if (v == null) return "";
+  if (v >= 1e6) return "$" + (v / 1e6).toFixed(1) + "M";
+  return "$" + Math.round(v / 1e3) + "K";
+}
+
+function scatterDatasets(xKey, yKey, colors) {
+  return SPORTS.filter(s => activeSports.has(s.key)).map(s => {
+    const pts = RAW.filter(r => r.sport === s.key && r[xKey] != null && r[yKey] != null)
+      .map(r => ({ x: r[xKey], y: r[yKey], school: r.school, conf: r.conf }));
+    return {
+      label: s.label,
+      data: pts,
+      backgroundColor: colors[s.key] + "cc",
+      borderColor: colors[s.key],
+      borderWidth: 1,
+      pointRadius: 4.2,
+      pointHoverRadius: 6,
+    };
+  });
+}
+
+function trendLine(points) {
+  const n = points.length;
+  if (n < 3) return null;
+  const sx = points.reduce((a, p) => a + p.x, 0);
+  const sy = points.reduce((a, p) => a + p.y, 0);
+  const sxx = points.reduce((a, p) => a + p.x * p.x, 0);
+  const sxy = points.reduce((a, p) => a + p.x * p.y, 0);
+  const denom = n * sxx - sx * sx;
+  if (Math.abs(denom) < 1e-9) return null;
+  const slope = (n * sxy - sx * sy) / denom;
+  const intercept = (sy - slope * sx) / n;
+  const xs = points.map(p => p.x);
+  const x0 = Math.min(...xs), x1 = Math.max(...xs);
+  return [{ x: x0, y: slope * x0 + intercept }, { x: x1, y: slope * x1 + intercept }];
+}
+
+function buildChartA() {
+  const colors = resolveColors();
+  const datasets = scatterDatasets("revenue", yMeasure, colors);
+  const allPts = datasets.flatMap(d => d.data);
+  const tl = trendLine(allPts);
+  if (tl) datasets.push({
+    label: "Trend", data: tl, type: "line", borderColor: colors.muted, borderWidth: 2,
+    pointRadius: 0, borderDash: [5, 4], fill: false, order: 0,
+  });
+
+  const cfg = {
+    type: "scatter",
+    data: { datasets },
+    options: chartOptions(colors, {
+      xTitle: "Athletics revenue (log scale)",
+      yTitle: yMeasure === "gsr" ? "Graduation Success Rate" : "Win percentage",
+      xLog: true,
+      xTickFmt: fmtMoney,
+      yTickFmt: yMeasure === "gsr" ? (v => v) : (v => Math.round(v * 100) + "%"),
+      yFmt: yMeasure === "gsr" ? (v => v) : (v => Math.round(v * 100) + "%"),
+    }),
+  };
+  if (chartA) chartA.destroy();
+  chartA = new Chart(document.getElementById("chartA"), cfg);
+}
+
+function buildChartB() {
+  const colors = resolveColors();
+  const datasets = scatterDatasets("aidshare", "gsr", colors);
+  const allPts = datasets.flatMap(d => d.data);
+  const tl = trendLine(allPts);
+  if (tl) datasets.push({
+    label: "Trend", data: tl, type: "line", borderColor: colors.muted, borderWidth: 2,
+    pointRadius: 0, borderDash: [5, 4], fill: false, order: 0,
+  });
+
+  const cfg = {
+    type: "scatter",
+    data: { datasets },
+    options: chartOptions(colors, {
+      xTitle: "Scholarship/aid share of revenue (%)",
+      yTitle: "Graduation Success Rate",
+      xLog: false,
+      xTickFmt: v => v + "%",
+      yTickFmt: v => v,
+      yFmt: v => v,
+    }),
+  };
+  if (chartB) chartB.destroy();
+  chartB = new Chart(document.getElementById("chartB"), cfg);
+}
+
+function chartOptions(colors, opt) {
+  return {
+    responsive: true, maintainAspectRatio: false,
+    animation: { duration: 250 },
+    interaction: { mode: "nearest", intersect: true },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: colors.ink, titleColor: colors.surface, bodyColor: colors.surface,
+        padding: 10, cornerRadius: 6, titleFont: { family: "Work Sans", weight: "600", size: 12.5 },
+        bodyFont: { family: "IBM Plex Mono", size: 11.5 },
+        callbacks: {
+          title: (items) => items[0]?.raw?.school || "",
+          label: (item) => {
+            if (item.dataset.label === "Trend") return null;
+            const r = item.raw;
+            return [`${item.dataset.label} · ${r.conf}`,
+              `x: ${opt.xTickFmt(r.x)}   y: ${opt.yFmt(r.y)}`];
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        type: opt.xLog ? "logarithmic" : "linear",
+        title: { display: true, text: opt.xTitle, color: colors.muted, font: { family: "Work Sans", size: 12 } },
+        ticks: { color: colors.muted, font: { family: "IBM Plex Mono", size: 10.5 }, callback: (v) => opt.xTickFmt(v), maxTicksLimit: 6 },
+        grid: { color: colors.rule },
+      },
+      y: {
+        title: { display: true, text: opt.yTitle, color: colors.muted, font: { family: "Work Sans", size: 12 } },
+        ticks: { color: colors.muted, font: { family: "IBM Plex Mono", size: 10.5 }, callback: (v) => opt.yTickFmt(v) },
+        grid: { color: colors.rule },
+      },
+    },
+  };
+}
+
+// ---------- table ----------
+const tbody = document.getElementById("tbody");
+const searchBox = document.getElementById("searchBox");
+searchBox.addEventListener("input", () => { search = searchBox.value.trim().toLowerCase(); renderTable(); });
+
+document.querySelectorAll("thead th[data-key]").forEach(th => {
+  th.addEventListener("click", () => {
+    const key = th.dataset.key;
+    if (sortKey === key) sortDir = sortDir === "asc" ? "desc" : "asc";
+    else { sortKey = key; sortDir = key === "school" || key === "conf" || key === "sport" ? "asc" : "desc"; }
+    document.querySelectorAll("thead th[data-key]").forEach(t => t.removeAttribute("aria-sort"));
+    th.setAttribute("aria-sort", sortDir === "asc" ? "ascending" : "descending");
+    renderTable();
+  });
+});
+
+function renderTable() {
+  const colors = resolveColors();
+  let rows = RAW.filter(r => activeSports.has(r.sport));
+  if (search) rows = rows.filter(r => r.school.toLowerCase().includes(search) || r.conf.toLowerCase().includes(search));
+  rows = rows.slice().sort((a, b) => {
+    let av = a[sortKey], bv = b[sortKey];
+    if (av == null) av = sortDir === "asc" ? Infinity : -Infinity;
+    if (bv == null) bv = sortDir === "asc" ? Infinity : -Infinity;
+    if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+    return sortDir === "asc" ? av - bv : bv - av;
+  });
+  document.getElementById("rowCount").textContent = `${rows.length} of ${RAW.length} rows`;
+  tbody.innerHTML = rows.map(r => `
+    <tr>
+      <td class="school">${r.school}</td>
+      <td>${r.conf}</td>
+      <td><span class="sporttag" style="background:${colorFor(r.sport, colors)}">${r.sport}</span></td>
+      <td>${r.revenue != null ? fmtMoney(r.revenue) : "&mdash;"}</td>
+      <td>${r.gsr != null ? r.gsr : "&mdash;"}</td>
+      <td>${r.winpct != null ? Math.round(r.winpct * 100) + "%" : "&mdash;"}</td>
+      <td>${r.aidshare != null ? r.aidshare + "%" : "&mdash;"}</td>
+      <td>${r.nilsum != null ? fmtMoney(r.nilsum) + " (" + r.nilcount + ")" : "&mdash;"}</td>
+    </tr>`).join("");
+}
+function colorFor(sportKey, colors) { return colors[sportKey]; }
+
+// ---------- refresh + theme reactivity ----------
+function refreshAll() { buildChartA(); buildChartB(); renderTable(); }
+refreshAll();
+
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", refreshAll);
+new MutationObserver(refreshAll).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+</script>
