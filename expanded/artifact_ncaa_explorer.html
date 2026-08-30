@@ -120,6 +120,22 @@
   section > h2 { font-size: 22px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
   section > .lede { color: var(--muted); font-size: 14.5px; max-width: 68ch; line-height: 1.55; margin-bottom: 18px; }
 
+  .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .databox {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 16px 18px;
+  }
+  .databox h3 { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+  .databox p { font-size: 13.5px; line-height: 1.6; color: var(--text); margin: 0 0 8px; }
+  .databox p:last-child { margin-bottom: 0; }
+  .databox dl { margin: 0; font-size: 13px; line-height: 1.6; }
+  .databox dt {
+    font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--gold-strong); margin-top: 10px;
+  }
+  .databox dt:first-child { margin-top: 0; }
+  .databox dd { margin: 2px 0 0; color: var(--text); }
+  .databox.flag { border-left: 3px solid var(--gold); border-radius: 0 12px 12px 0; }
+
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
   .chip {
     font-family: "Work Sans", sans-serif; font-size: 13.5px; font-weight: 600;
@@ -161,6 +177,14 @@
     border-radius: 0 10px 10px 0; padding: 16px 20px; font-size: 14.5px; line-height: 1.6; color: var(--text);
   }
   .finding b { color: var(--ink); }
+  .finding .why {
+    margin-top: 10px; padding: 10px 12px; background: var(--surface-2); border-radius: 8px;
+    font-size: 13.5px; line-height: 1.55; color: var(--text);
+  }
+  .finding .why b {
+    font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--gold-strong); display: block; margin-bottom: 3px;
+  }
   .finding details { margin-top: 10px; }
   .finding summary {
     font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600;
@@ -229,6 +253,7 @@
 
   <nav class="jumpnav" aria-label="Section navigation">
     <a href="#question">Question</a>
+    <a href="#data">Data</a>
     <a href="#charts">Charts</a>
     <a href="#findings">Findings</a>
     <a href="#schools">All schools</a>
@@ -237,6 +262,43 @@
   <section id="question">
     <h2>What we're testing</h2>
     <p class="lede">Athletic departments generate wildly different amounts of revenue. This page asks whether that revenue actually correlates with anything real &mdash; win percentage, graduation rates, and NIL exposure &mdash; across 83 schools and four sports, or whether raw spending and scholarship reinvestment tell different stories.</p>
+  </section>
+
+  <section id="data">
+    <h2>About the data</h2>
+    <p class="lede">Every number here traces back to a real, named source &mdash; no estimates presented as facts, no gaps papered over. The two places this dataset is weakest (NIL, and the financial/wins year offset) are explained below rather than hidden.</p>
+    <div class="data-grid">
+      <div class="databox">
+        <h3>Sample: 83 schools, 249 school-sport rows</h3>
+        <p>Full 2024-25 membership of the Big Ten (18), SEC (16), Big 12 (16), and ACC (18, including Notre Dame as a basketball/volleyball-only member) &mdash; the historical Pac-12 is down to a 2-school remnant (Oregon State, Washington State) after realignment, so it's included as-is. The announced &ldquo;new Pac-12&rdquo; doesn't start until 2026-27, after this data's window, so it isn't included.</p>
+        <p>Plus 13 non-Power-5 schools chosen for prominent non-football programs: the 10 non-football Big East members, Gonzaga and Saint Mary's (WCC), and Denver (Summit League).</p>
+      </div>
+      <div class="databox">
+        <h3>Where each variable comes from</h3>
+        <dl>
+          <dt>Revenue &amp; expense, by sport</dt>
+          <dd>US Dept. of Education EADA survey, AY2023-24 (the most recent year actually published &mdash; AY2024-25 isn't in EADA yet despite its reporting deadline having passed).</dd>
+          <dt>Scholarship / aid share</dt>
+          <dd>Same EADA survey, institution-wide (EADA doesn't report athletic aid broken out by sport at all &mdash; confirmed against the federal data dictionary), so this is a school-level control, not a per-sport figure.</dd>
+          <dt>Wins</dt>
+          <dd>NCAA's official stats site, 2025-26 season &mdash; about 2 years newer than the financial data. That offset is deliberate and disclosed, not an error.</dd>
+          <dt>Graduation Success Rate</dt>
+          <dd>NCAA's official GSR database, 2018 entering cohort (the most recent complete 6-year window), the <b>full population</b> of all 83 schools, not a sample.</dd>
+          <dt>NIL</dt>
+          <dd>On3's NIL 100 player valuations, dated 2026-08-30, football and basketball only. See the caveat card.</dd>
+        </dl>
+      </div>
+      <div class="databox flag">
+        <h3>The NIL caveat</h3>
+        <p>There's no official public record of what a school or its NIL collective actually spends &mdash; nothing like EADA exists for NIL. On3's NIL 100 only ranks the top 100 individual players nationally, so a school with no NIL-100 figure isn't a zero &mdash; it means no player from that school is currently ranked nationally, not that the school spends nothing.</p>
+        <p>Meaningfully populated for only about 40 of 83 schools in football and 27 in basketball. Every NIL model here is explicitly restricted to schools with real NIL-100 presence, rather than treating the absence as a true zero.</p>
+      </div>
+      <div class="databox flag">
+        <h3>Two real corrections made during collection</h3>
+        <p>Butler, Georgetown, and Villanova are all Big East members with no obvious football program &mdash; but checking directly against EADA showed each one actually sponsors real FCS football (Pioneer League, Patriot League, and CAA). Their real football numbers are used instead of lumping them into the equalizer-sport treatment.</p>
+        <p>A separate file already sitting in the project's repo claimed GSR numbers for about 94 schools, including conferences never discussed for this analysis, with no session or git history behind it. It had every signature of fabricated placeholder data and was set aside, unused, rather than built on.</p>
+      </div>
+    </div>
   </section>
 
   <div class="stats" id="statStrip"></div>
@@ -279,6 +341,7 @@
     <div style="display:flex; flex-direction:column; gap:12px">
       <div class="finding">
         <b>Scholarship reinvestment, not raw revenue, drives football's graduation rate.</b> On its own, more football revenue predicts a <i>lower</i> GSR (p&nbsp;=&nbsp;0.004). Add scholarship/aid share to the model and that revenue effect disappears (p&nbsp;=&nbsp;0.328) while aid share becomes the real, significant predictor (p&nbsp;=&nbsp;0.029).
+        <div class="why"><b>Why it matters</b>It isn't football money itself that hurts graduation rates &mdash; it's what a program does with it. Two schools with identical football revenue can land at very different graduation outcomes depending on how much of that money actually goes back into scholarships.</div>
         <details>
           <summary>Show the regression detail</summary>
           <div class="stats">
@@ -290,6 +353,7 @@
       </div>
       <div class="finding">
         <b>Revenue predicts wins, but only in some sports.</b> Basketball (p&nbsp;&lt;&nbsp;0.001) and volleyball (p&nbsp;=&nbsp;0.005) show real revenue-to-wins relationships. Football is only marginal (p&nbsp;=&nbsp;0.071); soccer shows none.
+        <div class="why"><b>Why it matters</b>In basketball and volleyball, spending more money is a real, statistically reliable way to win more games. In football, it's a much weaker lever &mdash; money alone doesn't explain who wins, which fits a sport where a much larger roster and other factors dilute any single dollar's effect.</div>
         <details>
           <summary>Show the regression detail</summary>
           <div class="stats">
@@ -300,6 +364,7 @@
       </div>
       <div class="finding">
         <b>NIL valuation tracks wins, not grades, and it's concentrated.</b> Among schools with a player in On3's national NIL 100, valuation predicts win percentage (p&nbsp;=&nbsp;0.005) but not GSR (p&nbsp;=&nbsp;0.584). Revenue itself predicts NIL-100 presence (p&nbsp;&lt;&nbsp;0.001): visibility concentrates at the wealthiest programs.
+        <div class="why"><b>Why it matters</b>NIL money is chasing on-field results, not academics, and it's flowing almost entirely to schools that are already the wealthiest. It isn't leveling the playing field between programs &mdash; it's reinforcing the hierarchy that already exists.</div>
         <details>
           <summary>Show the regression detail</summary>
           <div class="stats">
@@ -310,6 +375,7 @@
       </div>
       <div class="finding">
         <b>Real corrections, not smoothed over.</b> Three Big East schools assumed &ldquo;no football&rdquo; (Butler, Georgetown, Villanova) actually sponsor real FCS programs, caught against the source data. A circulating NIL &ldquo;team rankings&rdquo; list turned out to be from November 2023 and was discarded.
+        <div class="why"><b>Why it matters</b>Catching bad inputs before they enter the analysis is the difference between a real finding and a plausible-looking one built on data that doesn't hold up. Both catches are disclosed here rather than smoothed over.</div>
         <details>
           <summary>Show the detail</summary>
           <div class="stats">
